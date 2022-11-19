@@ -4,17 +4,61 @@
  */
 package Views;
 
+
+import DomainModels.KhachHang;
+import ServiceImpl.KhachHangSV;
+import ViewModels.QLKH;
+import java.sql.SQLException;
+import java.util.List;
+import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
+
+
 /**
  *
  * @author lanan
  */
 public class FrmQLKhachHang extends javax.swing.JFrame {
 
+    private final KhachHangSV khSV;
+    DefaultTableModel model;
+
     /**
      * Creates new form FrmQLKhachHang
      */
     public FrmQLKhachHang() {
         initComponents();
+        khSV = new KhachHangSV();
+        model = new DefaultTableModel();
+        model = (DefaultTableModel) tblKH.getModel();
+        model.setRowCount(0);
+        loadtable();
+    }
+
+    void loadtable() {
+        try {
+            List<QLKH> ql = khSV.findALL();
+            if (ql == null) {
+                JOptionPane.showMessageDialog(null, "lỗi");
+                return;
+            }
+            for (QLKH qlkh : ql) {
+                model.addRow(new Object[]{
+                    qlkh.getMaKH(),
+                    qlkh.getTenKH(),
+                    qlkh.getGioiTinh(),
+                    qlkh.getDiaChi(),
+                    qlkh.getNgaySinh(),
+                    qlkh.getSdt(),
+                    qlkh.getNgayDki()
+                });
+            }
+
+        } catch (SQLException ex) {
+            JOptionPane.showMessageDialog(null, "Lỗi");
+            return;
+        }
+
     }
 
     /**
@@ -26,6 +70,8 @@ public class FrmQLKhachHang extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        buttonGroup1 = new javax.swing.ButtonGroup();
+        buttonGroup2 = new javax.swing.ButtonGroup();
         jPanel9 = new javax.swing.JPanel();
         jLabel3 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
@@ -35,20 +81,20 @@ public class FrmQLKhachHang extends javax.swing.JFrame {
         jLabel8 = new javax.swing.JLabel();
         jLabel9 = new javax.swing.JLabel();
         jLabel10 = new javax.swing.JLabel();
-        jButton1 = new javax.swing.JButton();
-        jButton2 = new javax.swing.JButton();
-        jButton3 = new javax.swing.JButton();
-        jButton4 = new javax.swing.JButton();
+        btnThem = new javax.swing.JButton();
+        btnSua = new javax.swing.JButton();
+        btnXoa = new javax.swing.JButton();
+        btnTK = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
-        jTextField3 = new javax.swing.JTextField();
-        jTextField4 = new javax.swing.JTextField();
-        jTextField5 = new javax.swing.JTextField();
-        jTextField24 = new javax.swing.JTextField();
-        jTextField25 = new javax.swing.JTextField();
-        jTextField26 = new javax.swing.JTextField();
-        jRadioButton1 = new javax.swing.JRadioButton();
-        jRadioButton2 = new javax.swing.JRadioButton();
+        tblKH = new javax.swing.JTable();
+        txtMa = new javax.swing.JTextField();
+        txtTen = new javax.swing.JTextField();
+        txtDiaChi = new javax.swing.JTextField();
+        txtNgaySinh = new javax.swing.JTextField();
+        txtSDT = new javax.swing.JTextField();
+        txtNgayDki = new javax.swing.JTextField();
+        rdbNam = new javax.swing.JRadioButton();
+        rdbNu = new javax.swing.JRadioButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -69,15 +115,35 @@ public class FrmQLKhachHang extends javax.swing.JFrame {
 
         jLabel10.setText("Ngày đăng ký");
 
-        jButton1.setText("Thêm ");
+        btnThem.setText("Thêm ");
+        btnThem.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnThemActionPerformed(evt);
+            }
+        });
 
-        jButton2.setText("Cập nhật");
+        btnSua.setText("Cập nhật");
+        btnSua.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnSuaActionPerformed(evt);
+            }
+        });
 
-        jButton3.setText("Xóa");
+        btnXoa.setText("Xóa");
+        btnXoa.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnXoaActionPerformed(evt);
+            }
+        });
 
-        jButton4.setText("Tìm kiếm");
+        btnTK.setText("Tìm kiếm");
+        btnTK.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnTKActionPerformed(evt);
+            }
+        });
 
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+        tblKH.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
             },
@@ -85,17 +151,18 @@ public class FrmQLKhachHang extends javax.swing.JFrame {
                 "Mã KH", "Tên KH", "Giới tính ", "Địa chỉ", "Ngày sinh", "sđt", "Ngày đăng ký"
             }
         ));
-        jScrollPane1.setViewportView(jTable1);
-
-        jTextField26.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextField26ActionPerformed(evt);
+        tblKH.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                tblKHMouseClicked(evt);
             }
         });
+        jScrollPane1.setViewportView(tblKH);
 
-        jRadioButton1.setText("Nam ");
+        buttonGroup1.add(rdbNam);
+        rdbNam.setText("Nam ");
 
-        jRadioButton2.setText("Nữ");
+        buttonGroup1.add(rdbNu);
+        rdbNu.setText("Nữ");
 
         javax.swing.GroupLayout jPanel9Layout = new javax.swing.GroupLayout(jPanel9);
         jPanel9.setLayout(jPanel9Layout);
@@ -113,23 +180,23 @@ public class FrmQLKhachHang extends javax.swing.JFrame {
                         .addGap(40, 40, 40)
                         .addGroup(jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(jPanel9Layout.createSequentialGroup()
-                                .addComponent(jRadioButton1)
+                                .addComponent(rdbNam)
                                 .addGap(18, 18, 18)
-                                .addComponent(jRadioButton2))
+                                .addComponent(rdbNu))
                             .addGroup(jPanel9Layout.createSequentialGroup()
                                 .addGroup(jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addGroup(jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                         .addGroup(jPanel9Layout.createSequentialGroup()
                                             .addGap(65, 65, 65)
-                                            .addComponent(jButton1)
+                                            .addComponent(btnThem)
                                             .addGap(65, 65, 65)
-                                            .addComponent(jButton2)
+                                            .addComponent(btnSua)
                                             .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED))
                                         .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel9Layout.createSequentialGroup()
                                             .addGroup(jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                                .addComponent(jTextField3, javax.swing.GroupLayout.PREFERRED_SIZE, 158, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                                .addComponent(jTextField4, javax.swing.GroupLayout.PREFERRED_SIZE, 158, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                                .addComponent(jTextField5, javax.swing.GroupLayout.PREFERRED_SIZE, 158, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                                .addComponent(txtMa, javax.swing.GroupLayout.PREFERRED_SIZE, 158, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                .addComponent(txtTen, javax.swing.GroupLayout.PREFERRED_SIZE, 158, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                .addComponent(txtDiaChi, javax.swing.GroupLayout.PREFERRED_SIZE, 158, javax.swing.GroupLayout.PREFERRED_SIZE))
                                             .addGap(126, 126, 126)
                                             .addGroup(jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                                 .addComponent(jLabel9)
@@ -139,15 +206,15 @@ public class FrmQLKhachHang extends javax.swing.JFrame {
                                     .addGroup(jPanel9Layout.createSequentialGroup()
                                         .addGap(210, 210, 210)
                                         .addGroup(jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                            .addComponent(jButton3)
+                                            .addComponent(btnXoa)
                                             .addComponent(jLabel3))
                                         .addGap(69, 69, 69)))
                                 .addGroup(jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                                    .addComponent(jTextField26, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 174, Short.MAX_VALUE)
-                                    .addComponent(jTextField25, javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jTextField24, javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(txtNgayDki, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 174, Short.MAX_VALUE)
+                                    .addComponent(txtSDT, javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(txtNgaySinh, javax.swing.GroupLayout.Alignment.LEADING)
                                     .addGroup(jPanel9Layout.createSequentialGroup()
-                                        .addComponent(jButton4)
+                                        .addComponent(btnTK)
                                         .addGap(38, 38, 38))))))
                     .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 790, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(293, Short.MAX_VALUE))
@@ -163,37 +230,37 @@ public class FrmQLKhachHang extends javax.swing.JFrame {
                         .addGroup(jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel4)
                             .addComponent(jLabel8)
-                            .addComponent(jTextField3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jTextField24, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(txtMa, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(txtNgaySinh, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGroup(jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(jPanel9Layout.createSequentialGroup()
                                 .addGap(24, 24, 24)
                                 .addGroup(jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                                     .addComponent(jLabel5)
-                                    .addComponent(jTextField4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addComponent(txtTen, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                                 .addGap(18, 18, 18)
                                 .addComponent(jLabel6))
                             .addGroup(jPanel9Layout.createSequentialGroup()
                                 .addGap(18, 18, 18)
                                 .addGroup(jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                                     .addComponent(jLabel9)
-                                    .addComponent(jTextField25, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addComponent(txtSDT, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                                 .addGap(25, 25, 25)
                                 .addGroup(jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                    .addComponent(jTextField26, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(txtNgayDki, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addComponent(jLabel10)))))
-                    .addComponent(jTextField5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(txtDiaChi, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(25, 25, 25)
                 .addGroup(jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel7)
-                    .addComponent(jRadioButton1)
-                    .addComponent(jRadioButton2))
+                    .addComponent(rdbNam)
+                    .addComponent(rdbNu))
                 .addGap(29, 29, 29)
                 .addGroup(jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButton1)
-                    .addComponent(jButton2)
-                    .addComponent(jButton3)
-                    .addComponent(jButton4))
+                    .addComponent(btnThem)
+                    .addComponent(btnSua)
+                    .addComponent(btnXoa)
+                    .addComponent(btnTK))
                 .addGap(36, 36, 36)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 167, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(25, Short.MAX_VALUE))
@@ -223,9 +290,162 @@ public class FrmQLKhachHang extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jTextField26ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField26ActionPerformed
+    private void tblKHMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblKHMouseClicked
         // TODO add your handling code here:
-    }//GEN-LAST:event_jTextField26ActionPerformed
+        int row = tblKH.getSelectedRow();
+        txtMa.setText(tblKH.getValueAt(row, 0).toString());
+        txtTen.setText(tblKH.getValueAt(row, 1).toString());
+        String gioiTinh = tblKH.getValueAt(row, 2).toString();
+        if (gioiTinh.equalsIgnoreCase("NAM")) {
+            rdbNam.setSelected(true);
+        } else {
+            rdbNu.setSelected(true);
+        }
+        txtDiaChi.setText(tblKH.getValueAt(row, 3).toString());
+        txtNgaySinh.setText(tblKH.getValueAt(row, 4).toString());
+        txtSDT.setText(tblKH.getValueAt(row, 5).toString());
+        txtNgayDki.setText(tblKH.getValueAt(row, 6).toString());
+    }//GEN-LAST:event_tblKHMouseClicked
+
+    private void btnThemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnThemActionPerformed
+        // TODO add your handling code here:
+        String Ma = txtMa.getText();
+        String Ten = txtTen.getText();
+        String GioiTinh = "";
+        String DiaChi = txtDiaChi.getText();
+        String NgaySinh = txtNgaySinh.getText();
+        String Sdt = txtSDT.getText();
+        String NgayDki = txtNgayDki.getText();
+        if (rdbNam.isSelected() == true) {
+            GioiTinh = "NAM";
+        } else {
+            GioiTinh = "NỮ";
+        }
+
+        if (Ma.trim().isEmpty()) {
+            JOptionPane.showMessageDialog(null, "mã ko đc để trống");
+            return;
+        }
+        if (Ten.trim().isEmpty()) {
+            JOptionPane.showMessageDialog(null, "tên ko đc để trống");
+            return;
+        }
+        if (DiaChi.trim().isEmpty()) {
+            JOptionPane.showMessageDialog(null, "địa chỉ ko đc để trống");
+            return;
+        }
+        if (NgaySinh.trim().isEmpty()) {
+            JOptionPane.showMessageDialog(null, "Ngày sinh ko đc để trống");
+            return;
+        }
+        if (Sdt.trim().isEmpty()) {
+            JOptionPane.showMessageDialog(null, "Sdt ko đc để trống");
+            return;
+        }
+        if (NgayDki.trim().isEmpty()) {
+            JOptionPane.showMessageDialog(null, "Ngày đăng kí ko đc để trống");
+            return;
+        }
+        try {
+            khSV.insert(Ma, Ten, GioiTinh, DiaChi, NgaySinh, Sdt, NgayDki);
+            model.setRowCount(0);
+            loadtable();
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, "thêm thất bại");
+            return;
+        }
+        JOptionPane.showMessageDialog(null, "thêm thành công");
+        return;
+    }//GEN-LAST:event_btnThemActionPerformed
+
+    private void btnSuaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSuaActionPerformed
+        // TODO add your handling code here:
+        int row = tblKH.getSelectedRow();
+        if (row == -1) {
+            JOptionPane.showMessageDialog(null, "vui lòng chọn từ table");
+            return;
+        } else {
+            String Ma = txtMa.getText();
+            String Ten = txtTen.getText();
+            String GioiTinh = "";
+            String DiaChi = txtDiaChi.getText();
+            String NgaySinh = txtNgaySinh.getText();
+            String Sdt = txtSDT.getText();
+            String NgayDki = txtNgayDki.getText();
+            if (rdbNam.isSelected() == true) {
+                GioiTinh = "NAM";
+            } else {
+                GioiTinh = "NỮ";
+            }
+
+            if (Ma.trim().isEmpty()
+                    || Ten.trim().isEmpty()
+                    || GioiTinh.trim().isEmpty()
+                    || DiaChi.trim().isEmpty()
+                    || NgaySinh.trim().isEmpty()
+                    || Sdt.trim().isEmpty()
+                    || NgayDki.trim().isEmpty()) {
+                JOptionPane.showMessageDialog(null, "ko đc để trống");
+                return;
+            }
+            try {
+                khSV.update(Ma, Ten, GioiTinh, DiaChi, NgaySinh, Sdt, NgayDki);
+                model.setRowCount(0);
+                loadtable();
+            } catch (Exception e) {
+                JOptionPane.showMessageDialog(null, "sửa thất bại");
+                return;
+            }
+            JOptionPane.showMessageDialog(null, "sửa thành công");
+            return;
+
+        }
+    }//GEN-LAST:event_btnSuaActionPerformed
+
+    private void btnXoaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnXoaActionPerformed
+        // TODO add your handling code here:
+         int row = tblKH.getSelectedRow();
+        if (row == -1) {
+            JOptionPane.showMessageDialog(null, "chọn 1 cái để xóa");
+            return;
+        } else {
+            String Ma = txtMa.getText();
+            try {
+                khSV.delete(Ma);
+                model.setRowCount(0);
+                loadtable();
+            } catch (Exception e) {
+                JOptionPane.showMessageDialog(null, "xóa thất bại");
+                return;
+            }
+            JOptionPane.showMessageDialog(null, "xóa thành công");
+            return;
+        }
+    }//GEN-LAST:event_btnXoaActionPerformed
+
+    private void btnTKActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnTKActionPerformed
+        // TODO add your handling code here:
+        String ma = JOptionPane.showInputDialog(null, "vui lòng nhập mã khách hàng muốn tìm");
+        try {
+            List<KhachHang> k = khSV.select1(ma);
+            model.setRowCount(0);
+            for (KhachHang kh : k) {
+                model.addRow(new Object[]{
+                    kh.getMaKH(),
+                    kh.getTenKH(),
+                    kh.getGioiTinh(),
+                    kh.getDiaChi(),
+                    kh.getNgaySinh(),
+                    kh.getSdt(),
+                    kh.getNgayDki(),});
+            }
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, "thất bại");
+            return;
+        }
+        JOptionPane.showMessageDialog(null, "đã hiện khách hàng muốn tìm");
+        return;
+    }//GEN-LAST:event_btnTKActionPerformed
 
     /**
      * @param args the command line arguments
@@ -253,7 +473,6 @@ public class FrmQLKhachHang extends javax.swing.JFrame {
             java.util.logging.Logger.getLogger(FrmQLKhachHang.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
-        //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
@@ -264,10 +483,12 @@ public class FrmQLKhachHang extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
-    private javax.swing.JButton jButton3;
-    private javax.swing.JButton jButton4;
+    private javax.swing.JButton btnSua;
+    private javax.swing.JButton btnTK;
+    private javax.swing.JButton btnThem;
+    private javax.swing.JButton btnXoa;
+    private javax.swing.ButtonGroup buttonGroup1;
+    private javax.swing.ButtonGroup buttonGroup2;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
@@ -277,15 +498,15 @@ public class FrmQLKhachHang extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel9;
-    private javax.swing.JRadioButton jRadioButton1;
-    private javax.swing.JRadioButton jRadioButton2;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTable jTable1;
-    private javax.swing.JTextField jTextField24;
-    private javax.swing.JTextField jTextField25;
-    private javax.swing.JTextField jTextField26;
-    private javax.swing.JTextField jTextField3;
-    private javax.swing.JTextField jTextField4;
-    private javax.swing.JTextField jTextField5;
+    private javax.swing.JRadioButton rdbNam;
+    private javax.swing.JRadioButton rdbNu;
+    private javax.swing.JTable tblKH;
+    private javax.swing.JTextField txtDiaChi;
+    private javax.swing.JTextField txtMa;
+    private javax.swing.JTextField txtNgayDki;
+    private javax.swing.JTextField txtNgaySinh;
+    private javax.swing.JTextField txtSDT;
+    private javax.swing.JTextField txtTen;
     // End of variables declaration//GEN-END:variables
 }

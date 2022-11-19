@@ -4,17 +4,57 @@
  */
 package Views;
 
+
+import DomainModels.NhaPhanPhoi;
+import ServiceImpl.NhaPhanPhoiSV;
+import ViewModels.QLNPP;
+import java.sql.SQLException;
+import java.util.List;
+import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
+
+
 /**
  *
  * @author lanan
  */
 public class FrmQLNhaPhanPhoi extends javax.swing.JFrame {
 
+    private final NhaPhanPhoiSV NPPSV;
+    DefaultTableModel model;
+
     /**
      * Creates new form FrmQLNhaPhanPhoi
      */
     public FrmQLNhaPhanPhoi() {
         initComponents();
+        NPPSV = new NhaPhanPhoiSV();
+        model = new DefaultTableModel();
+        model = (DefaultTableModel) tblNPP.getModel();
+        model.setRowCount(0);
+        loadtable();
+    }
+
+    void loadtable() {
+        try {
+            List<QLNPP> ql = NPPSV.findALL();
+            if (ql == null) {
+                JOptionPane.showMessageDialog(null, "lỗi");
+                return;
+
+            }
+            for (QLNPP q : ql) {
+                model.addRow(new Object[]{
+                    q.getMaNPP(),
+                    q.getTenNPP(),
+                    q.getDiaChi(),
+                    q.getSdt(),});
+            }
+        } catch (SQLException ex) {
+            JOptionPane.showMessageDialog(null, "lỗi");
+            return;
+        }
+
     }
 
     /**
@@ -31,16 +71,16 @@ public class FrmQLNhaPhanPhoi extends javax.swing.JFrame {
         jLabel63 = new javax.swing.JLabel();
         jLabel64 = new javax.swing.JLabel();
         jLabel65 = new javax.swing.JLabel();
-        jButton24 = new javax.swing.JButton();
-        jButton25 = new javax.swing.JButton();
-        jButton26 = new javax.swing.JButton();
-        jButton27 = new javax.swing.JButton();
+        btnThem = new javax.swing.JButton();
+        btnSua = new javax.swing.JButton();
+        btnXoa = new javax.swing.JButton();
+        btnTK = new javax.swing.JButton();
         jScrollPane13 = new javax.swing.JScrollPane();
-        jTable11 = new javax.swing.JTable();
-        jTextField22 = new javax.swing.JTextField();
-        jTextField23 = new javax.swing.JTextField();
-        jTextField1 = new javax.swing.JTextField();
-        jTextField2 = new javax.swing.JTextField();
+        tblNPP = new javax.swing.JTable();
+        txtMa = new javax.swing.JTextField();
+        txtTen = new javax.swing.JTextField();
+        txtDiaChi = new javax.swing.JTextField();
+        txtSDT = new javax.swing.JTextField();
         jLabel1 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -54,15 +94,35 @@ public class FrmQLNhaPhanPhoi extends javax.swing.JFrame {
 
         jLabel65.setText("Địa chỉ");
 
-        jButton24.setText("Thêm ");
+        btnThem.setText("Thêm ");
+        btnThem.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnThemActionPerformed(evt);
+            }
+        });
 
-        jButton25.setText("Cập nhật");
+        btnSua.setText("Cập nhật");
+        btnSua.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnSuaActionPerformed(evt);
+            }
+        });
 
-        jButton26.setText("Xóa");
+        btnXoa.setText("Xóa");
+        btnXoa.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnXoaActionPerformed(evt);
+            }
+        });
 
-        jButton27.setText("Tìm kiếm");
+        btnTK.setText("Tìm kiếm");
+        btnTK.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnTKActionPerformed(evt);
+            }
+        });
 
-        jTable11.setModel(new javax.swing.table.DefaultTableModel(
+        tblNPP.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
             },
@@ -70,7 +130,12 @@ public class FrmQLNhaPhanPhoi extends javax.swing.JFrame {
                 "Mã BPP", "Tên NPP", "Địa chỉ", "SĐT"
             }
         ));
-        jScrollPane13.setViewportView(jTable11);
+        tblNPP.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                tblNPPMouseClicked(evt);
+            }
+        });
+        jScrollPane13.setViewportView(tblNPP);
 
         jLabel1.setText("Số ĐT");
 
@@ -92,8 +157,8 @@ public class FrmQLNhaPhanPhoi extends javax.swing.JFrame {
                                         .addComponent(jLabel1)
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                         .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                            .addComponent(jTextField1, javax.swing.GroupLayout.DEFAULT_SIZE, 130, Short.MAX_VALUE)
-                                            .addComponent(jTextField2)))))
+                                            .addComponent(txtDiaChi, javax.swing.GroupLayout.DEFAULT_SIZE, 130, Short.MAX_VALUE)
+                                            .addComponent(txtSDT)))))
                             .addGroup(jPanel7Layout.createSequentialGroup()
                                 .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addGroup(jPanel7Layout.createSequentialGroup()
@@ -103,19 +168,19 @@ public class FrmQLNhaPhanPhoi extends javax.swing.JFrame {
                                             .addComponent(jLabel64))
                                         .addGap(32, 32, 32)
                                         .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                            .addComponent(jTextField22)
-                                            .addComponent(jTextField23, javax.swing.GroupLayout.DEFAULT_SIZE, 159, Short.MAX_VALUE)))
+                                            .addComponent(txtMa)
+                                            .addComponent(txtTen, javax.swing.GroupLayout.DEFAULT_SIZE, 159, Short.MAX_VALUE)))
                                     .addGroup(jPanel7Layout.createSequentialGroup()
                                         .addGap(43, 43, 43)
-                                        .addComponent(jButton24)
+                                        .addComponent(btnThem)
                                         .addGap(65, 65, 65)
-                                        .addComponent(jButton25)))
+                                        .addComponent(btnSua)))
                                 .addGap(70, 70, 70)
                                 .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addGroup(jPanel7Layout.createSequentialGroup()
-                                        .addComponent(jButton26)
+                                        .addComponent(btnXoa)
                                         .addGap(68, 68, 68)
-                                        .addComponent(jButton27))
+                                        .addComponent(btnTK))
                                     .addComponent(jLabel65))))
                         .addGap(73, 73, 73)))
                 .addContainerGap(218, Short.MAX_VALUE))
@@ -130,24 +195,24 @@ public class FrmQLNhaPhanPhoi extends javax.swing.JFrame {
                         .addGap(18, 18, 18)
                         .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel63)
-                            .addComponent(jTextField22, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addComponent(txtMa, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addGroup(jPanel7Layout.createSequentialGroup()
                         .addGap(24, 24, 24)
                         .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel65)
-                            .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                            .addComponent(txtDiaChi, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
                 .addGap(19, 19, 19)
                 .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel64)
-                    .addComponent(jTextField23, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txtTen, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txtSDT, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel1))
                 .addGap(76, 76, 76)
                 .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButton24)
-                    .addComponent(jButton25)
-                    .addComponent(jButton26)
-                    .addComponent(jButton27))
+                    .addComponent(btnThem)
+                    .addComponent(btnSua)
+                    .addComponent(btnXoa)
+                    .addComponent(btnTK))
                 .addGap(37, 37, 37)
                 .addComponent(jScrollPane13, javax.swing.GroupLayout.DEFAULT_SIZE, 178, Short.MAX_VALUE)
                 .addContainerGap())
@@ -177,6 +242,125 @@ public class FrmQLNhaPhanPhoi extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    private void tblNPPMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblNPPMouseClicked
+        // TODO add your handling code here:
+        int row = tblNPP.getSelectedRow();
+        txtMa.setText(tblNPP.getValueAt(row, 0).toString());
+        txtTen.setText(tblNPP.getValueAt(row, 1).toString());
+        txtDiaChi.setText(tblNPP.getValueAt(row, 2).toString());
+        txtSDT.setText(tblNPP.getValueAt(row, 3).toString());
+    }//GEN-LAST:event_tblNPPMouseClicked
+
+    private void btnThemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnThemActionPerformed
+        // TODO add your handling code here:
+        String Ma = txtMa.getText();
+        String Ten = txtTen.getText();
+        String DiaChi = txtDiaChi.getText();
+        String Sdt = txtSDT.getText();
+
+        if (Ma.trim().isEmpty()) {
+            JOptionPane.showMessageDialog(null, "mã ko đc để trống");
+            return;
+        }
+        if (Ten.trim().isEmpty()) {
+            JOptionPane.showMessageDialog(null, "tên ko đc để trống");
+            return;
+        }
+        if (DiaChi.trim().isEmpty()) {
+            JOptionPane.showMessageDialog(null, "địa chỉ ko đc để trống");
+            return;
+        }
+        if (Sdt.trim().isEmpty()) {
+            JOptionPane.showMessageDialog(null, "Sdt ko đc để trống");
+            return;
+        }
+        try {
+            NPPSV.insert(Ma, Ten, DiaChi, Sdt);
+            model.setRowCount(0);
+            loadtable();
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, "thêm thất bại");
+            return;
+        }
+        JOptionPane.showMessageDialog(null, "thêm thành công");
+        return;
+    }//GEN-LAST:event_btnThemActionPerformed
+
+    private void btnSuaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSuaActionPerformed
+        // TODO add your handling code here:
+        int row = tblNPP.getSelectedRow();
+        if (row == -1) {
+            JOptionPane.showMessageDialog(null, "vui lòng chọn từ table");
+            return;
+        } else {
+            String Ma = txtMa.getText();
+            String Ten = txtTen.getText();
+            String DiaChi = txtDiaChi.getText();
+            String Sdt = txtSDT.getText();
+
+            if (Ma.trim().isEmpty()
+                    || Ten.trim().isEmpty()
+                    || DiaChi.trim().isEmpty()
+                    || Sdt.trim().isEmpty()) {
+                JOptionPane.showMessageDialog(null, "ko đc để trống");
+                return;
+            }
+            try {
+                NPPSV.update(Ma, Ten, DiaChi, Sdt);
+                model.setRowCount(0);
+                loadtable();
+            } catch (Exception e) {
+                JOptionPane.showMessageDialog(null, "sửa thất bại");
+                return;
+            }
+            JOptionPane.showMessageDialog(null, "sửa thành công");
+            return;
+
+        }
+    }//GEN-LAST:event_btnSuaActionPerformed
+
+    private void btnXoaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnXoaActionPerformed
+        // TODO add your handling code here:
+        int row = tblNPP.getSelectedRow();
+        if (row == -1) {
+            JOptionPane.showMessageDialog(null, "chọn 1 cái để xóa");
+            return;
+        } else {
+            String Ma = txtMa.getText();
+            try {
+                NPPSV.delete(Ma);
+                model.setRowCount(0);
+                loadtable();
+            } catch (Exception e) {
+                JOptionPane.showMessageDialog(null, "xóa thất bại");
+                return;
+            }
+            JOptionPane.showMessageDialog(null, "xóa thành công");
+            return;
+        }
+    }//GEN-LAST:event_btnXoaActionPerformed
+
+    private void btnTKActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnTKActionPerformed
+        // TODO add your handling code here:
+        String ma = JOptionPane.showInputDialog(null, "vui lòng nhập mã khách hàng muốn tìm");
+        try {
+            List<NhaPhanPhoi> k = NPPSV.select1(ma);
+            model.setRowCount(0);
+            for (NhaPhanPhoi n : k) {
+                model.addRow(new Object[]{
+                    n.getMaNPP(),
+                    n.getTenNPP(),
+                    n.getDiaChi(),
+                    n.getSdt(),});
+            }
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, "thất bại");
+            return;
+        }
+        JOptionPane.showMessageDialog(null, "đã hiện khách hàng muốn tìm");
+        return;
+    }//GEN-LAST:event_btnTKActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -203,7 +387,6 @@ public class FrmQLNhaPhanPhoi extends javax.swing.JFrame {
             java.util.logging.Logger.getLogger(FrmQLNhaPhanPhoi.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
-        //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
@@ -214,10 +397,10 @@ public class FrmQLNhaPhanPhoi extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton24;
-    private javax.swing.JButton jButton25;
-    private javax.swing.JButton jButton26;
-    private javax.swing.JButton jButton27;
+    private javax.swing.JButton btnSua;
+    private javax.swing.JButton btnTK;
+    private javax.swing.JButton btnThem;
+    private javax.swing.JButton btnXoa;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel62;
     private javax.swing.JLabel jLabel63;
@@ -225,10 +408,10 @@ public class FrmQLNhaPhanPhoi extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel65;
     private javax.swing.JPanel jPanel7;
     private javax.swing.JScrollPane jScrollPane13;
-    private javax.swing.JTable jTable11;
-    private javax.swing.JTextField jTextField1;
-    private javax.swing.JTextField jTextField2;
-    private javax.swing.JTextField jTextField22;
-    private javax.swing.JTextField jTextField23;
+    private javax.swing.JTable tblNPP;
+    private javax.swing.JTextField txtDiaChi;
+    private javax.swing.JTextField txtMa;
+    private javax.swing.JTextField txtSDT;
+    private javax.swing.JTextField txtTen;
     // End of variables declaration//GEN-END:variables
 }
