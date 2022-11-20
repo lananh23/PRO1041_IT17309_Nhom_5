@@ -10,7 +10,7 @@ public class DBConnection {
                 Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
                 String dbUser = "sa", dbPass = "Aa@123456",
                         dbUrl = "jdbc:sqlserver://localhost:1433;"
-                            +"databaseName=QuanLyTapHoa;"
+                            +"databaseName=QuanLyCuaHangTapHoa;"
                             +"encrypt=true;trustServerCertificate=true;sslProtocol=TLSv1.2";
                 conn = DriverManager.getConnection(dbUrl, dbUser, dbPass);
                 System.out.println("Kết nối thành công");
