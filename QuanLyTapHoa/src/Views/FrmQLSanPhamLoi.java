@@ -1,7 +1,9 @@
 package Views;
 
 import ServiceImpl.ManageSanPhamLoiService;
+import ServiceImpl.ManageSanPhamService;
 import Services.IManageSanPhamLoiService;
+import Services.IManageSanPhamService;
 import ViewModels.ManageSanPhamLoi;
 import ViewModels.QLSanPham;
 import java.util.ArrayList;
@@ -12,13 +14,13 @@ import javax.swing.table.DefaultTableModel;
 public class FrmQLSanPhamLoi extends javax.swing.JFrame {
 
     private IManageSanPhamLoiService sanPhamLoiService;
-    //private ManageSanPhamService sanPhamService;
+    private IManageSanPhamService sanPhamService;
 
     public FrmQLSanPhamLoi() {
         initComponents();
         this.setLocationRelativeTo(null);
         this.sanPhamLoiService = new ManageSanPhamLoiService();
-        //this.sanPhamService = new ManageSanPhamService();
+        this.sanPhamService = new ManageSanPhamService();
         this.loadTableSP();
         this.loadTableSPL();
         this.clearForm();
@@ -37,17 +39,16 @@ public class FrmQLSanPhamLoi extends javax.swing.JFrame {
         }
     }
     public void loadTableSP() {
-//        DefaultTableModel dtm = (DefaultTableModel) this.tblSP.getModel();
-//        dtm.setRowCount(0);
-//        for (QLSanPham sp : this.sanPhamService.ALL()) {
-//            Object[] rowData = {
-//                sp.getMaSP(),
-//                sp.getTenSP(),
-//                sp.getSoLuong(),
-//                sp.getMoTa()
-//            };
-//            dtm.addRow(rowData);
-//        }
+        DefaultTableModel dtm = (DefaultTableModel) this.tblSP.getModel();
+        dtm.setRowCount(0);
+        for (QLSanPham sp : this.sanPhamService.ALL()) {
+            Object[] rowData = {
+                sp.getMaSP(),
+                sp.getTenSP(),
+                sp.getSoLuong()
+            };
+            dtm.addRow(rowData);
+        }
     }
 
     public void clearForm() {
@@ -408,29 +409,28 @@ public class FrmQLSanPhamLoi extends javax.swing.JFrame {
     }//GEN-LAST:event_btnTimKiemSPLActionPerformed
 
     private void btnTimKiemSPActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnTimKiemSPActionPerformed
-//        String maSP = this.txtMaSP.getText();
-//        List<QLSanPham> ds = this.sanPhamService.ALL();
-//        int check = 0;
-//        if (maSP.trim().length() == 0) {
-//            JOptionPane.showMessageDialog(this, "Không được để trống mã sản phẩm");
-//            return;
-//        } else {
-//            for (QLSanPham sp : ds) {
-//                if (sp.getMaSP().equalsIgnoreCase(txtMaSP.getText())) {
-//                    check++;
-//                    this.lblMaSP.setText(sp.getMaSP());
-//                    this.lblTenSP.setText(sp.getTenSP());
-//                    JOptionPane.showMessageDialog(this, "Tìm thấy sản phẩm");
-//                    this.tblSPL.getSelectedRow();
-//                    return;
-//                }
-//            }
-//        }
-//        if (check == 0) {
-//            this.clearForm();
-//            JOptionPane.showMessageDialog(this, "Không tìm thấy sản phẩm");
-//
-//        }
+        String maSP = this.txtMaSP.getText();
+        List<QLSanPham> ds = this.sanPhamService.ALL();
+        int check = 0;
+        if (maSP.trim().length() == 0) {
+            JOptionPane.showMessageDialog(this, "Không được để trống mã sản phẩm");
+            return;
+        } else {
+            for (QLSanPham sp : ds) {
+                if (sp.getMaSP().equalsIgnoreCase(txtMaSP.getText())) {
+                    check++;
+                    this.lblMaSP.setText(sp.getMaSP());
+                    JOptionPane.showMessageDialog(this, "Tìm thấy sản phẩm");
+                    this.tblSPL.getSelectedRow();
+                    return;
+                }
+            }
+        }
+        if (check == 0) {
+            this.clearForm();
+            JOptionPane.showMessageDialog(this, "Không tìm thấy sản phẩm");
+
+        }
     }//GEN-LAST:event_btnTimKiemSPActionPerformed
 
     /**
