@@ -15,6 +15,11 @@ public class SanPhamLoi {
         this.lyDoLoi = lyDoLoi;
     }
 
+    public SanPhamLoi(String maSPL) {
+        this.maSPL = maSPL;
+    }
+    
+    
     public String getMaSPL() {
         return maSPL;
     }

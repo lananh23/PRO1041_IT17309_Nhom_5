@@ -4,6 +4,7 @@ import ServiceImpl.ManageSanPhamLoiService;
 import Services.IManageSanPhamLoiService;
 import ViewModels.ManageSanPhamLoi;
 import ViewModels.QLSanPham;
+import java.util.ArrayList;
 import java.util.List;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
@@ -20,6 +21,7 @@ public class FrmQLSanPhamLoi extends javax.swing.JFrame {
         //this.sanPhamService = new ManageSanPhamService();
         this.loadTableSP();
         this.loadTableSPL();
+        this.clearForm();
     }
 
     public void loadTableSPL() {
@@ -34,7 +36,6 @@ public class FrmQLSanPhamLoi extends javax.swing.JFrame {
             dtm.addRow(rowData);
         }
     }
-
     public void loadTableSP() {
 //        DefaultTableModel dtm = (DefaultTableModel) this.tblSP.getModel();
 //        dtm.setRowCount(0);
@@ -50,13 +51,16 @@ public class FrmQLSanPhamLoi extends javax.swing.JFrame {
     }
 
     public void clearForm() {
-
+//        List<ManageSanPhamLoi> list = this.sanPhamLoiService.ALL();
+//        String[] splits = list.split("-", 3);
+//        this.lblMaSPL.setText(list.get((list.size() - 1)).getMaSPL() + 1);
     }
 
     private ManageSanPhamLoi getFormData() {
         String maSPL = this.lblMaSPL.getText().trim();
         String maSP = this.lblMaSP.getText().trim();
         String loi = this.txtLyDoLoi.getText().trim();
+        
 
         ManageSanPhamLoi s = new ManageSanPhamLoi(maSPL, maSP, loi);
         return s;

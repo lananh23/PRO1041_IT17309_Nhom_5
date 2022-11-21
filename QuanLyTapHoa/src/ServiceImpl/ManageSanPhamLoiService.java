@@ -12,6 +12,7 @@ public class ManageSanPhamLoiService implements IManageSanPhamLoiService{
 
      private SanPhamLoiRepository SanPhamRepo;
     private List<ManageSanPhamLoi> list;
+    private List<ManageSanPhamLoi> listMa;
 
     public ManageSanPhamLoiService() {
         this.SanPhamRepo = new SanPhamLoiRepository();
@@ -42,7 +43,17 @@ public class ManageSanPhamLoiService implements IManageSanPhamLoiService{
 
     @Override
     public void delete(String ma) {
-        this.delete(ma);
+        this.SanPhamRepo.delete(ma);
     }
-    
+
+    @Override
+    public List<ManageSanPhamLoi> ALLMa() {
+        listMa = new ArrayList<>();
+        List<SanPhamLoi> List_CH = this.SanPhamRepo.AllMa();
+        for (SanPhamLoi o : List_CH) {
+            listMa.add(new ManageSanPhamLoi(o.getMaSPL()));
+        }
+        return listMa;
+    }
+   
 }

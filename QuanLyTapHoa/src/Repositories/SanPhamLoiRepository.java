@@ -28,7 +28,25 @@ public class SanPhamLoiRepository {
         }
         return list;
     }
-
+    
+    public List<SanPhamLoi> AllMa() {
+        ArrayList<SanPhamLoi> list = new ArrayList<>();
+        try {
+            Connection conn = DBConnection.getConnection();
+            String query = "SELECT SUBSTRING(MaSPL, 4, 7) FROM SanPhamLoi ORDER BY MaSPL";
+            PreparedStatement ps = conn.prepareStatement(query);
+            ps.execute();
+            ResultSet rs = ps.getResultSet();
+            while (rs.next() == true) {
+                String maSPL = rs.getString("MaSPL");
+                SanPhamLoi sp = new SanPhamLoi(maSPL);
+                list.add(sp);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return list;
+    }
     public void insert(SanPhamLoi sp) {
         try {
             Connection conn = DBConnection.getConnection();
