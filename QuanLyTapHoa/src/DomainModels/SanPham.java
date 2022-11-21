@@ -26,27 +26,27 @@ public class SanPham {
     }
 
     public String getMaSP() {
-        return maSP;
+        return MaSP;
     }
 
-    public void setMaSP(String maSP) {
-        this.maSP = maSP;
+    public void setMaSP(String MaSP) {
+        this.MaSP = MaSP;
     }
 
     public String getMaLSP() {
-        return maLSP;
+        return MaLSP;
     }
 
-    public void setMaLSP(String maLSP) {
-        this.maLSP = maLSP;
+    public void setMaLSP(String MaLSP) {
+        this.MaLSP = MaLSP;
     }
 
     public String getTenSP() {
-        return tenSP;
+        return TenSP;
     }
 
-    public void setTenSP(String tenSP) {
-        this.tenSP = tenSP;
+    public void setTenSP(String TenSP) {
+        this.TenSP = TenSP;
     }
 
     public int getSoLuong() {
