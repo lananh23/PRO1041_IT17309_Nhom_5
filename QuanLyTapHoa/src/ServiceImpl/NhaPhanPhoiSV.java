@@ -35,16 +35,18 @@ public class NhaPhanPhoiSV implements NhaPhanPhoiIF{
                     n.getMaNPP(),
                     n.getTenNPP(),
                     n.getDiaChi(),
-                    n.getSdt()
+                    n.getSdt(),
+                    n.getMaSP(),
+                    n.getTrangThai()
             );
             list.add(ql);
         }
         return list;
     }
 
-    public List<NhaPhanPhoi> insert(String Ma, String Ten, String DiaChi, String SDT) {
+    public List<NhaPhanPhoi> insert(String Ma, String Ten, String DiaChi, String SDT, String maSP, int Trangthai) {
         try {
-            return NPPRP.insert(Ma, Ten,DiaChi, SDT);
+            return NPPRP.insert(Ma, Ten, DiaChi, SDT, maSP, Trangthai);
         } catch (Exception e) {
             return null;
         }
@@ -57,10 +59,34 @@ public class NhaPhanPhoiSV implements NhaPhanPhoiIF{
             return null;
         }
     }
-
-    public List<NhaPhanPhoi> update(String Ma, String Ten, String DiaChi, String SDT) {
+    
+    public List<NhaPhanPhoi> timkiem(String maSP) {
         try {
-            return NPPRP.update(Ma, Ten,DiaChi, SDT);
+            return NPPRP.timkiem(maSP);
+        } catch (Exception e) {
+            return null;
+        }
+    }
+
+    public List<NhaPhanPhoi> locMa(String maSP) {
+        try {
+            return NPPRP.locMa(maSP);
+        } catch (Exception e) {
+            return null;
+        }
+    }
+    
+    public List<NhaPhanPhoi> locTT(int Trangthai) {
+        try {
+            return NPPRP.locTT(Trangthai);
+        } catch (Exception e) {
+            return null;
+        }
+    }
+    
+    public List<NhaPhanPhoi> update(String Ma, String Ten, String DiaChi, String SDT, String maSP, int Trangthai) {
+        try {
+            return NPPRP.update(Ma,Ten, DiaChi, SDT, maSP, Trangthai);
         } catch (Exception e) {
             return null;
         }

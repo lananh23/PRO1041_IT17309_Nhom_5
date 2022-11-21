@@ -30,11 +30,15 @@ public class NhaPhanPhoiRP {
             String Ten = rs.getString("TenNPP");
             String DiaChi = rs.getString("DiaChi");
             String Sdt = rs.getString("SDT");
+            String MaSP = rs.getString("MaSP");
+            Integer TrangThai = rs.getInt("TrangThai");
             NhaPhanPhoi n = new NhaPhanPhoi();
             n.setMaNPP(Ma);
             n.setTenNPP(Ten);
             n.setDiaChi(DiaChi);
             n.setSdt(Sdt);
+            n.setMaSP(MaSP);
+            n.setTrangThai(TrangThai);
             n1.add(n);
         }
         return n1;
@@ -52,50 +56,140 @@ public class NhaPhanPhoiRP {
             String Ten = rs.getString("TenNPP");
             String DiaChi = rs.getString("DiaChi");
             String Sdt = rs.getString("SDT");
+            String MaSP = rs.getString("MaSP");
+            Integer Trangthai = rs.getInt("TrangThai");
             NhaPhanPhoi n = new NhaPhanPhoi();
             n.setMaNPP(Ma);
             n.setTenNPP(Ten);
             n.setDiaChi(DiaChi);
             n.setSdt(Sdt);
+            n.setMaSP(MaSP);
+            n.setTrangThai(Trangthai);
             n1.add(n);
         }
         return n1;
     }
 
-    public List<NhaPhanPhoi> insert(String Ma, String Ten, String DiaChi, String SDT) throws SQLException {
+    public List<NhaPhanPhoi> timkiem(String maSP) throws SQLException {
         ArrayList<NhaPhanPhoi> n1 = new ArrayList<>();
         Connection con = DBConnection.getConnection();
-        String sql = "insert NhaPhanPhoi (MaNPP,TenNPP,DiaChi,SDT) values (?,?,?,?)";
+        String sql = "select * from NhaPhanPhoi where MaSP =?";
+        PreparedStatement st = con.prepareStatement(sql);
+        st.setString(1, maSP);
+        ResultSet rs = st.executeQuery();
+        while (rs.next()) {
+            String Ma = rs.getString("MaNPP");
+            String Ten = rs.getString("TenNPP");
+            String DiaChi = rs.getString("DiaChi");
+            String Sdt = rs.getString("SDT");
+            String MaSP = rs.getString("MaSP");
+            Integer Trangthai = rs.getInt("TrangThai");
+            NhaPhanPhoi n = new NhaPhanPhoi();
+            n.setMaNPP(Ma);
+            n.setTenNPP(Ten);
+            n.setDiaChi(DiaChi);
+            n.setSdt(Sdt);
+            n.setMaSP(MaSP);
+            n.setTrangThai(Trangthai);
+            n1.add(n);
+        }
+        return n1;
+    }
+
+    public List<NhaPhanPhoi> locMa(String maSP) throws SQLException {
+        ArrayList<NhaPhanPhoi> n1 = new ArrayList<>();
+        Connection con = DBConnection.getConnection();
+        String sql = "select * from NhaPhanPhoi where MaSP =?";
+        PreparedStatement st = con.prepareStatement(sql);
+        st.setString(1, maSP);
+        ResultSet rs = st.executeQuery();
+        while (rs.next()) {
+            String Ma = rs.getString("MaNPP");
+            String Ten = rs.getString("TenNPP");
+            String DiaChi = rs.getString("DiaChi");
+            String Sdt = rs.getString("SDT");
+            String MaSP = rs.getString("MaSP");
+            Integer Trangthai = rs.getInt("TrangThai");
+            NhaPhanPhoi n = new NhaPhanPhoi();
+            n.setMaNPP(Ma);
+            n.setTenNPP(Ten);
+            n.setDiaChi(DiaChi);
+            n.setSdt(Sdt);
+            n.setMaSP(MaSP);
+            n.setTrangThai(Trangthai);
+            n1.add(n);
+        }
+        return n1;
+    }
+
+    public List<NhaPhanPhoi> locTT(int Trangthai) throws SQLException {
+        ArrayList<NhaPhanPhoi> n1 = new ArrayList<>();
+        Connection con = DBConnection.getConnection();
+        String sql = "select * from NhaPhanPhoi where TrangThai =?";
+        PreparedStatement st = con.prepareStatement(sql);
+        st.setInt(1, Trangthai);
+        ResultSet rs = st.executeQuery();
+        while (rs.next()) {
+            String Ma = rs.getString("MaNPP");
+            String Ten = rs.getString("TenNPP");
+            String DiaChi = rs.getString("DiaChi");
+            String Sdt = rs.getString("SDT");
+            String MaSP = rs.getString("MaSP");
+            Integer TrangThai = rs.getInt("TrangThai");
+            NhaPhanPhoi n = new NhaPhanPhoi();
+            n.setMaNPP(Ma);
+            n.setTenNPP(Ten);
+            n.setDiaChi(DiaChi);
+            n.setSdt(Sdt);
+            n.setMaSP(MaSP);
+            n.setTrangThai(TrangThai);
+            n1.add(n);
+        }
+        return n1;
+    }
+
+    public List<NhaPhanPhoi> insert(String Ma, String Ten, String DiaChi, String SDT, String maSP, int Trangthai) throws SQLException {
+        ArrayList<NhaPhanPhoi> n1 = new ArrayList<>();
+        Connection con = DBConnection.getConnection();
+        String sql = "insert NhaPhanPhoi (MaNPP,TenNPP,DiaChi,SDT,MaSP,TrangThai) values (?,?,?,?,?,?)";
         PreparedStatement st = con.prepareStatement(sql);
         st.setString(1, Ma);
         st.setString(2, Ten);
         st.setString(3, DiaChi);
         st.setString(4, SDT);
+        st.setString(5, maSP);
+        st.setInt(6, Trangthai);
         st.executeUpdate();
         NhaPhanPhoi n = new NhaPhanPhoi();
         n.setMaNPP(Ma);
         n.setTenNPP(Ten);
         n.setDiaChi(DiaChi);
         n.setSdt(SDT);
+        n.setMaSP(maSP);
+        n.setTrangThai(Trangthai);
         n1.add(n);
         return n1;
     }
 
-    public List<NhaPhanPhoi> update(String Ma, String Ten, String DiaChi, String SDT) throws SQLException {
+    public List<NhaPhanPhoi> update(String Ma, String Ten, String DiaChi, String SDT, String maSP, int Trangthai) throws SQLException {
         ArrayList<NhaPhanPhoi> n1 = new ArrayList<>();
         Connection con = DBConnection.getConnection();
-        String sql = "update NhaPhanPhoi set TenNPP=?,DiaChi=?, SDT=? where MaNPP=?";
+        String sql = "update NhaPhanPhoi set TenNPP=?,DiaChi=?, SDT=?, MaSP=?, TrangThai=?  where MaNPP=?";
         PreparedStatement st = con.prepareStatement(sql);
-        st.setString(4, Ma);
+        st.setString(6, Ma);
         st.setString(1, Ten);
         st.setString(2, DiaChi);
         st.setString(3, SDT);
+        st.setString(4, maSP);
+        st.setInt(5, Trangthai);
         st.executeUpdate();
         NhaPhanPhoi n = new NhaPhanPhoi();
         n.setMaNPP(Ma);
         n.setTenNPP(Ten);
         n.setDiaChi(DiaChi);
         n.setSdt(SDT);
+        n.setMaSP(maSP);
+        n.setTrangThai(Trangthai);
         n1.add(n);
         return n1;
     }

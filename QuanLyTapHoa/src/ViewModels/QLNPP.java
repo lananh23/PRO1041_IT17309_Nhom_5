@@ -14,15 +14,19 @@ public class QLNPP {
     private String TenNPP;
     private String DiaChi;
     private String Sdt;
+    private String MaSP;
+    private int TrangThai;
 
     public QLNPP() {
     }
 
-    public QLNPP(String MaNPP, String TenNPP, String DiaChi, String Sdt) {
+    public QLNPP(String MaNPP, String TenNPP, String DiaChi, String Sdt, String MaSP, int TrangThai) {
         this.MaNPP = MaNPP;
         this.TenNPP = TenNPP;
         this.DiaChi = DiaChi;
         this.Sdt = Sdt;
+        this.MaSP = MaSP;
+        this.TrangThai = TrangThai;
     }
 
     public String getMaNPP() {
@@ -57,10 +61,25 @@ public class QLNPP {
         this.Sdt = Sdt;
     }
 
+    public String getMaSP() {
+        return MaSP;
+    }
+
+    public void setMaSP(String MaSP) {
+        this.MaSP = MaSP;
+    }
+
+    public int getTrangThai() {
+        return TrangThai;
+    }
+
+    public void setTrangThai(int TrangThai) {
+        this.TrangThai = TrangThai;
+    }
+
     @Override
     public String toString() {
-        return "QLNPP{" + "MaNPP=" + MaNPP + ", TenNPP=" + TenNPP + ", DiaChi=" + DiaChi + ", Sdt=" + Sdt + '}';
+        return "QLNPP{" + "MaNPP=" + MaNPP + ", TenNPP=" + TenNPP + ", DiaChi=" + DiaChi + ", Sdt=" + Sdt + ", MaSP=" + MaSP + ", TrangThai=" + TrangThai + '}';
     }
-    
-    
-}
+
+  }
