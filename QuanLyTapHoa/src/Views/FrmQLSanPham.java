@@ -50,7 +50,13 @@ public class FrmQLSanPham extends javax.swing.JFrame {
     }
 
     public void clearForm() {
-
+        this.txtMaSP.setText("");
+        this.cboMaLSP.setSelectedIndex(0);
+        this.txtTenSP.setText("");
+        this.txtSoluong.setText("");
+        this.txtGiaNhap.setText("");
+        this.txtGiaBan.setText("");
+        this.txtHanSuDung.setText("");
     }
 
     public static Date toDate(String s) throws ParseException {
@@ -68,7 +74,7 @@ public class FrmQLSanPham extends javax.swing.JFrame {
 
     private QLSanPham getFormData() {
         String maSP = this.txtMaSP.getText().trim();
-        String maLSP = (String) this.cboMaLSP.getSelectedItem(); 
+        String maLSP = (String) this.cboMaLSP.getSelectedItem();
         String tenSP = this.txtTenSP.getText().trim();
         String soLuongStr = this.txtSoluong.getText().trim();
         int soLuong;
@@ -181,6 +187,11 @@ public class FrmQLSanPham extends javax.swing.JFrame {
         });
 
         btnTim.setText("Tìm kiếm");
+        btnTim.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnTimActionPerformed(evt);
+            }
+        });
 
         btnSua.setText("Cập nhật");
         btnSua.addActionListener(new java.awt.event.ActionListener() {
@@ -430,6 +441,39 @@ public class FrmQLSanPham extends javax.swing.JFrame {
         this.clearForm();
         JOptionPane.showMessageDialog(this, "Xóa thành công");
     }//GEN-LAST:event_btnXoaActionPerformed
+
+    private void btnTimActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnTimActionPerformed
+        String maSP = this.txtMaSP.getText();
+        List<QLSanPham> ds = this.sanPhamService.ALL();
+        int check = 0;
+        if (maSP.trim().length() == 0) {
+            JOptionPane.showMessageDialog(this, "Không được để trống mã sản phẩm");
+            return;
+        } else {
+            for (QLSanPham sp : ds) {
+                if (sp.getMaSP().equalsIgnoreCase(txtMaSP.getText())) {
+                    check++;
+                    this.txtMaSP.setText(sp.getMaSP());
+                    this.cboMaLSP.setSelectedItem(sp.getMaLSP());
+                    this.txtTenSP.setText(sp.getTenSP());
+                    this.txtSoluong.setText(String.valueOf(sp.getSoLuong()));
+                    this.txtGiaNhap.setText(String.valueOf(sp.getGiaNhap()));
+                    this.txtGiaBan.setText(String.valueOf(sp.getGiaBan()));
+                    this.txtHanSuDung.setText(String.valueOf(sp.getHanSuDung()));
+
+                    JOptionPane.showMessageDialog(this, "Tìm thấy sản phẩm");
+                    //this.tblSPL.getSelectedRow();
+                    return;
+                }
+            }
+        }
+        if (check == 0) {
+            this.clearForm();
+            JOptionPane.showMessageDialog(this, "Không tìm thấy sản phẩm");
+
+        }
+
+    }//GEN-LAST:event_btnTimActionPerformed
 
     /**
      * @param args the command line arguments
