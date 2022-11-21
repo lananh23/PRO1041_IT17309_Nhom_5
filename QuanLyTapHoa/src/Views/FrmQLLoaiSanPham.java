@@ -3,6 +3,7 @@ package Views;
 import Services.IManageLoaiSanPhamService;
 import ServiceImpl.ManageLoaiSanPhamService;
 import ViewModels.QLLoaiSanPham;
+import java.util.List;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
@@ -95,6 +96,11 @@ public class FrmQLLoaiSanPham extends javax.swing.JFrame {
         });
 
         btnTimKiem.setText("Tìm kiếm");
+        btnTimKiem.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnTimKiemActionPerformed(evt);
+            }
+        });
 
         tbl_LSP.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -264,6 +270,34 @@ public class FrmQLLoaiSanPham extends javax.swing.JFrame {
         this.clearForm();
         JOptionPane.showMessageDialog(this, "Xóa thành công");
     }//GEN-LAST:event_btnXoaActionPerformed
+
+    private void btnTimKiemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnTimKiemActionPerformed
+        String maLSP = this.txtMaLSP.getText();
+        List<QLLoaiSanPham> ds = this.loaiSanPhamService.ALL();
+        int check = 0;
+        if (maLSP.trim().length() == 0) {
+            JOptionPane.showMessageDialog(this, "Không được để trống mã loại sản phẩm");
+            return;
+        } else {
+            for (QLLoaiSanPham sp : ds) {
+                if (sp.getMaLSP().equalsIgnoreCase(txtMaLSP.getText())) {
+                    check++;
+                    this.txtMaLSP.setText(sp.getMaLSP());
+                    this.txtTenLSP.setText(sp.getTenLSP());
+                    this.txtMoTa.setText(sp.getMoTa());
+
+                    JOptionPane.showMessageDialog(this, "Tìm thấy loại sản phẩm");
+                    //this.tblSPL.getSelectedRow();
+                    return;
+                }
+            }
+        }
+        if (check == 0) {
+            this.clearForm();
+            JOptionPane.showMessageDialog(this, "Không tìm thấy sản phẩm");
+
+        }
+    }//GEN-LAST:event_btnTimKiemActionPerformed
 
     /**
      * @param args the command line arguments
