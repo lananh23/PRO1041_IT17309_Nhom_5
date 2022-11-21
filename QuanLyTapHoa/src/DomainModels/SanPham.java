@@ -1,33 +1,28 @@
-
 package DomainModels;
 
 import java.util.Date;
 
-
 public class SanPham {
+
     private String maSP;
-    private String idLSP;
-    private String idNPP;
+    private String maLSP;
     private String tenSP;
     private int soLuong;
     private float giaNhap;
     private float giaBan;
     private Date hanSuDung;
-    private String moTa;
 
     public SanPham() {
     }
 
-    public SanPham(String maSP, String idLSP, String idNPP, String tenSP, int soLuong, float giaNhap, float giaBan, Date hanSuDung, String moTa) {
+    public SanPham(String maSP, String maLSP, String tenSP, int soLuong, float giaNhap, float giaBan, Date hanSuDung) {
         this.maSP = maSP;
-        this.idLSP = idLSP;
-        this.idNPP = idNPP;
+        this.maLSP = maLSP;
         this.tenSP = tenSP;
         this.soLuong = soLuong;
         this.giaNhap = giaNhap;
         this.giaBan = giaBan;
         this.hanSuDung = hanSuDung;
-        this.moTa = moTa;
     }
 
     public String getMaSP() {
@@ -38,20 +33,12 @@ public class SanPham {
         this.maSP = maSP;
     }
 
-    public String getIdLSP() {
-        return idLSP;
+    public String getMaLSP() {
+        return maLSP;
     }
 
-    public void setIdLSP(String idLSP) {
-        this.idLSP = idLSP;
-    }
-
-    public String getIdNPP() {
-        return idNPP;
-    }
-
-    public void setIdNPP(String idNPP) {
-        this.idNPP = idNPP;
+    public void setMaLSP(String maLSP) {
+        this.maLSP = maLSP;
     }
 
     public String getTenSP() {
@@ -94,13 +81,4 @@ public class SanPham {
         this.hanSuDung = hanSuDung;
     }
 
-    public String getMoTa() {
-        return moTa;
-    }
-
-    public void setMoTa(String moTa) {
-        this.moTa = moTa;
-    }
-    
-    
 }
