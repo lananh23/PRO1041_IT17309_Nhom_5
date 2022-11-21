@@ -31,7 +31,9 @@ public class FrmQLLoaiSanPham extends javax.swing.JFrame {
     }
 
     public void clearForm() {
-
+        this.txtMaLSP.setText("");
+        this.txtTenLSP.setText("");
+        this.txtMoTa.setText("");
     }
 
     private QLLoaiSanPham getFormData() {

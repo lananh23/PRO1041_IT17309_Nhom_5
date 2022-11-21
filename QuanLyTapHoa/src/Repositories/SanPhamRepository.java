@@ -48,7 +48,8 @@ public class SanPhamRepository implements ISanPhamRepository {
             ps.setInt(4, sp.getSoLuong());
             ps.setFloat(5, sp.getGiaNhap());
             ps.setFloat(6, sp.getGiaBan());
-            ps.setDate(7, (Date) sp.getHanSuDung());
+            java.sql.Date date = new java.sql.Date(sp.getHanSuDung().getTime());
+            ps.setDate(7, date);
             ps.execute();
         } catch (SQLException e) {
             e.printStackTrace();
