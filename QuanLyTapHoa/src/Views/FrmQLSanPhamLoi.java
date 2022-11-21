@@ -54,10 +54,14 @@ public class FrmQLSanPhamLoi extends javax.swing.JFrame {
 //        List<ManageSanPhamLoi> list = this.sanPhamLoiService.ALL();
 //        String[] splits = list.split("-", 3);
 //        this.lblMaSPL.setText(list.get((list.size() - 1)).getMaSPL() + 1);
+          this.txtMaSPL.setText("");
+          this.lblMaSP.setText("-");
+          this.txtLyDoLoi.setText("");
+          
     }
 
     private ManageSanPhamLoi getFormData() {
-        String maSPL = this.lblMaSPL.getText().trim();
+        String maSPL = this.txtMaSPL.getText().trim();
         String maSP = this.lblMaSP.getText().trim();
         String loi = this.txtLyDoLoi.getText().trim();
         
@@ -74,7 +78,6 @@ public class FrmQLSanPhamLoi extends javax.swing.JFrame {
         jScrollPane16 = new javax.swing.JScrollPane();
         tblSP = new javax.swing.JTable();
         jPanel23 = new javax.swing.JPanel();
-        jLabel72 = new javax.swing.JLabel();
         txtLyDoLoi = new javax.swing.JTextField();
         jLabel73 = new javax.swing.JLabel();
         jLabel74 = new javax.swing.JLabel();
@@ -85,10 +88,9 @@ public class FrmQLSanPhamLoi extends javax.swing.JFrame {
         tblSPL = new javax.swing.JTable();
         btnTimKiemSPL = new javax.swing.JButton();
         jLabel76 = new javax.swing.JLabel();
-        lblTenSP = new javax.swing.JLabel();
         lblMaSP = new javax.swing.JLabel();
-        lblMaSPL = new javax.swing.JLabel();
         cbbLocSPL = new javax.swing.JComboBox<>();
+        txtMaSPL = new javax.swing.JTextField();
         jLabel22 = new javax.swing.JLabel();
         jLabel26 = new javax.swing.JLabel();
         btnTimKiemSP = new javax.swing.JButton();
@@ -113,8 +115,6 @@ public class FrmQLSanPhamLoi extends javax.swing.JFrame {
         jScrollPane16.setViewportView(tblSP);
 
         jPanel23.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
-
-        jLabel72.setText("Tên SP");
 
         jLabel73.setText("Lý do lỗi");
 
@@ -165,11 +165,7 @@ public class FrmQLSanPhamLoi extends javax.swing.JFrame {
 
         jLabel76.setText("Mã SPL");
 
-        lblTenSP.setText("--");
-
         lblMaSP.setText("--");
-
-        lblMaSPL.setText("--");
 
         cbbLocSPL.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
 
@@ -187,23 +183,23 @@ public class FrmQLSanPhamLoi extends javax.swing.JFrame {
                         .addGap(37, 37, 37)
                         .addGroup(jPanel23Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(jPanel23Layout.createSequentialGroup()
-                                .addComponent(lblMaSPL, javax.swing.GroupLayout.PREFERRED_SIZE, 66, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 272, Short.MAX_VALUE)
                                 .addGroup(jPanel23Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jLabel73)
-                                    .addComponent(jLabel72))
-                                .addGap(29, 29, 29))
+                                    .addGroup(jPanel23Layout.createSequentialGroup()
+                                        .addGap(0, 0, Short.MAX_VALUE)
+                                        .addComponent(jLabel73)
+                                        .addGap(29, 29, 29))
+                                    .addGroup(jPanel23Layout.createSequentialGroup()
+                                        .addComponent(lblMaSP, javax.swing.GroupLayout.PREFERRED_SIZE, 81, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                                .addComponent(txtLyDoLoi, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(129, 129, 129))
                             .addGroup(jPanel23Layout.createSequentialGroup()
-                                .addComponent(lblMaSP, javax.swing.GroupLayout.PREFERRED_SIZE, 81, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
-                        .addGroup(jPanel23Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(txtLyDoLoi, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(lblTenSP, javax.swing.GroupLayout.PREFERRED_SIZE, 81, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(129, 129, 129))
+                                .addComponent(txtMaSPL, javax.swing.GroupLayout.PREFERRED_SIZE, 138, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
                     .addGroup(jPanel23Layout.createSequentialGroup()
                         .addGap(11, 11, 11)
                         .addComponent(cbbLocSPL, javax.swing.GroupLayout.PREFERRED_SIZE, 260, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 130, Short.MAX_VALUE)
                         .addComponent(btnThem)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(btnCapNhat)
@@ -219,10 +215,8 @@ public class FrmQLSanPhamLoi extends javax.swing.JFrame {
             .addGroup(jPanel23Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanel23Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel72)
-                    .addComponent(lblTenSP)
                     .addComponent(jLabel76)
-                    .addComponent(lblMaSPL))
+                    .addComponent(txtMaSPL, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGroup(jPanel23Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel23Layout.createSequentialGroup()
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 20, Short.MAX_VALUE)
@@ -331,7 +325,7 @@ public class FrmQLSanPhamLoi extends javax.swing.JFrame {
         String maSP = this.tblSPL.getValueAt(row, 1).toString();
         String lyDoLoi = this.tblSPL.getValueAt(row, 2).toString();
 
-        this.lblMaSPL.setText(maSPL);
+        this.txtMaSPL.setText(maSPL);
         this.lblMaSP.setText(maSP);
         this.txtLyDoLoi.setText(lyDoLoi);
     }//GEN-LAST:event_tblSPLMouseClicked
@@ -345,7 +339,6 @@ public class FrmQLSanPhamLoi extends javax.swing.JFrame {
         String ten = this.tblSP.getValueAt(row, 1).toString();
 
         this.lblMaSP.setText(ma);
-        this.lblTenSP.setText(ten);
     }//GEN-LAST:event_tblSPMouseClicked
 
     private void btnThemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnThemActionPerformed
@@ -364,7 +357,7 @@ public class FrmQLSanPhamLoi extends javax.swing.JFrame {
         if (sp == null) {
             return;
         }
-        String id = this.lblMaSPL.getText();
+        String id = this.txtMaSPL.getText();
         this.sanPhamLoiService.update(id, sp);
         this.loadTableSPL();
         this.clearForm();
@@ -388,32 +381,30 @@ public class FrmQLSanPhamLoi extends javax.swing.JFrame {
     }//GEN-LAST:event_btnXoaActionPerformed
 
     private void btnTimKiemSPLActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnTimKiemSPLActionPerformed
-//        String maSPL = this.txtMaSPL.getText();
-//        List<QLSanPhamLoi> ds = this.sanPhamLoiService.ALL();
-//        int check = 0;
-//        if (maSPL.trim().length() == 0) {
-//            JOptionPane.showMessageDialog(this, "Không được để trống mã sản phẩm lỗi");
-//            return;
-//        } else {
-//            for (QLSanPhamLoi sp : ds) {
-//                if (sp.getMaSPL().equalsIgnoreCase(txtMaSPL.getText())) {
-//                    check++;
-//                    this.lblID.setText(sp.getId());
-//                    this.txtMaSPL.setText(sp.getMaSPL());
-//                    this.lblMaSP.setText(sp.getIdSP());
-//                    this.lblTenSP.setText(sp.getTenSPL());
-//                    this.txtLyDoLoi.setText(sp.getLyDoLoi());
-//                    JOptionPane.showMessageDialog(this, "Tìm thấy sản phẩm lỗi");
-//                    this.tblSPL.getSelectedRow();
-//                    return;
-//                }
-//            }
-//        }
-//        if (check == 0) {
-//            this.clearForm();
-//            JOptionPane.showMessageDialog(this, "Không tìm thấy sản phẩm lỗi");
-//
-//        }
+        String maSPL = this.txtMaSPL.getText();
+        List<ManageSanPhamLoi> ds = this.sanPhamLoiService.ALL();
+        int check = 0;
+        if (maSPL.trim().length() == 0) {
+            JOptionPane.showMessageDialog(this, "Không được để trống mã sản phẩm lỗi");
+            return;
+        } else {
+            for (ManageSanPhamLoi sp : ds) {
+                if (sp.getMaSPL().equalsIgnoreCase(txtMaSPL.getText())) {
+                    check++;
+                    this.txtMaSPL.setText(sp.getMaSPL());
+                    this.lblMaSP.setText(sp.getMaSP());
+                    this.txtLyDoLoi.setText(sp.getLyDoLoi());
+                    JOptionPane.showMessageDialog(this, "Tìm thấy sản phẩm lỗi");
+                    this.tblSPL.getSelectedRow();
+                    return;
+                }
+            }
+        }
+        if (check == 0) {
+            this.clearForm();
+            JOptionPane.showMessageDialog(this, "Không tìm thấy sản phẩm lỗi");
+
+        }
     }//GEN-LAST:event_btnTimKiemSPLActionPerformed
 
     private void btnTimKiemSPActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnTimKiemSPActionPerformed
@@ -488,7 +479,6 @@ public class FrmQLSanPhamLoi extends javax.swing.JFrame {
     private javax.swing.JComboBox<String> cbbLocSPL;
     private javax.swing.JLabel jLabel22;
     private javax.swing.JLabel jLabel26;
-    private javax.swing.JLabel jLabel72;
     private javax.swing.JLabel jLabel73;
     private javax.swing.JLabel jLabel74;
     private javax.swing.JLabel jLabel76;
@@ -497,11 +487,10 @@ public class FrmQLSanPhamLoi extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane16;
     private javax.swing.JScrollPane jScrollPane17;
     private javax.swing.JLabel lblMaSP;
-    private javax.swing.JLabel lblMaSPL;
-    private javax.swing.JLabel lblTenSP;
     private javax.swing.JTable tblSP;
     private javax.swing.JTable tblSPL;
     private javax.swing.JTextField txtLyDoLoi;
     private javax.swing.JTextField txtMaSP;
+    private javax.swing.JTextField txtMaSPL;
     // End of variables declaration//GEN-END:variables
 }
