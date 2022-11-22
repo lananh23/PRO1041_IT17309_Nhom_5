@@ -18,16 +18,12 @@ public interface NhaPhanPhoiIF {
     public List<QLNPP> findALL() throws SQLException;
 
     public List<NhaPhanPhoi> select1(String ma);
-    
-    public List<NhaPhanPhoi> timkiem(String maSP);
-    
-    public List<NhaPhanPhoi> locMa(String maSP);
-    
-    public List<NhaPhanPhoi> locTT(int Trangthai);
 
     public List<NhaPhanPhoi> insert(String Ma, String Ten, String DiaChi, String SDT, String maSP, int Trangthai);
 
     public List<NhaPhanPhoi> delete(String Ma);
 
     public List<NhaPhanPhoi> update(String Ma, String Ten, String DiaChi, String SDT, String maSP, int Trangthai);
+
+    public List<NhaPhanPhoi> click();
 }

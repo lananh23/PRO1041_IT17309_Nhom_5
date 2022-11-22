@@ -12,7 +12,6 @@ import java.util.List;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
-
 /**
  *
  * @author lanan
@@ -58,6 +57,15 @@ public class FrmQLKhachHang extends javax.swing.JFrame {
             return;
         }
 
+    }
+    
+    void clearForm() {
+        this.txtMa.setText("");
+        this.txtTen.setText("");
+        this.txtDiaChi.setText("");
+        this.txtSDT.setText("");
+        this.txtNgaySinh.setText("");
+        this.txtNgayDki.setText("");
     }
 
     /**
@@ -318,13 +326,19 @@ public class FrmQLKhachHang extends javax.swing.JFrame {
                     kh.getNgaySinh(),
                     kh.getSdt(),
                     kh.getNgayDki(),});
-        }
+            }
+            if (k.isEmpty()) {
+                JOptionPane.showMessageDialog(null, "Thất bại");
+                return;
+            }else{
+                  JOptionPane.showMessageDialog(null, "đã hiện khách hàng muốn tìm");
+                  return;
+            }
         } catch (Exception e) {
-            JOptionPane.showMessageDialog(null, "thất bại");
-            return;
+            e.printStackTrace();
         }
-        JOptionPane.showMessageDialog(null, "đã hiện khách hàng muốn tìm");
-        return;
+
+
     }//GEN-LAST:event_btnTKActionPerformed
 
     private void btnXoaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnXoaActionPerformed
@@ -339,6 +353,7 @@ public class FrmQLKhachHang extends javax.swing.JFrame {
                 khSV.delete(Ma);
                 model.setRowCount(0);
                 loadtable();
+                clearForm();
             } catch (Exception e) {
                 JOptionPane.showMessageDialog(null, "xóa thất bại");
                 return;
@@ -369,12 +384,12 @@ public class FrmQLKhachHang extends javax.swing.JFrame {
             }
 
             if (Ma.trim().isEmpty()
-                || Ten.trim().isEmpty()
-                || GioiTinh.trim().isEmpty()
-                || DiaChi.trim().isEmpty()
-                || NgaySinh.trim().isEmpty()
-                || Sdt.trim().isEmpty()
-                || NgayDki.trim().isEmpty()) {
+                    || Ten.trim().isEmpty()
+                    || GioiTinh.trim().isEmpty()
+                    || DiaChi.trim().isEmpty()
+                    || NgaySinh.trim().isEmpty()
+                    || Sdt.trim().isEmpty()
+                    || NgayDki.trim().isEmpty()) {
                 JOptionPane.showMessageDialog(null, "ko đc để trống");
                 return;
             }
@@ -382,6 +397,7 @@ public class FrmQLKhachHang extends javax.swing.JFrame {
                 khSV.update(Ma, Ten, GioiTinh, DiaChi, NgaySinh, Sdt, NgayDki);
                 model.setRowCount(0);
                 loadtable();
+                clearForm();
             } catch (Exception e) {
                 JOptionPane.showMessageDialog(null, "sửa thất bại");
                 return;
@@ -435,6 +451,7 @@ public class FrmQLKhachHang extends javax.swing.JFrame {
             khSV.insert(Ma, Ten, GioiTinh, DiaChi, NgaySinh, Sdt, NgayDki);
             model.setRowCount(0);
             loadtable();
+            clearForm();
         } catch (Exception e) {
             JOptionPane.showMessageDialog(null, "thêm thất bại");
             return;

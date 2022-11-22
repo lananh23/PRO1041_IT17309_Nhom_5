@@ -98,7 +98,6 @@ public class KhachHang {
         return "KhachHang{" + "MaKH=" + MaKH + ", TenKH=" + TenKH + ", GioiTinh=" + GioiTinh + ", DiaChi=" + DiaChi + ", NgaySinh=" + NgaySinh + ", Sdt=" + Sdt + ", NgayDki=" + NgayDki + '}';
     }
 
-    
-    
+   
     
 }

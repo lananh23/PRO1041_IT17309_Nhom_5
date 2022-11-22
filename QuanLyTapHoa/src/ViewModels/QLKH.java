@@ -91,6 +91,8 @@ public class QLKH {
     public String toString() {
         return "QLKH{" + "MaKH=" + MaKH + ", TenKH=" + TenKH + ", GioiTinh=" + GioiTinh + ", DiaChi=" + DiaChi + ", NgaySinh=" + NgaySinh + ", Sdt=" + Sdt + ", NgayDki=" + NgayDki + '}';
     }
+
+    
     
     
 }

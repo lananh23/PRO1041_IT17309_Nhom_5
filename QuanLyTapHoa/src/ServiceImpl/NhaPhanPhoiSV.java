@@ -60,29 +60,7 @@ public class NhaPhanPhoiSV implements NhaPhanPhoiIF{
         }
     }
     
-    public List<NhaPhanPhoi> timkiem(String maSP) {
-        try {
-            return NPPRP.timkiem(maSP);
-        } catch (Exception e) {
-            return null;
-        }
-    }
-
-    public List<NhaPhanPhoi> locMa(String maSP) {
-        try {
-            return NPPRP.locMa(maSP);
-        } catch (Exception e) {
-            return null;
-        }
-    }
     
-    public List<NhaPhanPhoi> locTT(int Trangthai) {
-        try {
-            return NPPRP.locTT(Trangthai);
-        } catch (Exception e) {
-            return null;
-        }
-    }
     
     public List<NhaPhanPhoi> update(String Ma, String Ten, String DiaChi, String SDT, String maSP, int Trangthai) {
         try {
@@ -95,6 +73,15 @@ public class NhaPhanPhoiSV implements NhaPhanPhoiIF{
     public List<NhaPhanPhoi> delete(String Ma) {
         try {
             return NPPRP.delete(Ma);
+        } catch (Exception e) {
+            return null;
+        }
+    }
+
+    @Override
+    public List<NhaPhanPhoi> click() {
+         try {
+            return NPPRP.select();
         } catch (Exception e) {
             return null;
         }

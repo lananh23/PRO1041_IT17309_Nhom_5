@@ -12,6 +12,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -70,6 +71,7 @@ public List<KhachHang> select() throws SQLException {
             kh.setNgayDki(NgayDki);
             k.add(kh);
         }
+
         return k;
     }
 

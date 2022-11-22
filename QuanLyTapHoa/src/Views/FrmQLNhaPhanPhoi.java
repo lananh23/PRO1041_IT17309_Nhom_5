@@ -55,7 +55,7 @@ public class FrmQLNhaPhanPhoi extends javax.swing.JFrame {
                     q.getDiaChi(),
                     q.getSdt(),
                     q.getMaSP(),
-                    q.getTrangThai() == 1 ? "Đã nhận" : "Chưa nhận"});
+                    q.getTrangThai() == 1 ? "Còn cung cấp" : "ko còn cung cấp"});
             }
         } catch (SQLException ex) {
             JOptionPane.showMessageDialog(null, "lỗi");
@@ -65,8 +65,8 @@ public class FrmQLNhaPhanPhoi extends javax.swing.JFrame {
     }
 
     void cbx() {
-        cbb.addElement("Đã nhận");
-        cbb.addElement("Chưa nhận");
+        cbb.addElement("ko còn cung cấp");
+        cbb.addElement("Còn cung cấp");
         cbxTT.setModel(cbb);
     }
 
@@ -75,7 +75,16 @@ public class FrmQLNhaPhanPhoi extends javax.swing.JFrame {
         cbb1.addElement("Mã");
         cbxLoc.setModel(cbb1);
     }
-    
+
+    void clearForm() {
+        this.txtMa.setText("");
+        this.cbxMaSP.setSelectedIndex(0);
+        this.txtTen.setText("");
+        this.txtDiaChi.setText("");
+        this.txtSDT.setText("");
+        this.cbxTT.setSelectedIndex(0);
+    }
+
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -105,13 +114,9 @@ public class FrmQLNhaPhanPhoi extends javax.swing.JFrame {
         btnSua = new javax.swing.JButton();
         btnTK = new javax.swing.JButton();
         jLabel2 = new javax.swing.JLabel();
-        txtMaSP = new javax.swing.JTextField();
         jLabel3 = new javax.swing.JLabel();
         cbxTT = new javax.swing.JComboBox<>();
-        jPanel2 = new javax.swing.JPanel();
-        jScrollPane1 = new javax.swing.JScrollPane();
-        tblSP = new javax.swing.JTable();
-        btnTKSP = new javax.swing.JButton();
+        cbxMaSP = new javax.swing.JComboBox<>();
         jLabel62 = new javax.swing.JLabel();
 
         javax.swing.GroupLayout jLayeredPane1Layout = new javax.swing.GroupLayout(jLayeredPane1);
@@ -205,6 +210,8 @@ public class FrmQLNhaPhanPhoi extends javax.swing.JFrame {
 
         cbxTT.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
 
+        cbxMaSP.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "SP001", "SP002", "SP003", "SP004" }));
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -221,10 +228,10 @@ public class FrmQLNhaPhanPhoi extends javax.swing.JFrame {
                                     .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE))
                                 .addGap(32, 32, 32)
                                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(txtMaSP, javax.swing.GroupLayout.PREFERRED_SIZE, 159, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                                         .addComponent(txtMa)
-                                        .addComponent(txtTen, javax.swing.GroupLayout.PREFERRED_SIZE, 159, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                        .addComponent(txtTen, javax.swing.GroupLayout.PREFERRED_SIZE, 159, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addComponent(cbxMaSP, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                                 .addGap(16, 16, 16))
                             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                                 .addGap(42, 42, 42)
@@ -286,9 +293,9 @@ public class FrmQLNhaPhanPhoi extends javax.swing.JFrame {
                 .addGap(27, 27, 27)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel2)
-                    .addComponent(txtMaSP, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel3)
-                    .addComponent(cbxTT, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(cbxTT, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(cbxMaSP, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(25, 25, 25)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(btnLoc)
@@ -304,49 +311,6 @@ public class FrmQLNhaPhanPhoi extends javax.swing.JFrame {
                 .addContainerGap())
         );
 
-        jPanel2.setBackground(new java.awt.Color(204, 204, 204));
-
-        tblSP.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
-            },
-            new String [] {
-                "Title 1", "Title 2", "Title 3", "Title 4"
-            }
-        ));
-        jScrollPane1.setViewportView(tblSP);
-
-        btnTKSP.setText("Tìm kiếm SP");
-        btnTKSP.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnTKSPActionPerformed(evt);
-            }
-        });
-
-        javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
-        jPanel2.setLayout(jPanel2Layout);
-        jPanel2Layout.setHorizontalGroup(
-            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel2Layout.createSequentialGroup()
-                .addGap(21, 21, 21)
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnTKSP))
-                .addContainerGap(116, Short.MAX_VALUE))
-        );
-        jPanel2Layout.setVerticalGroup(
-            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel2Layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(btnTKSP)
-                .addGap(18, 18, 18)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 143, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap())
-        );
-
         jLabel62.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         jLabel62.setText("Quản lý nhà phân phối");
 
@@ -355,16 +319,14 @@ public class FrmQLNhaPhanPhoi extends javax.swing.JFrame {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addGroup(layout.createSequentialGroup()
-                            .addGap(101, 101, 101)
-                            .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGroup(layout.createSequentialGroup()
-                            .addGap(302, 302, 302)
-                            .addComponent(jLabel62))))
-                .addContainerGap(197, Short.MAX_VALUE))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(101, 101, 101)
+                        .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(289, 289, 289)
+                        .addComponent(jLabel62)))
+                .addContainerGap(85, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -373,9 +335,7 @@ public class FrmQLNhaPhanPhoi extends javax.swing.JFrame {
                 .addComponent(jLabel62)
                 .addGap(18, 18, 18)
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(28, Short.MAX_VALUE))
+                .addContainerGap(45, Short.MAX_VALUE))
         );
 
         pack();
@@ -384,12 +344,13 @@ public class FrmQLNhaPhanPhoi extends javax.swing.JFrame {
     private void tblNPPMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblNPPMouseClicked
         // TODO add your handling code here:
         int row = tblNPP.getSelectedRow();
-        txtMa.setText(tblNPP.getValueAt(row, 0).toString());
-        txtTen.setText(tblNPP.getValueAt(row, 1).toString());
-        txtDiaChi.setText(tblNPP.getValueAt(row, 2).toString());
-        txtSDT.setText(tblNPP.getValueAt(row, 3).toString());
-        txtMaSP.setText(tblNPP.getValueAt(row, 4).toString());
-        cbxTT.setSelectedItem(tblNPP.getValueAt(row, 5));
+        NhaPhanPhoi npp = NPPSV.click().get(row);
+        txtMa.setText(npp.getMaNPP());
+        txtTen.setText(npp.getTenNPP());
+        txtDiaChi.setText(npp.getDiaChi());
+        txtSDT.setText(npp.getSdt());
+        cbxMaSP.setSelectedItem(npp.getMaSP());
+        cbxTT.setSelectedItem(tblNPP.getValueAt(row, 5).toString());
 
     }//GEN-LAST:event_tblNPPMouseClicked
 
@@ -399,7 +360,7 @@ public class FrmQLNhaPhanPhoi extends javax.swing.JFrame {
         String Ten = txtTen.getText();
         String DiaChi = txtDiaChi.getText();
         String Sdt = txtSDT.getText();
-        String MaSP = txtMaSP.getText();
+        String MaSP = (String) cbxMaSP.getSelectedItem();
 
         if (Ma.trim().isEmpty()) {
             JOptionPane.showMessageDialog(null, "mã ko đc để trống");
@@ -417,14 +378,12 @@ public class FrmQLNhaPhanPhoi extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(null, "Sdt ko đc để trống");
             return;
         }
-        if (MaSP.trim().isEmpty()) {
-            JOptionPane.showMessageDialog(null, "mã sp ko đc để trống");
-            return;
-        }
+
         try {
             NPPSV.insert(Ma, Ten, DiaChi, Sdt, MaSP, WIDTH);
             model.setRowCount(0);
             loadtable();
+            clearForm();
         } catch (Exception e) {
             JOptionPane.showMessageDialog(null, "thêm thất bại");
             return;
@@ -444,20 +403,21 @@ public class FrmQLNhaPhanPhoi extends javax.swing.JFrame {
             String Ten = txtTen.getText();
             String DiaChi = txtDiaChi.getText();
             String Sdt = txtSDT.getText();
-            String MaSP = txtMaSP.getText();
+            String MaSP = (String) cbxMaSP.getSelectedItem();
 
             if (Ma.trim().isEmpty()
                     || Ten.trim().isEmpty()
                     || DiaChi.trim().isEmpty()
-                    || Sdt.trim().isEmpty()
-                    || MaSP.trim().isEmpty()) {
+                    || Sdt.trim().isEmpty()) {
                 JOptionPane.showMessageDialog(null, "ko đc để trống");
                 return;
             }
+
             try {
                 NPPSV.update(Ma, Ten, DiaChi, Sdt, MaSP, WIDTH);
                 model.setRowCount(0);
                 loadtable();
+                clearForm();
             } catch (Exception e) {
                 JOptionPane.showMessageDialog(null, "sửa thất bại");
                 return;
@@ -480,6 +440,7 @@ public class FrmQLNhaPhanPhoi extends javax.swing.JFrame {
                 NPPSV.delete(Ma);
                 model.setRowCount(0);
                 loadtable();
+                clearForm();
             } catch (Exception e) {
                 JOptionPane.showMessageDialog(null, "xóa thất bại");
                 return;
@@ -502,58 +463,25 @@ public class FrmQLNhaPhanPhoi extends javax.swing.JFrame {
                     n.getDiaChi(),
                     n.getSdt(),
                     n.getMaSP(),
-                    n.getTrangThai() == 1 ? "Đã nhận" : "Chưa nhận"});
+                    n.getTrangThai() == 1 ? "Còn cung cấp" : "ko còn cung cấp"});
+            }
+            if (k.isEmpty()) {
+                JOptionPane.showMessageDialog(null, "Thất bại");
+                return;
+            } else {
+                JOptionPane.showMessageDialog(null, "đã hiện khách hàng muốn tìm");
+                return;
             }
         } catch (Exception e) {
-            JOptionPane.showMessageDialog(null, "thất bại");
-            return;
+            e.printStackTrace();
         }
-        JOptionPane.showMessageDialog(null, "đã hiện npp muốn tìm");
-        return;
-    }//GEN-LAST:event_btnTKActionPerformed
 
-    private void btnTKSPActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnTKSPActionPerformed
-        // TODO add your handling code here:
-        String ma = JOptionPane.showInputDialog(null, "vui lòng nhập mã sp muốn tìm");
-        try {
-            List<NhaPhanPhoi> k = NPPSV.timkiem(ma);
-            model.setRowCount(0);
-            for (NhaPhanPhoi n : k) {
-                model.addRow(new Object[]{
-                    n.getMaNPP(),
-                    n.getTenNPP(),
-                    n.getDiaChi(),
-                    n.getSdt(),});
-            }
-        } catch (Exception e) {
-            JOptionPane.showMessageDialog(null, "thất bại");
-            return;
-        }
-        JOptionPane.showMessageDialog(null, "đã hiện sp muốn tìm");
-        return;
-    }//GEN-LAST:event_btnTKSPActionPerformed
+    }//GEN-LAST:event_btnTKActionPerformed
 
     private void btnLocActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLocActionPerformed
         // TODO add your handling code here:
-     
-        try {
-            List<NhaPhanPhoi> k1 = NPPSV.locTT(0);
-            model.setRowCount(0);
-            for (NhaPhanPhoi n : k1) {
-                model.addRow(new Object[]{
-                    n.getMaNPP(),
-                    n.getTenNPP(),
-                    n.getDiaChi(),
-                    n.getSdt(),
-                    n.getMaSP(),
-                    n.getTrangThai() == 1 ? "Đã nhận" : "Chưa nhận"});
-            }
-        } catch (Exception e) {
-            JOptionPane.showMessageDialog(null, "thất bại");
-            return;
-        }
-        JOptionPane.showMessageDialog(null, "lọc thành công");
-        return;
+
+
     }//GEN-LAST:event_btnLocActionPerformed
 
     /**
@@ -595,11 +523,11 @@ public class FrmQLNhaPhanPhoi extends javax.swing.JFrame {
     private javax.swing.JButton btnLoc;
     private javax.swing.JButton btnSua;
     private javax.swing.JButton btnTK;
-    private javax.swing.JButton btnTKSP;
     private javax.swing.JButton btnThem;
     private javax.swing.JButton btnXoa;
     private javax.swing.ButtonGroup buttonGroup1;
     private javax.swing.JComboBox<String> cbxLoc;
+    private javax.swing.JComboBox<String> cbxMaSP;
     private javax.swing.JComboBox<String> cbxTT;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
@@ -610,14 +538,10 @@ public class FrmQLNhaPhanPhoi extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel65;
     private javax.swing.JLayeredPane jLayeredPane1;
     private javax.swing.JPanel jPanel1;
-    private javax.swing.JPanel jPanel2;
-    private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane13;
     private javax.swing.JTable tblNPP;
-    private javax.swing.JTable tblSP;
     private javax.swing.JTextField txtDiaChi;
     private javax.swing.JTextField txtMa;
-    private javax.swing.JTextField txtMaSP;
     private javax.swing.JTextField txtSDT;
     private javax.swing.JTextField txtTen;
     // End of variables declaration//GEN-END:variables

@@ -12,6 +12,7 @@ import ViewModels.QLKH;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
+import javax.swing.JOptionPane;
 
 
 /**
@@ -54,6 +55,7 @@ public class KhachHangSV implements KhachHangIF {
 
     public List<KhachHang> select1(String ma) {
         try {
+          
             return khRP.select1(ma);
         } catch (Exception e) {
             return null;
