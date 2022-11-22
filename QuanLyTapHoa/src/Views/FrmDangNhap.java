@@ -4,10 +4,16 @@
  */
 package Views;
 
+import DomainModels.DangNhap.dangNhapModel;
+import Repositories.dangNhap.dangNhapRepositories;
+import Services.dangNhap.dangNhapService;
 import Utilities.DBConnection;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
 import javax.swing.JOptionPane;
 
 public class FrmDangNhap extends javax.swing.JFrame {
@@ -15,36 +21,31 @@ public class FrmDangNhap extends javax.swing.JFrame {
     Connection connection;
     PreparedStatement ps;
     ResultSet rs;
+    dangNhapModel dn;
+    dangNhapService dangNhapService;
+    List<dangNhapModel> listDangNhaps;
+    public static DBConnection DBconection = new DBConnection();
 
     public FrmDangNhap() {
         initComponents();
         setLocationRelativeTo(null);
+
+        this.getRootPane().setDefaultButton(btnLogin);
+
+        dn = new dangNhapModel();
+        dangNhapService = new dangNhapService();
+        listDangNhaps = new ArrayList<>();
+
     }
 
-    void dangNhap() {
+    void DangNhap() {
 
         String userName = txtUsername.getText();
         String password = new String(txtPassword.getPassword());
-
-        try {
-
-            connection = DBConnection.getConnection();
-            String sql = " SELECT * FROM dbo.NguoiDung WHERE MaND = ? AND Pass = ?";
-            ps = connection.prepareStatement(sql);
-            ps.setString(1, userName);
-            ps.setString(2, password);
-            rs = ps.executeQuery();
-            if (rs.next()) {
-                JOptionPane.showMessageDialog(this, "Login Successfully !!");
-                new FrmTrangChu().setVisible(true);
-                this.dispose();
-                return;
-            } else {
-                JOptionPane.showMessageDialog(this, "Login Failed");
-                return;
-            }
-        } catch (Exception e) {
-            System.out.println(e);
+        boolean dn = dangNhapService.getAllDangNhap(userName, password);
+        if (dn) {
+            new FrmTrangChu().setVisible(true);
+            this.dispose();
         }
     }
 
@@ -97,6 +98,11 @@ public class FrmDangNhap extends javax.swing.JFrame {
         });
 
         btnExit.setText("Exit");
+        btnExit.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnExitActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
@@ -180,8 +186,15 @@ public class FrmDangNhap extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnLoginActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLoginActionPerformed
-       dangNhap();
+
+        DangNhap();
+
+
     }//GEN-LAST:event_btnLoginActionPerformed
+
+    private void btnExitActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnExitActionPerformed
+        System.exit(0);
+    }//GEN-LAST:event_btnExitActionPerformed
 
     /**
      * @param args the command line arguments
