@@ -1,13 +1,14 @@
 package Utilities;
 
+import com.microsoft.sqlserver.jdbc.SQLServerDriver;
 import java.sql.*;
 import java.sql.Statement;
 import java.sql.Connection;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 public class DBConnection {
-<<<<<<< HEAD
 
-    
     private static final String USERNAME = "sa";
     private static final String PASSWORD = "123";
     private static final String SERVER_NAME = "DESKTOP-CSTQHQ6\\SQLEXPRESS";
@@ -18,7 +19,7 @@ public class DBConnection {
 
     private static String CONNECT_STRING;
 
-    static {
+     static {
         try {
             DriverManager.registerDriver(new SQLServerDriver());
             //Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
@@ -31,32 +32,17 @@ public class DBConnection {
                     .append("password=").append(PASSWORD).append(";");
             if (USING_SSL) {
                 connectStringBuilder.append("encrypt=true;trustServerCertificate=true;");
-=======
-    private static Connection conn;
-    public static Connection getConnection(){
-        if(conn == null){
-            try {
-                Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
-                String dbUser = "sa", dbPass = "Aa@123456",
-                        dbUrl = "jdbc:sqlserver://localhost:1433;"
-                            +"databaseName=QuanLyCuaHangTapHoa;"
-                            +"encrypt=true;trustServerCertificate=true;sslProtocol=TLSv1.2";
-                conn = DriverManager.getConnection(dbUrl, dbUser, dbPass);
-                System.out.println("Kết nối thành công");
-            } catch (ClassNotFoundException e) {
-                e.printStackTrace();
-            } catch (SQLException e) {
-                e.printStackTrace();
->>>>>>> parent of c026d28 (Commit_5_thanhhieu_Login)
             }
-            
+            CONNECT_STRING = connectStringBuilder.toString();
+            System.out.println("Connect String co dang: " + CONNECT_STRING);
+            System.out.println("Ket noi thanh cong");
+        } catch (Exception ex) {
         }
-        return conn;
     }
-    public static void main(String[] args) {
-        getConnection();
+
+    public static Connection getConnection() throws SQLException {
+        return DriverManager.getConnection(CONNECT_STRING);
     }
-<<<<<<< HEAD
 
     public static void main(String[] args) throws SQLException {
         Connection conn = getConnection();
@@ -94,6 +80,4 @@ public class DBConnection {
         }
     }
 
-=======
->>>>>>> parent of c026d28 (Commit_5_thanhhieu_Login)
 }
