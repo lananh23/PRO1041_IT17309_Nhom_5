@@ -11,11 +11,12 @@ public class SanPham {
     private float giaNhap;
     private float giaBan;
     private Date hanSuDung;
+    private String maQR;
 
     public SanPham() {
     }
 
-    public SanPham(String maSP, String maLSP, String tenSP, int soLuong, float giaNhap, float giaBan, Date hanSuDung) {
+    public SanPham(String maSP, String maLSP, String tenSP, int soLuong, float giaNhap, float giaBan, Date hanSuDung, String maQR) {
         this.maSP = maSP;
         this.maLSP = maLSP;
         this.tenSP = tenSP;
@@ -23,6 +24,7 @@ public class SanPham {
         this.giaNhap = giaNhap;
         this.giaBan = giaBan;
         this.hanSuDung = hanSuDung;
+        this.maQR = maQR;
     }
 
     public String getMaSP() {
@@ -79,6 +81,14 @@ public class SanPham {
 
     public void setHanSuDung(Date hanSuDung) {
         this.hanSuDung = hanSuDung;
+    }
+
+    public String getMaQR() {
+        return maQR;
+    }
+
+    public void setMaQR(String maQR) {
+        this.maQR = maQR;
     }
 
 }

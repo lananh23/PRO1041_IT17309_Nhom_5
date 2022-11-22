@@ -22,20 +22,20 @@ public class ManageSanPhamService implements IManageSanPhamService {
         list = new ArrayList<>();
         List<SanPham> List_CH = this.SanPhamRepo.All();
         for (SanPham o : List_CH) {
-            list.add(new QLSanPham(o.getMaSP(), o.getMaLSP(), o.getTenSP(), o.getSoLuong(), o.getGiaNhap(), o.getGiaBan(), o.getHanSuDung()));
+            list.add(new QLSanPham(o.getMaSP(), o.getMaLSP(), o.getTenSP(), o.getSoLuong(), o.getGiaNhap(), o.getGiaBan(), o.getHanSuDung(), o.getMaQR()));
         }
         return list;
     }
 
     @Override
     public void insert(QLSanPham sp) {
-        SanPham s = new SanPham(sp.getMaSP(), sp.getMaLSP(), sp.getTenSP(), sp.getSoLuong(), sp.getGiaNhap(), sp.getGiaBan(), sp.getHanSuDung());
+        SanPham s = new SanPham(sp.getMaSP(), sp.getMaLSP(), sp.getTenSP(), sp.getSoLuong(), sp.getGiaNhap(), sp.getGiaBan(), sp.getHanSuDung(), sp.getMaQR());
         this.SanPhamRepo.insert(s);
     }
 
     @Override
     public void update(String maSP, QLSanPham sp) {
-        SanPham s = new SanPham(sp.getMaSP(), sp.getMaLSP(), sp.getTenSP(), sp.getSoLuong(), sp.getGiaNhap(), sp.getGiaBan(), sp.getHanSuDung());
+        SanPham s = new SanPham(sp.getMaSP(), sp.getMaLSP(), sp.getTenSP(), sp.getSoLuong(), sp.getGiaNhap(), sp.getGiaBan(), sp.getHanSuDung(), sp.getMaQR());
         this.SanPhamRepo.update(maSP, s);
     }
 
