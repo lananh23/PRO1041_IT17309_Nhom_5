@@ -16,5 +16,7 @@ public interface IsDangNhapRepositories {
 
     public boolean getAllDangNhap(String userName, String pass);
 
-    public void SuaMK(String MK, String MaND);
+    public boolean SuaMK(String MK, String MaND);
+    
+    public boolean doiMK(String mkcu, String mkmoi,  String nhapLai);
 }

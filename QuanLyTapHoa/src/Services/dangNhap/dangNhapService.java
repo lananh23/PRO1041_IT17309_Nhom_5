@@ -32,19 +32,14 @@ public class dangNhapService implements IsDangNhapService {
 
     @Override
     public boolean KT_DoiMK(String mkcu, String mkmoi, String nhaplai) {
-        if (!mkcu.equals(MatKhau)) {
-            thongBao.thongbao.thongbao("Mật khẩu cũ sai", "");
-            return false;
-        }
-        if (mkmoi.length() < 5) {
-            thongBao.thongbao.thongbao("mật khẩu dài hơn 5 ký tự", "");
-            return false;
-        }
-        if (!mkmoi.equals(nhaplai)) {
-            thongBao.thongbao.thongbao("Mật Khẩu Không Trùng Khớp", "");
-            return false;
-        }
-        return true;
+        boolean isKT_DoiPass = dangNhapRepositories.doiMK(mkcu, mkmoi, nhaplai);
+        return isKT_DoiPass;
+    }
+
+    @Override
+    public boolean KT_SuaMK(String MK, String MaND) {
+        boolean isKT_SuaMK = dangNhapRepositories.SuaMK(MK, MaND);
+        return isKT_SuaMK;
     }
 
 }
