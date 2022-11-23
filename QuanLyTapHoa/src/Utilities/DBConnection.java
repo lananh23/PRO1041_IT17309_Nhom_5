@@ -53,7 +53,6 @@ public class DBConnection {
 
     }
 
-    //hàm thực thi câu lệnh select
     public static ResultSet Getdata(String cauTruyVan) {
         try {
             conn = DBConnection.getConnection();
