@@ -117,8 +117,9 @@ public class FrmQLSanPham extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(this, "Sai định dạng ngày sinh");
             return null;
         }
+        String maQR = this.txtMaQR.getText().trim();
 
-        QLSanPham s = new QLSanPham(maSP, maLSP, tenSP, soLuong, giaNhap, giaBan, d);
+        QLSanPham s = new QLSanPham(maSP, maLSP, tenSP, soLuong, giaNhap, giaBan, d, maQR);
         return s;
     }
 
@@ -150,7 +151,7 @@ public class FrmQLSanPham extends javax.swing.JFrame {
         jComboBox1 = new javax.swing.JComboBox<>();
         jButton1 = new javax.swing.JButton();
         jButton2 = new javax.swing.JButton();
-        jTextField1 = new javax.swing.JTextField();
+        txtMaQR = new javax.swing.JTextField();
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
         txtGiaNhap = new javax.swing.JTextField();
@@ -296,7 +297,7 @@ public class FrmQLSanPham extends javax.swing.JFrame {
                                         .addComponent(jButton1)
                                         .addGap(18, 18, 18)
                                         .addComponent(jButton2))
-                                    .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(txtMaQR, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 166, javax.swing.GroupLayout.PREFERRED_SIZE))))))
                 .addContainerGap(85, Short.MAX_VALUE))
             .addComponent(jScrollPane6)
@@ -310,7 +311,7 @@ public class FrmQLSanPham extends javax.swing.JFrame {
                 .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel21)
                     .addComponent(txtMaSP, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txtMaQR, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel54)
                     .addComponent(txtSoluong, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
@@ -534,11 +535,11 @@ public class FrmQLSanPham extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel57;
     private javax.swing.JPanel jPanel4;
     private javax.swing.JScrollPane jScrollPane6;
-    private javax.swing.JTextField jTextField1;
     private javax.swing.JTable tbl_SP;
     private javax.swing.JTextField txtGiaBan;
     private javax.swing.JTextField txtGiaNhap;
     private javax.swing.JTextField txtHanSuDung;
+    private javax.swing.JTextField txtMaQR;
     private javax.swing.JTextField txtMaSP;
     private javax.swing.JTextField txtSoluong;
     private javax.swing.JTextField txtTenSP;

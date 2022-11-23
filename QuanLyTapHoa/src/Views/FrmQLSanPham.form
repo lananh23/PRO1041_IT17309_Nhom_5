@@ -122,7 +122,7 @@
                                           <EmptySpace type="separate" max="-2" attributes="0"/>
                                           <Component id="jButton2" min="-2" max="-2" attributes="0"/>
                                       </Group>
-                                      <Component id="jTextField1" min="-2" pref="200" max="-2" attributes="0"/>
+                                      <Component id="txtMaQR" min="-2" pref="200" max="-2" attributes="0"/>
                                       <Component id="jLabel2" alignment="0" min="-2" pref="166" max="-2" attributes="0"/>
                                   </Group>
                               </Group>
@@ -143,7 +143,7 @@
                   <Group type="103" groupAlignment="3" attributes="0">
                       <Component id="jLabel21" alignment="3" min="-2" max="-2" attributes="0"/>
                       <Component id="txtMaSP" alignment="3" min="-2" max="-2" attributes="0"/>
-                      <Component id="jTextField1" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="txtMaQR" alignment="3" min="-2" max="-2" attributes="0"/>
                       <Component id="jLabel54" alignment="3" min="-2" max="-2" attributes="0"/>
                       <Component id="txtSoluong" alignment="3" min="-2" max="-2" attributes="0"/>
                   </Group>
@@ -398,7 +398,7 @@
             <Property name="text" type="java.lang.String" value="BarCode"/>
           </Properties>
         </Component>
-        <Component class="javax.swing.JTextField" name="jTextField1">
+        <Component class="javax.swing.JTextField" name="txtMaQR">
         </Component>
         <Component class="javax.swing.JLabel" name="jLabel2">
           <Properties>
