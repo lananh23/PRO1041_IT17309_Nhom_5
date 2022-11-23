@@ -16,10 +16,12 @@ public class DBConnection {
     private static final String DATABASE_NAME = "QuanLyCuaHangTapHoa";
     private static final boolean USING_SSL = true;
     public static Connection conn = null;
+    public static PreparedStatement ps = null;
+    public static ResultSet rs = null;
 
     private static String CONNECT_STRING;
 
-     static {
+    static {
         try {
             DriverManager.registerDriver(new SQLServerDriver());
             //Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
@@ -54,14 +56,15 @@ public class DBConnection {
     //hàm thực thi câu lệnh select
     public static ResultSet Getdata(String cauTruyVan) {
         try {
-            Statement stm = conn.createStatement();
+            conn = DBConnection.getConnection();
+            ps = conn.prepareStatement(cauTruyVan);
             //thực thicaau truy vấn select dc truyền vào từ
             //tham số cautruyvan
             //trả về kết quả là ResultSet
-            ResultSet rs = stm.executeQuery(cauTruyVan);
+            rs = ps.executeQuery();
             return rs;//trả về resultset nếu thành công
         } catch (SQLException ex) {
-            System.out.println("lỗi truy vấn");
+            System.out.println("Loi thuc thi truy van");
             return null;
         }
 
@@ -70,12 +73,12 @@ public class DBConnection {
     // hàm thực thi 3 câu lệnh insert delete update
     public static int ExecuteTruyVan(String cauTruyVan) {
         try {
-
-            Statement stm = conn.createStatement();
-            return stm.executeUpdate(cauTruyVan);
+            conn = DBConnection.getConnection();
+            ps = conn.prepareStatement(cauTruyVan);
+            return ps.executeUpdate();
 
         } catch (SQLException ex) {
-            System.out.println("lỗi thực thi truy vấn");
+            System.out.println("Loi thuc thi truy van");
             return -1;
         }
     }
