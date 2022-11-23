@@ -33,6 +33,7 @@ public class FrmQLSanPhamLoi extends javax.swing.JFrame {
             Object[] rowData = {
                 sp.getMaSPL(),
                 sp.getMaSP(),
+                sp.getTenSP(),
                 sp.getLyDoLoi()
             };
             dtm.addRow(rowData);
@@ -57,6 +58,7 @@ public class FrmQLSanPhamLoi extends javax.swing.JFrame {
 //        this.lblMaSPL.setText(list.get((list.size() - 1)).getMaSPL() + 1);
           this.txtMaSPL.setText("");
           this.lblMaSP.setText("-");
+          this.lblTen.setText("-");
           this.txtLyDoLoi.setText("");
           
     }
@@ -64,10 +66,11 @@ public class FrmQLSanPhamLoi extends javax.swing.JFrame {
     private ManageSanPhamLoi getFormData() {
         String maSPL = this.txtMaSPL.getText().trim();
         String maSP = this.lblMaSP.getText().trim();
+        String tenSP = this.lblTen.getText().trim();
         String loi = this.txtLyDoLoi.getText().trim();
         
 
-        ManageSanPhamLoi s = new ManageSanPhamLoi(maSPL, maSP, loi);
+        ManageSanPhamLoi s = new ManageSanPhamLoi(maSPL, maSP,tenSP, loi);
         return s;
     }
 
@@ -92,6 +95,8 @@ public class FrmQLSanPhamLoi extends javax.swing.JFrame {
         lblMaSP = new javax.swing.JLabel();
         cbbLocSPL = new javax.swing.JComboBox<>();
         txtMaSPL = new javax.swing.JTextField();
+        jLabel1 = new javax.swing.JLabel();
+        lblTen = new javax.swing.JLabel();
         jLabel22 = new javax.swing.JLabel();
         jLabel26 = new javax.swing.JLabel();
         btnTimKiemSP = new javax.swing.JButton();
@@ -147,9 +152,17 @@ public class FrmQLSanPhamLoi extends javax.swing.JFrame {
 
             },
             new String [] {
-                "Mã SPL", "Mã SP", "Lý do lỗi"
+                "Mã SPL", "Mã SP", "Tên SP", "Lý do lỗi"
             }
-        ));
+        ) {
+            boolean[] canEdit = new boolean [] {
+                false, false, false, false
+            };
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
         tblSPL.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 tblSPLMouseClicked(evt);
@@ -170,6 +183,10 @@ public class FrmQLSanPhamLoi extends javax.swing.JFrame {
 
         cbbLocSPL.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
 
+        jLabel1.setText("Tên SP");
+
+        lblTen.setText("-");
+
         javax.swing.GroupLayout jPanel23Layout = new javax.swing.GroupLayout(jPanel23);
         jPanel23.setLayout(jPanel23Layout);
         jPanel23Layout.setHorizontalGroup(
@@ -184,19 +201,21 @@ public class FrmQLSanPhamLoi extends javax.swing.JFrame {
                         .addGap(37, 37, 37)
                         .addGroup(jPanel23Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(jPanel23Layout.createSequentialGroup()
-                                .addGroup(jPanel23Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addGroup(jPanel23Layout.createSequentialGroup()
-                                        .addGap(0, 0, Short.MAX_VALUE)
-                                        .addComponent(jLabel73)
-                                        .addGap(29, 29, 29))
-                                    .addGroup(jPanel23Layout.createSequentialGroup()
-                                        .addComponent(lblMaSP, javax.swing.GroupLayout.PREFERRED_SIZE, 81, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
-                                .addComponent(txtLyDoLoi, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(129, 129, 129))
+                                .addGap(0, 0, Short.MAX_VALUE)
+                                .addComponent(jLabel73)
+                                .addGap(29, 29, 29))
+                            .addGroup(jPanel23Layout.createSequentialGroup()
+                                .addComponent(lblMaSP, javax.swing.GroupLayout.PREFERRED_SIZE, 81, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                             .addGroup(jPanel23Layout.createSequentialGroup()
                                 .addComponent(txtMaSPL, javax.swing.GroupLayout.PREFERRED_SIZE, 138, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(jLabel1)
+                                .addGap(37, 37, 37)))
+                        .addGroup(jPanel23Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(txtLyDoLoi, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(lblTen, javax.swing.GroupLayout.PREFERRED_SIZE, 99, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(129, 129, 129))
                     .addGroup(jPanel23Layout.createSequentialGroup()
                         .addGap(11, 11, 11)
                         .addComponent(cbbLocSPL, javax.swing.GroupLayout.PREFERRED_SIZE, 260, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -214,23 +233,27 @@ public class FrmQLSanPhamLoi extends javax.swing.JFrame {
         jPanel23Layout.setVerticalGroup(
             jPanel23Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel23Layout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(jPanel23Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel76)
-                    .addComponent(txtMaSPL, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGroup(jPanel23Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel23Layout.createSequentialGroup()
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 20, Short.MAX_VALUE)
+                        .addContainerGap()
                         .addGroup(jPanel23Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jLabel73)
-                            .addComponent(txtLyDoLoi, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(26, 26, 26))
-                    .addGroup(jPanel23Layout.createSequentialGroup()
+                            .addComponent(jLabel76)
+                            .addComponent(txtMaSPL, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(18, 18, 18)
                         .addGroup(jPanel23Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel74)
                             .addComponent(lblMaSP))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addGroup(jPanel23Layout.createSequentialGroup()
+                        .addContainerGap(21, Short.MAX_VALUE)
+                        .addGroup(jPanel23Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel1)
+                            .addComponent(lblTen))
+                        .addGap(18, 18, 18)
+                        .addGroup(jPanel23Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel73)
+                            .addComponent(txtLyDoLoi, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(26, 26, 26)))
                 .addGroup(jPanel23Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnXoa)
                     .addComponent(btnCapNhat)
@@ -324,10 +347,12 @@ public class FrmQLSanPhamLoi extends javax.swing.JFrame {
         }
         String maSPL = this.tblSPL.getValueAt(row, 0).toString();
         String maSP = this.tblSPL.getValueAt(row, 1).toString();
-        String lyDoLoi = this.tblSPL.getValueAt(row, 2).toString();
+        String ten = this.tblSPL.getValueAt(row, 2).toString();
+        String lyDoLoi = this.tblSPL.getValueAt(row, 3).toString();
 
         this.txtMaSPL.setText(maSPL);
         this.lblMaSP.setText(maSP);
+        this.lblTen.setText(ten);
         this.txtLyDoLoi.setText(lyDoLoi);
     }//GEN-LAST:event_tblSPLMouseClicked
 
@@ -340,6 +365,7 @@ public class FrmQLSanPhamLoi extends javax.swing.JFrame {
         String ten = this.tblSP.getValueAt(row, 1).toString();
 
         this.lblMaSP.setText(ma);
+        this.lblTen.setText(ten);
     }//GEN-LAST:event_tblSPMouseClicked
 
     private void btnThemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnThemActionPerformed
@@ -420,6 +446,7 @@ public class FrmQLSanPhamLoi extends javax.swing.JFrame {
                 if (sp.getMaSP().equalsIgnoreCase(txtMaSP.getText())) {
                     check++;
                     this.lblMaSP.setText(sp.getMaSP());
+                    this.lblTen.setText(sp.getMaSP());
                     JOptionPane.showMessageDialog(this, "Tìm thấy sản phẩm");
                     this.tblSPL.getSelectedRow();
                     return;
@@ -477,6 +504,7 @@ public class FrmQLSanPhamLoi extends javax.swing.JFrame {
     private javax.swing.JButton btnXoa;
     private javax.swing.JComboBox<String> cbbLocSP;
     private javax.swing.JComboBox<String> cbbLocSPL;
+    private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel22;
     private javax.swing.JLabel jLabel26;
     private javax.swing.JLabel jLabel73;
@@ -487,6 +515,7 @@ public class FrmQLSanPhamLoi extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane16;
     private javax.swing.JScrollPane jScrollPane17;
     private javax.swing.JLabel lblMaSP;
+    private javax.swing.JLabel lblTen;
     private javax.swing.JTable tblSP;
     private javax.swing.JTable tblSPL;
     private javax.swing.JTextField txtLyDoLoi;

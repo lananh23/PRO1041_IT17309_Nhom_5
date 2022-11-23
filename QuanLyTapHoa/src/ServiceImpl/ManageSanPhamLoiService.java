@@ -24,20 +24,20 @@ public class ManageSanPhamLoiService implements IManageSanPhamLoiService{
         list = new ArrayList<>();
         List<SanPhamLoi> List_CH = this.SanPhamRepo.All();
         for (SanPhamLoi o : List_CH) {
-            list.add(new ManageSanPhamLoi(o.getMaSPL(), o.getMaSP(), o.getLyDoLoi()));
+            list.add(new ManageSanPhamLoi(o.getMaSPL(), o.getMaSP(),o.getTenSP(), o.getLyDoLoi()));
         }
         return list;
     }
 
     @Override
     public void insert(ManageSanPhamLoi sp) {
-        SanPhamLoi s = new SanPhamLoi(sp.getMaSPL(), sp.getMaSP(), sp.getLyDoLoi());
+        SanPhamLoi s = new SanPhamLoi(sp.getMaSPL(), sp.getMaSP(),sp.getTenSP(), sp.getLyDoLoi());
         this.SanPhamRepo.insert(s);
     }
 
     @Override
     public void update(String ma, ManageSanPhamLoi sp) {
-        SanPhamLoi s = new SanPhamLoi(sp.getMaSPL(), sp.getMaSP(), sp.getLyDoLoi());
+        SanPhamLoi s = new SanPhamLoi(sp.getMaSPL(), sp.getMaSP(),sp.getTenSP(), sp.getLyDoLoi());
         this.SanPhamRepo.update(ma, s);
     }
 
