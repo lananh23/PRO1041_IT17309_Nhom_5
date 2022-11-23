@@ -75,8 +75,9 @@ public List<KhachHang> select() throws SQLException {
         return k;
     }
 
-    public List<KhachHang> insert(String Ma, String Ten, String GioiTinh, String DiaChi, String NgaySinh, String SDT, String NgayDki) throws SQLException {
+    public List<KhachHang> insert(String Ma, String Ten, String GioiTinh, String DiaChi, String NgaySinh, String SDT, String NgayDki){
         ArrayList<KhachHang> k = new ArrayList<>();
+        try {
         Connection con = DBConnection.getConnection();
         String sql = "insert KhachHang (MaKH,TenKH,GioiTinh,DiaChi,NgaySinh,SDT,NgayDangKy) values (?,?,?,?,?,?,?)";
         PreparedStatement st = con.prepareStatement(sql);
@@ -97,6 +98,9 @@ public List<KhachHang> select() throws SQLException {
         kh.setSdt(SDT);
         kh.setNgayDki(NgayDki);
         k.add(kh);
+        } catch (Exception e) {
+            return  null;
+        }
         return k;
     }
 

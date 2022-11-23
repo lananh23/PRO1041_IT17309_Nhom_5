@@ -9,6 +9,7 @@ import ServiceImpl.KhachHangSV;
 import ViewModels.QLKH;
 import java.sql.SQLException;
 import java.util.List;
+import javax.security.auth.Refreshable;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
@@ -58,7 +59,7 @@ public class FrmQLKhachHang extends javax.swing.JFrame {
         }
 
     }
-    
+
     void clearForm() {
         this.txtMa.setText("");
         this.txtTen.setText("");
@@ -102,6 +103,7 @@ public class FrmQLKhachHang extends javax.swing.JFrame {
         txtNgayDki = new javax.swing.JTextField();
         rdbNam = new javax.swing.JRadioButton();
         rdbNu = new javax.swing.JRadioButton();
+        jButton1 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -171,6 +173,13 @@ public class FrmQLKhachHang extends javax.swing.JFrame {
         buttonGroup1.add(rdbNu);
         rdbNu.setText("Nữ");
 
+        jButton1.setText("Hiển thị");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel9Layout = new javax.swing.GroupLayout(jPanel9);
         jPanel9.setLayout(jPanel9Layout);
         jPanel9Layout.setHorizontalGroup(
@@ -204,7 +213,9 @@ public class FrmQLKhachHang extends javax.swing.JFrame {
                                         .addGap(18, 18, 18)
                                         .addComponent(rdbNu)))
                                 .addGap(1, 1, 1)
-                                .addComponent(btnTK))
+                                .addComponent(btnTK)
+                                .addGap(52, 52, 52)
+                                .addComponent(jButton1))
                             .addGroup(jPanel9Layout.createSequentialGroup()
                                 .addGroup(jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(txtMa, javax.swing.GroupLayout.PREFERRED_SIZE, 158, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -264,7 +275,8 @@ public class FrmQLKhachHang extends javax.swing.JFrame {
                     .addComponent(btnThem)
                     .addComponent(btnSua)
                     .addComponent(btnXoa)
-                    .addComponent(btnTK))
+                    .addComponent(btnTK)
+                    .addComponent(jButton1))
                 .addGap(36, 36, 36)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 167, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(25, Short.MAX_VALUE))
@@ -330,9 +342,9 @@ public class FrmQLKhachHang extends javax.swing.JFrame {
             if (k.isEmpty()) {
                 JOptionPane.showMessageDialog(null, "Thất bại");
                 return;
-            }else{
-                  JOptionPane.showMessageDialog(null, "đã hiện khách hàng muốn tìm");
-                  return;
+            } else {
+                JOptionPane.showMessageDialog(null, "đã hiện khách hàng muốn tìm");
+                return;
             }
         } catch (Exception e) {
             e.printStackTrace();
@@ -348,16 +360,15 @@ public class FrmQLKhachHang extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(null, "chọn 1 cái để xóa");
             return;
         } else {
-            String Ma = txtMa.getText();
-            try {
-                khSV.delete(Ma);
-                model.setRowCount(0);
-                loadtable();
-                clearForm();
-            } catch (Exception e) {
-                JOptionPane.showMessageDialog(null, "xóa thất bại");
+            int cofirm = JOptionPane.showConfirmDialog(this, "bạn muốn xóa không");
+            if (cofirm != JOptionPane.YES_OPTION) {
                 return;
             }
+            String Ma = txtMa.getText();
+            khSV.delete(Ma);
+            model.setRowCount(0);
+            loadtable();
+            clearForm();
             JOptionPane.showMessageDialog(null, "xóa thành công");
             return;
         }
@@ -377,6 +388,7 @@ public class FrmQLKhachHang extends javax.swing.JFrame {
             String NgaySinh = txtNgaySinh.getText();
             String Sdt = txtSDT.getText();
             String NgayDki = txtNgayDki.getText();
+            String dangSDT = "0\\d{9,10}";
             if (rdbNam.isSelected() == true) {
                 GioiTinh = "NAM";
             } else {
@@ -391,6 +403,10 @@ public class FrmQLKhachHang extends javax.swing.JFrame {
                     || Sdt.trim().isEmpty()
                     || NgayDki.trim().isEmpty()) {
                 JOptionPane.showMessageDialog(null, "ko đc để trống");
+                return;
+            }
+            if (!Sdt.matches(dangSDT)) {
+                JOptionPane.showMessageDialog(this, "Số điện thoại không đúng định dạng!");
                 return;
             }
             try {
@@ -417,6 +433,7 @@ public class FrmQLKhachHang extends javax.swing.JFrame {
         String NgaySinh = txtNgaySinh.getText();
         String Sdt = txtSDT.getText();
         String NgayDki = txtNgayDki.getText();
+        String dangSDT = "0\\d{9,10}";
         if (rdbNam.isSelected() == true) {
             GioiTinh = "NAM";
         } else {
@@ -447,18 +464,30 @@ public class FrmQLKhachHang extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(null, "Ngày đăng kí ko đc để trống");
             return;
         }
-        try {
-            khSV.insert(Ma, Ten, GioiTinh, DiaChi, NgaySinh, Sdt, NgayDki);
+        if (!Sdt.matches(dangSDT)) {
+            JOptionPane.showMessageDialog(null, "Số điện thoại không đúng định dạng!");
+            return;
+        }
+
+        List<KhachHang> kh1 = khSV.insert(Ma, Ten, GioiTinh, DiaChi, NgaySinh, Sdt, NgayDki);
+        if (kh1 == null) {
+            JOptionPane.showMessageDialog(null, " mã bị trùng ");
+            return;
+        } else {
             model.setRowCount(0);
             loadtable();
             clearForm();
-        } catch (Exception e) {
-            JOptionPane.showMessageDialog(null, "thêm thất bại");
+            JOptionPane.showMessageDialog(null, "thêm thành công");
             return;
         }
-        JOptionPane.showMessageDialog(null, "thêm thành công");
-        return;
+
+
     }//GEN-LAST:event_btnThemActionPerformed
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        // TODO add your handling code here:
+        loadtable();
+    }//GEN-LAST:event_jButton1ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -502,6 +531,7 @@ public class FrmQLKhachHang extends javax.swing.JFrame {
     private javax.swing.JButton btnXoa;
     private javax.swing.ButtonGroup buttonGroup1;
     private javax.swing.ButtonGroup buttonGroup2;
+    private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;

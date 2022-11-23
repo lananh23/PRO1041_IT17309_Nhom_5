@@ -46,7 +46,7 @@ public class KhachHangSV implements KhachHangIF {
     }
 
     public List<KhachHang> insert(String Ma, String Ten, String GioiTinh, String DiaChi, String NgaySinh, String SDT, String NgayDki) {
-        try {
+        try {        
             return khRP.insert(Ma, Ten, GioiTinh, DiaChi, NgaySinh, SDT, NgayDki);
         } catch (Exception e) {
             return null;

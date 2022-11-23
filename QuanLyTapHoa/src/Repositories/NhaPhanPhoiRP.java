@@ -74,6 +74,7 @@ public class NhaPhanPhoiRP {
 
     public List<NhaPhanPhoi> insert(String Ma, String Ten, String DiaChi, String SDT, String maSP, int Trangthai) throws SQLException {
         ArrayList<NhaPhanPhoi> n1 = new ArrayList<>();
+        try {
         Connection con = DBConnection.getConnection();
         String sql = "insert NhaPhanPhoi (MaNPP,TenNPP,DiaChi,SDT,MaSP,TrangThai) values (?,?,?,?,?,?)";
         PreparedStatement st = con.prepareStatement(sql);
@@ -91,7 +92,10 @@ public class NhaPhanPhoiRP {
         n.setSdt(SDT);
         n.setMaSP(maSP);
         n.setTrangThai(Trangthai);
-        n1.add(n);
+        n1.add(n);         
+        } catch (Exception e) {
+            return null;
+        }
         return n1;
     }
 
