@@ -22,25 +22,28 @@ public class dangNhapRepositories implements IsDangNhapRepositories {
     PreparedStatement ps;
     ResultSet rs;
     List<dangNhapModel> listDangNhaps;
-    public static String TenUser = "", MatKhau = "";
-    public static int chucVu;
+    public static String TenUser = "", MatKhau = "", ChucVu = "";
 
     @Override
-    public void SuaMK(String MK, String MaND) {
+    public boolean SuaMK(String MK, String MaND) {
 
         try {
             connection = DBConnection.getConnection();
-            String sql = "UPDATE dbo.NguoiDung SET Pass = ?" + MK + "WHERE MaND = ?" + MaND + " ";
+            String sql = "UPDATE dbo.NguoiDung SET Pass = ''" + MatKhau + " WHERE MaND = ''" + TenUser + "";
             int kq = DBConnection.ExecuteTruyVan(sql);
+            ps.setString(1, MatKhau);
+            ps.setString(2, TenUser);
             if (kq > 0) {
-                thongBao.thongbao.thongbao("Update Pass Thành Công", "");
+                thongBao.thongbao.thongbao("Update Pass Thành Công", "Thông Báo");
             } else {
-                thongBao.thongbao.thongbao("Update Pass Thất Bại", "");
+                thongBao.thongbao.thongbao("Update Pass Thất Bại", "Thông Báo");
             }
 
         } catch (Exception e) {
             System.out.println(e);
+
         }
+        return true;
     }
 
     @Override
@@ -65,24 +68,48 @@ public class dangNhapRepositories implements IsDangNhapRepositories {
                         thongBao.thongbao.thongbao("Đăng nhập thành công", "");
                         TenUser = rs.getString("MaND");
                         MatKhau = rs.getString("Pass");
-                        chucVu = rs.getInt("ChucVu");
+                        ChucVu = rs.getString("ChucVu");
                         return true;
                     }
-                    thongBao.thongbao.thongbao("Username or Password Failed !!", "Thông Báo");
+                    thongBao.thongbao.thongbao("Login Failed !!", "Thông Báo");
                     return false;
 
                 }
-                thongBao.thongbao.thongbao("Username or Password Failed !!", "Thông Báo");
+                thongBao.thongbao.thongbao("Login Failed !!", "Thông Báo");
                 return false;
 
             }
-            thongBao.thongbao.thongbao("Username or Password Failed !!", "Thông Báo");
+            thongBao.thongbao.thongbao("Login Failed !!", "Thông Báo");
             return false;
 
         } catch (Exception e) {
             System.out.println(e);
         }
-        thongBao.thongbao.thongbao("Username or Password Failed !!", "Thông Báo");
+        thongBao.thongbao.thongbao("Login Failed !!", "Thông Báo");
+        return true;
+    }
+
+    @Override
+    public boolean doiMK(String mkcu, String mkmoi, String nhapLai) {
+        if (mkcu.trim().equals("") || mkmoi.trim().equals("")
+                || nhapLai.trim().equals("")) {
+            thongBao.thongbao.thongbao("Không được bỏ trống", "");
+            return false;
+        }
+
+        if (!mkcu.equals(MatKhau)) {
+            thongBao.thongbao.thongbao("Mật khẩu cũ sai", "");
+            return false;
+        }
+        if (mkmoi.length() < 5) {
+            thongBao.thongbao.thongbao("mật khẩu dài hơn 5 ký tự", "");
+            return false;
+        }
+        if (!mkmoi.equals(nhapLai)) {
+            thongBao.thongbao.thongbao("Mật Khẩu Không Trùng Khớp", "");
+            return false;
+        }
+
         return true;
     }
 
