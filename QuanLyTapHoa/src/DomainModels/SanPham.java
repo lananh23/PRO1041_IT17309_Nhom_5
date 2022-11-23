@@ -16,10 +16,10 @@ public class SanPham {
     public SanPham() {
     }
 
-    public SanPham(String maSP, String maLSP, String tenSP, int soLuong, float giaNhap, float giaBan, Date hanSuDung, String maQR) {
-        this.maSP = maSP;
-        this.maLSP = maLSP;
-        this.tenSP = tenSP;
+    public SanPham(String MaSP, String MaLSP, String TenSP, int soLuong, float giaNhap, float giaBan, Date hanSuDung, String maQR) {
+        this.MaSP = MaSP;
+        this.MaLSP = MaLSP;
+        this.TenSP = TenSP;
         this.soLuong = soLuong;
         this.giaNhap = giaNhap;
         this.giaBan = giaBan;
