@@ -19,8 +19,9 @@ public class SanPhamLoiRepository {
             while (rs.next() == true) {
                 String maSPL = rs.getString("MaSPL");
                 String maSP = rs.getString("MaSP");
+                String ten = rs.getString("TenSP");
                 String loi = rs.getString("LyDoLoi");
-                SanPhamLoi sp = new SanPhamLoi(maSPL, maSP, loi);
+                SanPhamLoi sp = new SanPhamLoi(maSPL, maSP, ten, loi);
                 list.add(sp);
             }
         } catch (SQLException e) {
@@ -50,11 +51,12 @@ public class SanPhamLoiRepository {
     public void insert(SanPhamLoi sp) {
         try {
             Connection conn = DBConnection.getConnection();
-            String query = "INSERT INTO SanPhamLoi (MaSPL, MaSP, LyDoLoi) VALUES(?,?,?)";
+            String query = "INSERT INTO SanPhamLoi (MaSPL, MaSP,TenSP, LyDoLoi) VALUES(?,?,?,?)";
             PreparedStatement ps = conn.prepareStatement(query);
             ps.setString(1, sp.getMaSPL());
             ps.setString(2, sp.getMaSP());
-            ps.setString(3, sp.getLyDoLoi());
+            ps.setString(3, sp.getTenSP());
+            ps.setString(4, sp.getLyDoLoi());
             ps.execute();
         } catch (SQLException e) {
             e.printStackTrace();
@@ -64,11 +66,12 @@ public class SanPhamLoiRepository {
     public void update(String ma, SanPhamLoi sp) {
         try {
             Connection conn = DBConnection.getConnection();
-            String query = "UPDATE SanPhamLoi SET MaSP =?, LyDoLoi=?  WHERE MaSPL=?";
+            String query = "UPDATE SanPhamLoi SET MaSP =?,TenSP=?, LyDoLoi=?  WHERE MaSPL=?";
             PreparedStatement ps = conn.prepareStatement(query);
             ps.setString(1, sp.getMaSP());
-            ps.setString(2, sp.getLyDoLoi());
-            ps.setString(3, ma);
+            ps.setString(2, sp.getTenSP());
+            ps.setString(3, sp.getLyDoLoi());
+            ps.setString(4, ma);
             ps.execute();
         } catch (SQLException e) {
             e.printStackTrace();
