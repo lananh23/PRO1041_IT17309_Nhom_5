@@ -21,8 +21,8 @@ public class NguoiDungRepository {
     public ArrayList<NguoiDung> listND() {
         ArrayList<NguoiDung> list = new ArrayList<>();
         String query = "SELECT*FROM NguoiDung";
-        try (Connection con = DBConnection.getConnection();
-                PreparedStatement ps = con.prepareCall(query);) {
+        try{ Connection con = DBConnection.getConnection();
+                PreparedStatement ps = con.prepareCall(query); 
             ResultSet rs = ps.executeQuery();
             while (rs.next()) {
                 NguoiDung nd = new NguoiDung();
@@ -47,8 +47,8 @@ public class NguoiDungRepository {
     public Boolean them(NguoiDung nguoiDung) {
         String query = "INSERT INTO NguoiDung(MaND, Ho, TenDem, Ten, GioiTinh, NgaySinh, DiaChi, "
                 + "SDT, Email, ChucVu) VALUES(?,?,?,?,?,?,?,?,?,?)";
-        try (Connection con = DBConnection.getConnection();
-                PreparedStatement ps = con.prepareStatement(query);) {
+        try {Connection con = DBConnection.getConnection();
+                PreparedStatement ps = con.prepareStatement(query);
             ps.setObject(1, nguoiDung.getMaND());
             ps.setObject(2, nguoiDung.getHo());
             ps.setObject(3, nguoiDung.getTenDem());
@@ -70,8 +70,8 @@ public class NguoiDungRepository {
     public Boolean sua(NguoiDung nguoiDung, String maND) {
         String query = "UPDATE NguoiDung SET Ho =?, TenDem=?, Ten=?, GioiTinh=?, NgaySinh=?, DiaChi=?, "
                 + "SDT=?, Email=?, ChucVu=? WHERE MaND =?";
-        try (Connection con = DBConnection.getConnection();
-                PreparedStatement ps = con.prepareStatement(query);) {
+        try {Connection con = DBConnection.getConnection();
+                PreparedStatement ps = con.prepareStatement(query);
             ps.setObject(10, nguoiDung.getMaND());
             ps.setObject(1, nguoiDung.getHo());
             ps.setObject(2, nguoiDung.getTenDem());
@@ -92,8 +92,8 @@ public class NguoiDungRepository {
 
     public Boolean delete(String maND) {
         String query = "DELETE NguoiDung WHERE MaND = ?";
-        try (Connection con = DBConnection.getConnection();
-                PreparedStatement ps = con.prepareStatement(query);) {
+        try {Connection con = DBConnection.getConnection();
+                PreparedStatement ps = con.prepareStatement(query);
             ps.setObject(1, maND);
             ps.executeUpdate();
             return true;
@@ -105,8 +105,8 @@ public class NguoiDungRepository {
     public List<NguoiDung> find(String maND) {
         ArrayList<NguoiDung> list = new ArrayList<>();
         String query = "SELECT*FROM NguoiDung WHERE MaND = ?";
-        try (Connection con = DBConnection.getConnection();
-                PreparedStatement ps = con.prepareCall(query);) {
+        try {Connection con = DBConnection.getConnection();
+                PreparedStatement ps = con.prepareCall(query);
             ResultSet rs = ps.executeQuery();
             while (rs.next()) {
                 ps.setString(1, maND);
