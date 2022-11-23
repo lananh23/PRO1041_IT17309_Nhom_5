@@ -2,19 +2,21 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
-package DomainModels;
+package ViewModels;
+
+import java.io.Serializable;
 
 /**
  *
  * @author Admin
  */
-public class NguoiDung {
-    private String maND, ho, tenDem, ten, gioiTinh, ngaySinh, diaChi, sdt, eMail, Pass, chucVu, trangThai;
+public class NguoiDungViewModel implements Serializable{
+   private String maND, ho, tenDem, ten, gioiTinh, ngaySinh, diaChi, sdt, eMail, chucVu;
 
-    public NguoiDung() {
+    public NguoiDungViewModel() {
     }
 
-    public NguoiDung(String maND, String ho, String tenDem, String ten, String gioiTinh, String ngaySinh, String diaChi, String sdt, String eMail, String Pass, String chucVu, String trangThai) {
+    public NguoiDungViewModel(String maND, String ho, String tenDem, String ten, String gioiTinh, String ngaySinh, String diaChi, String sdt, String eMail, String chucVu) {
         this.maND = maND;
         this.ho = ho;
         this.tenDem = tenDem;
@@ -24,9 +26,7 @@ public class NguoiDung {
         this.diaChi = diaChi;
         this.sdt = sdt;
         this.eMail = eMail;
-        this.Pass = Pass;
         this.chucVu = chucVu;
-        this.trangThai = trangThai;
     }
 
     public String getMaND() {
@@ -101,14 +101,6 @@ public class NguoiDung {
         this.eMail = eMail;
     }
 
-    public String getPass() {
-        return Pass;
-    }
-
-    public void setPass(String Pass) {
-        this.Pass = Pass;
-    }
-
     public String getChucVu() {
         return chucVu;
     }
@@ -116,13 +108,5 @@ public class NguoiDung {
     public void setChucVu(String chucVu) {
         this.chucVu = chucVu;
     }
-
-    public String getTrangThai() {
-        return trangThai;
-    }
-
-    public void setTrangThai(String trangThai) {
-        this.trangThai = trangThai;
-    }
-    
+   
 }
