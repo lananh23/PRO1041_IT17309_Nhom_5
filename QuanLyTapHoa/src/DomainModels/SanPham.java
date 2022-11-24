@@ -27,6 +27,14 @@ public class SanPham {
         this.maQR = maQR;
     }
 
+    public SanPham(String MaSP, int soLuong) {
+        this.MaSP = MaSP;
+        this.soLuong = soLuong;
+    }
+
+    
+    
+
     public String getMaSP() {
         return MaSP;
     }

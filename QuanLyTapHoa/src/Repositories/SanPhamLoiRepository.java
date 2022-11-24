@@ -30,23 +30,27 @@ public class SanPhamLoiRepository {
         return list;
     }
     
-    public List<SanPhamLoi> AllMa() {
-        ArrayList<SanPhamLoi> list = new ArrayList<>();
+    public List<SanPhamLoi> Loc(String ma) {
+        ArrayList<SanPhamLoi> listLoc = new ArrayList<>();
         try {
             Connection conn = DBConnection.getConnection();
-            String query = "SELECT SUBSTRING(MaSPL, 4, 7) FROM SanPhamLoi ORDER BY MaSPL";
+            String query = "SELECT * FROM SanPhamLoi WHERE MaSP=?";
             PreparedStatement ps = conn.prepareStatement(query);
+            ps.setString(1, ma);
             ps.execute();
             ResultSet rs = ps.getResultSet();
             while (rs.next() == true) {
                 String maSPL = rs.getString("MaSPL");
-                SanPhamLoi sp = new SanPhamLoi(maSPL);
-                list.add(sp);
+                String maSP = rs.getString("MaSP");
+                String ten = rs.getString("TenSP");
+                String loi = rs.getString("LyDoLoi");
+                SanPhamLoi sp = new SanPhamLoi(maSPL, maSP, ten, loi);
+                listLoc.add(sp);
             }
         } catch (SQLException e) {
             e.printStackTrace();
         }
-        return list;
+        return listLoc;
     }
     public void insert(SanPhamLoi sp) {
         try {

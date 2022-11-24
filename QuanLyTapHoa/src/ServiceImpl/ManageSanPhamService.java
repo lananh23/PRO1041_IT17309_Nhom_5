@@ -43,4 +43,9 @@ public class ManageSanPhamService implements IManageSanPhamService {
     public void delete(String maSP) {
         this.SanPhamRepo.delete(maSP);
     }
+
+    @Override
+    public void updateSL(String maSP) {
+        this.SanPhamRepo.updateSL(maSP);
+    }
 }

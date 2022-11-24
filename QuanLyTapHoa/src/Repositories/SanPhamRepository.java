@@ -78,7 +78,18 @@ public class SanPhamRepository implements ISanPhamRepository {
             e.printStackTrace();
         }
     }
-
+    @Override
+    public void updateSL(String maSP) {
+        try {
+            Connection conn = DBConnection.getConnection();
+            String query = "UPDATE SanPham SET SoLuong = SoLuong -1  WHERE MaSP=?";
+            PreparedStatement ps = conn.prepareStatement(query);
+            ps.setString(1, maSP);
+            ps.execute();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
     @Override
     public void delete(String maSP) {
         try {
