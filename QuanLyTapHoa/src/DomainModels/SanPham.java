@@ -4,9 +4,9 @@ import java.util.Date;
 
 public class SanPham {
 
-    private String MaSP;
-    private String MaLSP;
-    private String TenSP;
+    private String maSP;
+    private String maLSP;
+    private String tenSP;
     private int soLuong;
     private float giaNhap;
     private float giaBan;
@@ -16,10 +16,10 @@ public class SanPham {
     public SanPham() {
     }
 
-    public SanPham(String MaSP, String MaLSP, String TenSP, int soLuong, float giaNhap, float giaBan, Date hanSuDung, String maQR) {
-        this.MaSP = MaSP;
-        this.MaLSP = MaLSP;
-        this.TenSP = TenSP;
+    public SanPham(String maSP, String maLSP, String tenSP, int soLuong, float giaNhap, float giaBan, Date hanSuDung, String maQR) {
+        this.maSP = maSP;
+        this.maLSP = maLSP;
+        this.tenSP = tenSP;
         this.soLuong = soLuong;
         this.giaNhap = giaNhap;
         this.giaBan = giaBan;
@@ -27,28 +27,39 @@ public class SanPham {
         this.maQR = maQR;
     }
 
+    public SanPham(String maSP, String maLSP, String tenSP, int soLuong, float giaNhap, float giaBan, Date hanSuDung) {
+        this.maSP = maSP;
+        this.maLSP = maLSP;
+        this.tenSP = tenSP;
+        this.soLuong = soLuong;
+        this.giaNhap = giaNhap;
+        this.giaBan = giaBan;
+        this.hanSuDung = hanSuDung;
+    }
+    
+
     public String getMaSP() {
-        return MaSP;
+        return maSP;
     }
 
-    public void setMaSP(String MaSP) {
-        this.MaSP = MaSP;
+    public void setMaSP(String maSP) {
+        this.maSP = maSP;
     }
 
     public String getMaLSP() {
-        return MaLSP;
+        return maLSP;
     }
 
-    public void setMaLSP(String MaLSP) {
-        this.MaLSP = MaLSP;
+    public void setMaLSP(String maLSP) {
+        this.maLSP = maLSP;
     }
 
     public String getTenSP() {
-        return TenSP;
+        return tenSP;
     }
 
-    public void setTenSP(String TenSP) {
-        this.TenSP = TenSP;
+    public void setTenSP(String tenSP) {
+        this.tenSP = tenSP;
     }
 
     public int getSoLuong() {
@@ -84,11 +95,16 @@ public class SanPham {
     }
 
     public String getMaQR() {
-        return maQR;
+        return tenSP;
     }
 
     public void setMaQR(String maQR) {
-        this.maQR = maQR;
+        this.tenSP = tenSP;
+    }
+
+    @Override
+    public String toString() {
+        return maLSP + " " + tenSP;
     }
 
 }

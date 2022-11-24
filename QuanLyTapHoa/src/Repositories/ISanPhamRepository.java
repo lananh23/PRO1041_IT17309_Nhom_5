@@ -12,4 +12,6 @@ public interface ISanPhamRepository {
     public void update(String maSP, SanPham sp);
 
     public void delete(String maSP);
+    
+    public List<SanPham> findByCode(String maSP);
 }
