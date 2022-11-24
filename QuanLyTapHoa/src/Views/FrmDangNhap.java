@@ -43,10 +43,14 @@ public class FrmDangNhap extends javax.swing.JFrame {
         String userName = txtUsername.getText();
         String password = new String(txtPassword.getPassword());
         boolean dn = dangNhapService.getAllDangNhap(userName, password);
-        if (dn) {
+        if (dn == true) {
             new FrmTrangChu().setVisible(true);
             this.dispose();
+            return;
+        } else {
+            
         }
+
     }
 
     @SuppressWarnings("unchecked")
@@ -188,7 +192,6 @@ public class FrmDangNhap extends javax.swing.JFrame {
     private void btnLoginActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLoginActionPerformed
 
         DangNhap();
-
 
     }//GEN-LAST:event_btnLoginActionPerformed
 

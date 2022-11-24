@@ -12,12 +12,12 @@ public class dangNhapModel {
     
     private String username;
     private String password;
-    private int chucVu;
+    private String chucVu;
 
     public dangNhapModel() {
     }
 
-    public dangNhapModel(String username, String password, int chucVu) {
+    public dangNhapModel(String username, String password, String  chucVu) {
         this.username = username;
         this.password = password;
         this.chucVu = chucVu;
@@ -39,11 +39,11 @@ public class dangNhapModel {
         this.password = password;
     }
 
-    public int getChucVu() {
+    public String  getChucVu() {
         return chucVu;
     }
 
-    public void setChucVu(int chucVu) {
+    public void setChucVu(String  chucVu) {
         this.chucVu = chucVu;
     }
     
