@@ -10,6 +10,7 @@ public interface IManageSanPhamService {
     public void insert(QLSanPham sp);
 
     public void update(String maSP, QLSanPham sp);
+    public void updateSL(String maSP);
 
     public void delete(String maSP);
 }

@@ -10,6 +10,7 @@ public interface ISanPhamRepository {
     public void insert(SanPham sp);
 
     public void update(String maSP, SanPham sp);
+    public void updateSL(String maSP);
 
     public void delete(String maSP);
 }

@@ -410,7 +410,9 @@ public class FrmQLSanPhamLoi extends javax.swing.JFrame {
             return;
         }
         this.sanPhamLoiService.insert(sp);
+        this.sanPhamService.updateSL(sp.getMaSP());
         this.loadTableSPL();
+        this.loadTableSP();
         this.clearForm();
         JOptionPane.showMessageDialog(this, "thêm thành công");
     }//GEN-LAST:event_btnThemActionPerformed
