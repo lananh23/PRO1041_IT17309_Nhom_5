@@ -30,6 +30,15 @@ public class FrmQLSanPham extends javax.swing.JFrame {
             sp[i] = dsLSP.get(i).getMaLSP();
         }
         cboMaLSP.setModel(new DefaultComboBoxModel(sp));
+
+        cboLoc.setModel(new DefaultComboBoxModel(sp));
+        List<QLSanPham> dsSPl = sanPhamService.ALL();
+        this.cboLoc.getModel();
+        String[] spl = new String[dsSPl.size()];
+        for (int i = 0; i < dsSPl.size(); i++) {
+            spl[i] = dsSPl.get(i).getMaSP();
+        }
+        cboLoc.setModel(new DefaultComboBoxModel(spl));
         this.loadTable();
     }
 
@@ -148,7 +157,7 @@ public class FrmQLSanPham extends javax.swing.JFrame {
         txtGiaBan = new javax.swing.JTextField();
         txtHanSuDung = new javax.swing.JTextField();
         jLabel1 = new javax.swing.JLabel();
-        jComboBox1 = new javax.swing.JComboBox<>();
+        cboLoc = new javax.swing.JComboBox<>();
         jButton1 = new javax.swing.JButton();
         jButton2 = new javax.swing.JButton();
         txtMaQR = new javax.swing.JTextField();
@@ -226,7 +235,12 @@ public class FrmQLSanPham extends javax.swing.JFrame {
 
         jLabel1.setText("Lọc:");
 
-        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        cboLoc.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        cboLoc.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cboLocActionPerformed(evt);
+            }
+        });
 
         jButton1.setText("QR Code");
 
@@ -269,7 +283,7 @@ public class FrmQLSanPham extends javax.swing.JFrame {
                                 .addGap(86, 86, 86)
                                 .addComponent(jLabel1)
                                 .addGap(18, 18, 18)
-                                .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addComponent(cboLoc, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addGroup(jPanel4Layout.createSequentialGroup()
                                 .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                                     .addComponent(txtTenSP, javax.swing.GroupLayout.Alignment.TRAILING)
@@ -350,7 +364,7 @@ public class FrmQLSanPham extends javax.swing.JFrame {
                             .addComponent(btnSua)
                             .addComponent(btnThem)
                             .addComponent(jLabel1)
-                            .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(cboLoc, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(0, 0, Short.MAX_VALUE))))
         );
 
@@ -476,6 +490,37 @@ public class FrmQLSanPham extends javax.swing.JFrame {
 
     }//GEN-LAST:event_btnTimActionPerformed
 
+    private void cboLocActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cboLocActionPerformed
+
+        String ma = (String) this.cboLoc.getSelectedItem();
+        List<QLSanPham> ds = this.sanPhamService.ALL();
+        int check = 0;
+        DefaultTableModel dtm = (DefaultTableModel) this.tbl_SP.getModel();
+        dtm.setRowCount(0);
+        for (QLSanPham sp : ds) {
+            if (sp.getMaSP().equalsIgnoreCase(ma)) {
+                check++;
+                Object[] rowData = {
+                    sp.getMaSP(),
+                    sp.getMaLSP(),
+                    sp.getTenSP(),
+                    sp.getSoLuong(),
+                    sp.getGiaNhap(),
+                    sp.getGiaBan(),
+                    sp.getHanSuDung()
+                };
+                dtm.addRow(rowData);
+            }
+        }
+        if (check == 0) {
+            JOptionPane.showMessageDialog(this, "Không tìm thấy sản phẩm");
+            return;
+        } else {
+            JOptionPane.showMessageDialog(this, "Tìm thấy sản phẩm");
+            return;
+        }
+    }//GEN-LAST:event_cboLocActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -519,10 +564,10 @@ public class FrmQLSanPham extends javax.swing.JFrame {
     private javax.swing.JButton btnThem;
     private javax.swing.JButton btnTim;
     private javax.swing.JButton btnXoa;
+    private javax.swing.JComboBox<String> cboLoc;
     private javax.swing.JComboBox<String> cboMaLSP;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
-    private javax.swing.JComboBox<String> jComboBox1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel21;
