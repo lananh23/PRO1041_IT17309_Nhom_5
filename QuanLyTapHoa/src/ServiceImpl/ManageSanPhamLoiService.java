@@ -47,11 +47,11 @@ public class ManageSanPhamLoiService implements IManageSanPhamLoiService{
     }
 
     @Override
-    public List<ManageSanPhamLoi> ALLMa() {
+    public List<ManageSanPhamLoi> Loc(String ma) {
         listMa = new ArrayList<>();
-        List<SanPhamLoi> List_CH = this.SanPhamRepo.AllMa();
+        List<SanPhamLoi> List_CH = this.SanPhamRepo.Loc(ma);
         for (SanPhamLoi o : List_CH) {
-            listMa.add(new ManageSanPhamLoi(o.getMaSPL()));
+            listMa.add(new ManageSanPhamLoi(o.getMaSPL(), o.getMaSP(),o.getTenSP(), o.getLyDoLoi()));
         }
         return listMa;
     }

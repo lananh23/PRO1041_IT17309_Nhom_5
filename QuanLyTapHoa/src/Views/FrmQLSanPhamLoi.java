@@ -1,13 +1,17 @@
 package Views;
 
+import ServiceImpl.ManageLoaiSanPhamService;
 import ServiceImpl.ManageSanPhamLoiService;
 import ServiceImpl.ManageSanPhamService;
+import Services.IManageLoaiSanPhamService;
 import Services.IManageSanPhamLoiService;
 import Services.IManageSanPhamService;
 import ViewModels.ManageSanPhamLoi;
+import ViewModels.QLLoaiSanPham;
 import ViewModels.QLSanPham;
 import java.util.ArrayList;
 import java.util.List;
+import javax.swing.DefaultComboBoxModel;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
@@ -15,12 +19,28 @@ public class FrmQLSanPhamLoi extends javax.swing.JFrame {
 
     private IManageSanPhamLoiService sanPhamLoiService;
     private IManageSanPhamService sanPhamService;
+    private IManageLoaiSanPhamService loaiSanPhamService;
 
     public FrmQLSanPhamLoi() {
         initComponents();
         this.setLocationRelativeTo(null);
         this.sanPhamLoiService = new ManageSanPhamLoiService();
         this.sanPhamService = new ManageSanPhamService();
+        this.loaiSanPhamService = new ManageLoaiSanPhamService();
+        List<QLLoaiSanPham> dsSP = loaiSanPhamService.ALL();
+        this.cbbLocSP.getModel();
+        String[] sp = new String[dsSP.size()];
+        for (int i = 0; i < dsSP.size(); i++) {
+            sp[i] = dsSP.get(i).getTenLSP();
+        }
+        cbbLocSPL.setModel(new DefaultComboBoxModel(sp));
+        List<QLSanPham> dsSP1 = sanPhamService.ALL();
+        this.cbbLocSPL.getModel();
+        String[] sp1 = new String[dsSP1.size()];
+        for (int i = 0; i < dsSP1.size(); i++) {
+            sp1[i] = dsSP1.get(i).getMaSP();
+        }
+        cbbLocSPL.setModel(new DefaultComboBoxModel(sp1));
         this.loadTableSP();
         this.loadTableSPL();
         this.clearForm();
@@ -39,6 +59,7 @@ public class FrmQLSanPhamLoi extends javax.swing.JFrame {
             dtm.addRow(rowData);
         }
     }
+
     public void loadTableSP() {
         DefaultTableModel dtm = (DefaultTableModel) this.tblSP.getModel();
         dtm.setRowCount(0);
@@ -56,11 +77,11 @@ public class FrmQLSanPhamLoi extends javax.swing.JFrame {
 //        List<ManageSanPhamLoi> list = this.sanPhamLoiService.ALL();
 //        String[] splits = list.split("-", 3);
 //        this.lblMaSPL.setText(list.get((list.size() - 1)).getMaSPL() + 1);
-          this.txtMaSPL.setText("");
-          this.lblMaSP.setText("-");
-          this.lblTen.setText("-");
-          this.txtLyDoLoi.setText("");
-          
+        this.txtMaSPL.setText("");
+        this.lblMaSP.setText("-");
+        this.lblTen.setText("-");
+        this.txtLyDoLoi.setText("");
+
     }
 
     private ManageSanPhamLoi getFormData() {
@@ -68,9 +89,8 @@ public class FrmQLSanPhamLoi extends javax.swing.JFrame {
         String maSP = this.lblMaSP.getText().trim();
         String tenSP = this.lblTen.getText().trim();
         String loi = this.txtLyDoLoi.getText().trim();
-        
 
-        ManageSanPhamLoi s = new ManageSanPhamLoi(maSPL, maSP,tenSP, loi);
+        ManageSanPhamLoi s = new ManageSanPhamLoi(maSPL, maSP, tenSP, loi);
         return s;
     }
 
@@ -97,6 +117,7 @@ public class FrmQLSanPhamLoi extends javax.swing.JFrame {
         txtMaSPL = new javax.swing.JTextField();
         jLabel1 = new javax.swing.JLabel();
         lblTen = new javax.swing.JLabel();
+        btnLoc = new javax.swing.JButton();
         jLabel22 = new javax.swing.JLabel();
         jLabel26 = new javax.swing.JLabel();
         btnTimKiemSP = new javax.swing.JButton();
@@ -187,6 +208,13 @@ public class FrmQLSanPhamLoi extends javax.swing.JFrame {
 
         lblTen.setText("-");
 
+        btnLoc.setText("Lọc");
+        btnLoc.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnLocActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel23Layout = new javax.swing.GroupLayout(jPanel23);
         jPanel23.setLayout(jPanel23Layout);
         jPanel23Layout.setHorizontalGroup(
@@ -219,7 +247,9 @@ public class FrmQLSanPhamLoi extends javax.swing.JFrame {
                     .addGroup(jPanel23Layout.createSequentialGroup()
                         .addGap(11, 11, 11)
                         .addComponent(cbbLocSPL, javax.swing.GroupLayout.PREFERRED_SIZE, 260, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 130, Short.MAX_VALUE)
+                        .addGap(18, 18, 18)
+                        .addComponent(btnLoc)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 35, Short.MAX_VALUE)
                         .addComponent(btnThem)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(btnCapNhat)
@@ -259,7 +289,8 @@ public class FrmQLSanPhamLoi extends javax.swing.JFrame {
                     .addComponent(btnCapNhat)
                     .addComponent(btnThem)
                     .addComponent(btnTimKiemSPL)
-                    .addComponent(cbbLocSPL, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(cbbLocSPL, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnLoc))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jScrollPane17, javax.swing.GroupLayout.PREFERRED_SIZE, 107, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(24, 24, 24))
@@ -278,6 +309,11 @@ public class FrmQLSanPhamLoi extends javax.swing.JFrame {
         });
 
         cbbLocSP.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        cbbLocSP.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cbbLocSPActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel22Layout = new javax.swing.GroupLayout(jPanel22);
         jPanel22.setLayout(jPanel22Layout);
@@ -460,6 +496,37 @@ public class FrmQLSanPhamLoi extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_btnTimKiemSPActionPerformed
 
+    private void cbbLocSPActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbbLocSPActionPerformed
+
+    }//GEN-LAST:event_cbbLocSPActionPerformed
+
+    private void btnLocActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLocActionPerformed
+        String ma = (String) this.cbbLocSPL.getSelectedItem();
+        List<ManageSanPhamLoi> ds = this.sanPhamLoiService.ALL();
+        int check = 0;
+        DefaultTableModel dtm = (DefaultTableModel) this.tblSPL.getModel();
+        dtm.setRowCount(0);
+        for (ManageSanPhamLoi sp : ds) {
+            if (sp.getMaSP().equalsIgnoreCase(ma)) {
+                check++;
+                Object[] rowData = {
+                    sp.getMaSPL(),
+                    sp.getMaSP(),
+                    sp.getTenSP(),
+                    sp.getLyDoLoi()
+                };
+                dtm.addRow(rowData);
+            }
+        }
+        if (check == 0) {
+            JOptionPane.showMessageDialog(this, "Không tìm thấy sản phẩm");
+            return;
+        } else {
+            JOptionPane.showMessageDialog(this, "tìm thấy sản phẩm");
+            return ;
+        }
+    }//GEN-LAST:event_btnLocActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -498,6 +565,7 @@ public class FrmQLSanPhamLoi extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnCapNhat;
+    private javax.swing.JButton btnLoc;
     private javax.swing.JButton btnThem;
     private javax.swing.JButton btnTimKiemSP;
     private javax.swing.JButton btnTimKiemSPL;
