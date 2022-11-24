@@ -10,6 +10,7 @@ import ServiceImpl.NguoiDungServiceImpl;
 import ViewModels.NguoiDungViewModel;
 import java.util.ArrayList;
 import java.util.List;
+import javax.swing.DefaultComboBoxModel;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
@@ -28,6 +29,14 @@ public class FrmQLNguoiDung extends javax.swing.JFrame {
     public FrmQLNguoiDung() {
         initComponents();
         loadTable(nguoiDungService.listND());
+        List<NguoiDungViewModel> nd = nguoiDungService.listND();
+        this.cboChucVu_2.getModel();
+        String[] nguoiDung = new String[nd.size()];
+        for(int i = 0; i < nd.size(); i++){
+            nguoiDung[i] = nd.get(i).getChucVu();
+        }
+        cboChucVu_2.setModel(new DefaultComboBoxModel<>(nguoiDung));
+        loadTable((ArrayList<NguoiDungViewModel>) nd);
     }
 
     public void loadTable(ArrayList<NguoiDungViewModel> list) {
@@ -190,15 +199,7 @@ public class FrmQLNguoiDung extends javax.swing.JFrame {
             new String [] {
                 "Mã", "Họ ", "Tên đệm", "Tên", "Giới tính", "Ngày sinh", "Địa chỉ", "Sdt", "Email", "Chức vụ"
             }
-        ) {
-            boolean[] canEdit = new boolean [] {
-                false, false, false, false, false, false, false, false, false, false
-            };
-
-            public boolean isCellEditable(int rowIndex, int columnIndex) {
-                return canEdit [columnIndex];
-            }
-        });
+        ));
         tblNguoiDung.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 tblNguoiDungMouseClicked(evt);
@@ -208,7 +209,6 @@ public class FrmQLNguoiDung extends javax.swing.JFrame {
 
         jLabel72.setText("Ngày sinh");
 
-        cboChucVu_2.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Quản lý", "Nhân viên" }));
         cboChucVu_2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 cboChucVu_2ActionPerformed(evt);
@@ -376,6 +376,7 @@ public class FrmQLNguoiDung extends javax.swing.JFrame {
         if (nguoiDungService.them(nd)) {
             loadTable(nguoiDungService.listND());
             JOptionPane.showMessageDialog(this, "Bạn đã thêm thành công");
+            clearForm();
         }
     }//GEN-LAST:event_btnThemActionPerformed
 
@@ -458,8 +459,26 @@ public class FrmQLNguoiDung extends javax.swing.JFrame {
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
         String chucVu = (String) cboChucVu_2.getSelectedItem();
+        ArrayList<NguoiDungViewModel> ds = this.nguoiDungService.listND();
+        int index = 0;
         dtm = (DefaultTableModel) tblNguoiDung.getModel();
         dtm.setRowCount(0);
+        for(NguoiDungViewModel nd : ds){
+            index ++;
+            Object[] rowData = {
+                nd.getMaND(),
+                nd.getHo(),
+                nd.getTenDem(),
+                nd.getTen(),
+                nd.getGioiTinh(),
+                nd.getNgaySinh(),
+                nd.getDiaChi(),
+                nd.getSdt(),
+                nd.geteMail(),
+                nd.getChucVu()
+            };
+            dtm.addRow(rowData);
+        }   
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void cboChucVu_2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cboChucVu_2ActionPerformed
