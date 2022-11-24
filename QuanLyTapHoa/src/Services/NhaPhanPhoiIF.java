@@ -26,4 +26,7 @@ public interface NhaPhanPhoiIF {
     public List<NhaPhanPhoi> update(String Ma, String Ten, String DiaChi, String SDT, String maSP, int Trangthai);
 
     public List<NhaPhanPhoi> click();
+    
+    public List<NhaPhanPhoi> select2(String ma);
+    
 }
