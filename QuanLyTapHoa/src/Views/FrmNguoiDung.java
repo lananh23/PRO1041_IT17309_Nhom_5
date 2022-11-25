@@ -10,6 +10,7 @@ import ServiceImpl.NguoiDungServiceImpl;
 import ViewModels.NguoiDungViewModel;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Set;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
@@ -18,7 +19,7 @@ import javax.swing.table.DefaultTableModel;
  *
  * @author Admin
  */
-public class FrmQLNguoiDung extends javax.swing.JFrame {
+public class FrmNguoiDung extends javax.swing.JFrame {
 
     private DefaultTableModel dtm;
     private NguoiDungService nguoiDungService = new NguoiDungServiceImpl();
@@ -26,17 +27,10 @@ public class FrmQLNguoiDung extends javax.swing.JFrame {
     /**
      * Creates new form nguoiDung
      */
-    public FrmQLNguoiDung() {
+    public FrmNguoiDung() {
         initComponents();
         loadTable(nguoiDungService.listND());
         List<NguoiDungViewModel> nd = nguoiDungService.listND();
-        this.cboChucVu_2.getModel();
-        String[] nguoiDung = new String[nd.size()];
-        for(int i = 0; i < nd.size(); i++){
-            nguoiDung[i] = nd.get(i).getChucVu();
-        }
-        cboChucVu_2.setModel(new DefaultComboBoxModel<>(nguoiDung));
-        loadTable((ArrayList<NguoiDungViewModel>) nd);
     }
 
     public void loadTable(ArrayList<NguoiDungViewModel> list) {
@@ -129,7 +123,6 @@ public class FrmQLNguoiDung extends javax.swing.JFrame {
         txtNgaySinh = new javax.swing.JTextField();
         txtEmail = new javax.swing.JTextField();
         cboChucVu_2 = new javax.swing.JComboBox<>();
-        jButton1 = new javax.swing.JButton();
         btnTimKiem = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -209,16 +202,10 @@ public class FrmQLNguoiDung extends javax.swing.JFrame {
 
         jLabel72.setText("Ngày sinh");
 
+        cboChucVu_2.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Quản lý", "Nhân viên" }));
         cboChucVu_2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 cboChucVu_2ActionPerformed(evt);
-            }
-        });
-
-        jButton1.setText("Lọc");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
             }
         });
 
@@ -258,7 +245,7 @@ public class FrmQLNguoiDung extends javax.swing.JFrame {
                             .addGroup(jPanel11Layout.createSequentialGroup()
                                 .addGap(13, 13, 13)
                                 .addComponent(cboChucVu_2, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGap(76, 76, 76)
                         .addGroup(jPanel11Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel11Layout.createSequentialGroup()
                                 .addGroup(jPanel11Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -279,8 +266,6 @@ public class FrmQLNguoiDung extends javax.swing.JFrame {
                                         .addComponent(txtDiaChi)
                                         .addComponent(txtEmail))))
                             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel11Layout.createSequentialGroup()
-                                .addComponent(jButton1)
-                                .addGap(18, 18, 18)
                                 .addComponent(btnThem)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                 .addComponent(btnSua)
@@ -343,7 +328,6 @@ public class FrmQLNguoiDung extends javax.swing.JFrame {
                     .addComponent(btnXoa)
                     .addComponent(btnClearForm)
                     .addComponent(cboChucVu_2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButton1)
                     .addComponent(btnTimKiem))
                 .addGap(18, 18, 18)
                 .addComponent(jScrollPane14, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -373,7 +357,26 @@ public class FrmQLNguoiDung extends javax.swing.JFrame {
     private void btnThemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnThemActionPerformed
         // TODO add your handling code here:
         NguoiDung nd = getForm();
-        if (nguoiDungService.them(nd)) {
+        if (txtMa.getText() == "" || txtMa.getText().isEmpty()) {
+            JOptionPane.showMessageDialog(this, "Bạn chưa nhập mã của người dùng");
+        } else if (txtHo.getText() == "" || txtHo.getText().isEmpty()) {
+            JOptionPane.showMessageDialog(this, "Bạn chưa nhập họ của người dùng");
+        }else if(txtTenDem.getText() == "" || txtTenDem.getText().isEmpty()){
+            JOptionPane.showMessageDialog(this, "Bạn chưa nhập tên đệm của người dùng");
+        }else if(txtTen.getText() == "" || txtTen.getText().isEmpty()){
+            JOptionPane.showMessageDialog(this, "Bạn chưa nhập tên của người dùng");
+        }else if(rdoNam.isSelected() == false && rdoNu.isSelected() == false){
+            JOptionPane.showMessageDialog(this, "Bạn chưa chọn giới tính của người dùng");
+        }else if(txtNgaySinh.getText() == "" || txtNgaySinh.getText().isEmpty()){
+            JOptionPane.showMessageDialog(this, "Bạn chưa nhập ngày sinh của người dùng");
+        }else if(txtDiaChi.getText() == "" || txtDiaChi.getText().isEmpty()){
+            JOptionPane.showMessageDialog(this, "Bạn chưa nhập địa chỉ của người dùng");
+        }else if(txtSDT.getText() == "" || txtSDT.getText().isEmpty()){
+            JOptionPane.showMessageDialog(this, "Bạn chưa nhập số điện thoại của người dùng");
+        }else if(txtEmail.getText() == "" || txtEmail.getText().isEmpty()){
+            JOptionPane.showMessageDialog(this, "Bạn chưa nhập email của người dùng");
+        }else {
+            nguoiDungService.them(nd);
             loadTable(nguoiDungService.listND());
             JOptionPane.showMessageDialog(this, "Bạn đã thêm thành công");
             clearForm();
@@ -456,33 +459,34 @@ public class FrmQLNguoiDung extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_btnTimKiemActionPerformed
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        // TODO add your handling code here:
-        String chucVu = (String) cboChucVu_2.getSelectedItem();
-        ArrayList<NguoiDungViewModel> ds = this.nguoiDungService.listND();
-        int index = 0;
-        dtm = (DefaultTableModel) tblNguoiDung.getModel();
-        dtm.setRowCount(0);
-        for(NguoiDungViewModel nd : ds){
-            index ++;
-            Object[] rowData = {
-                nd.getMaND(),
-                nd.getHo(),
-                nd.getTenDem(),
-                nd.getTen(),
-                nd.getGioiTinh(),
-                nd.getNgaySinh(),
-                nd.getDiaChi(),
-                nd.getSdt(),
-                nd.geteMail(),
-                nd.getChucVu()
-            };
-            dtm.addRow(rowData);
-        }   
-    }//GEN-LAST:event_jButton1ActionPerformed
-
     private void cboChucVu_2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cboChucVu_2ActionPerformed
         // TODO add your handling code here:
+        String cV = (String) this.cboChucVu_2.getSelectedItem();
+        List<NguoiDungViewModel> ds = this.nguoiDungService.listND();
+        int index = 0;
+        dtm = (DefaultTableModel) this.tblNguoiDung.getModel();
+        dtm.setRowCount(0);
+        for (NguoiDungViewModel nd : ds) {
+            if (nd.getChucVu().equals(cV)) {
+                index++;
+                dtm.addRow(new Object[]{
+                    nd.getMaND(),
+                    nd.getHo(),
+                    nd.getTenDem(),
+                    nd.getTen(),
+                    nd.getGioiTinh(),
+                    nd.getNgaySinh(),
+                    nd.getDiaChi(),
+                    nd.getSdt(),
+                    nd.geteMail(),
+                    nd.getChucVu()});
+            }
+        }
+        if (index == 0) {
+            JOptionPane.showMessageDialog(this, "Không tìm thấy thông tin người dùng");
+        } else {
+            JOptionPane.showMessageDialog(this, "Đã lọc thông tin theo yêu cầu");
+        }
 
     }//GEN-LAST:event_cboChucVu_2ActionPerformed
 
@@ -503,13 +507,13 @@ public class FrmQLNguoiDung extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(FrmQLNguoiDung.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(FrmNguoiDung.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(FrmQLNguoiDung.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(FrmNguoiDung.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(FrmQLNguoiDung.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(FrmNguoiDung.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(FrmQLNguoiDung.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(FrmNguoiDung.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
         //</editor-fold>
@@ -517,7 +521,7 @@ public class FrmQLNguoiDung extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new FrmQLNguoiDung().setVisible(true);
+                new FrmNguoiDung().setVisible(true);
             }
         });
     }
@@ -531,7 +535,6 @@ public class FrmQLNguoiDung extends javax.swing.JFrame {
     private javax.swing.ButtonGroup buttonGroup1;
     private javax.swing.JComboBox<String> cboChucVu;
     private javax.swing.JComboBox<String> cboChucVu_2;
-    private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel12;
     private javax.swing.JLabel jLabel13;
