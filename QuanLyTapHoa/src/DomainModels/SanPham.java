@@ -36,6 +36,10 @@ public class SanPham {
         this.giaBan = giaBan;
         this.hanSuDung = hanSuDung;
     }
+    public SanPham(String maSP, int soLuong) {
+        this.maSP = maSP;
+        this.soLuong = soLuong;
+    }
     
 
     public String getMaSP() {

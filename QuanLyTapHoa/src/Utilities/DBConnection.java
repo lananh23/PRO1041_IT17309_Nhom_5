@@ -38,6 +38,7 @@ public class DBConnection {
         } catch (Exception ex) {
         }
     }
+
 //    static {
 //        try {
 //            DriverManager.registerDriver(new SQLServerDriver());
