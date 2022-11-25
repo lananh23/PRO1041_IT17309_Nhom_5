@@ -21,27 +21,27 @@ import javax.swing.JOptionPane;
  */
 public class FrmBanHang extends javax.swing.JFrame {
 
-    private IManageSanPhamService _sanphamService;
-    private DefaultTableModel defaultTableModel;
+    private IManageSanPhamService banHangService;
+    private DefaultTableModel dtm;
 
     /**
      * Creates new form banHang
      */
     public FrmBanHang() {
         initComponents();
-        _sanphamService = new ManageSanPhamService();
+        banHangService = new ManageSanPhamService();
         setLocationRelativeTo(null);
-//        loadToTable();
+        loadToTable();
 
     }
 
     private void loadToTable() {
-        List<QLSanPham> spList = _sanphamService.ALL();
-        defaultTableModel = (DefaultTableModel) tblDSSanPham.getModel();
+        List<QLSanPham> spList = banHangService.ALL();
+        dtm = (DefaultTableModel) tblDSSanPham.getModel();
 
-        defaultTableModel.setRowCount(0);
+        dtm.setRowCount(0);
         for (QLSanPham sanPham : spList) {
-            defaultTableModel.addRow(new Object[]{
+            dtm.addRow(new Object[]{
                 sanPham.getMaSP(), sanPham.getTenSP(), sanPham.getSoLuong(),
                 sanPham.getGiaNhap(), sanPham.getGiaBan(), sanPham.getHanSuDung()
             });
@@ -669,16 +669,16 @@ public class FrmBanHang extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(this, "Chưa nhập mã cần tìm");
 
         } else {
-            List<QLSanPham> sanPhams = _sanphamService.getByCode(maSP);
+            List<QLSanPham> sanPhams =banHangService.getByCode(maSP);
 
             if (sanPhams.isEmpty()) {
                 JOptionPane.showMessageDialog(this, "Không có sản phẩm mà bạn đang tìm");
             } else {
-                defaultTableModel = (DefaultTableModel) tblDSSanPham.getModel();
+                dtm= (DefaultTableModel) tblDSSanPham.getModel();
 
-                defaultTableModel.setRowCount(0);
+                dtm.setRowCount(0);
                 for (QLSanPham sanPham : sanPhams) {
-                    defaultTableModel.addRow(new Object[]{
+                    dtm.addRow(new Object[]{
                         sanPham.getMaSP(), sanPham.getTenSP(), sanPham.getSoLuong(),
                         sanPham.getGiaNhap(), sanPham.getGiaBan(), sanPham.getHanSuDung()
                     });
@@ -691,7 +691,7 @@ public class FrmBanHang extends javax.swing.JFrame {
 
     private void btnLuuTamActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLuuTamActionPerformed
         // TODO add your handling code here:
-        List<QLSanPham> sanPhams = _sanphamService.getByCode(lbMaSP.getText());
+        List<QLSanPham> sanPhams = banHangService.getByCode(lbMaSP.getText());
 
         int soLuong = (int) spnSoLuong.getValue();
 
@@ -699,12 +699,12 @@ public class FrmBanHang extends javax.swing.JFrame {
 
         lbThanhTien.setText("" + thanhTien);
 
-        defaultTableModel = (DefaultTableModel) tblDSCho.getModel();
+        dtm= (DefaultTableModel) tblDSCho.getModel();
         
-        defaultTableModel.setRowCount(0);
+        dtm.setRowCount(0);
         
         for (QLSanPham sanPham : sanPhams) {
-            defaultTableModel.addRow(new Object[]{
+            dtm.addRow(new Object[]{
                 sanPham.getMaSP(), sanPham.getTenSP(), soLuong,
                 sanPham.getGiaBan(), thanhTien
             });
