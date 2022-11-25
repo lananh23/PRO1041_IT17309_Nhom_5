@@ -32,9 +32,11 @@ public class DBConnection {
             } catch (SQLException e) {
                 e.printStackTrace();
             }
-            
+            CONNECT_STRING = connectStringBuilder.toString();
+            System.out.println("Connect String co dang: " + CONNECT_STRING);
+            System.out.println("Ket noi thanh cong");
+        } catch (Exception ex) {
         }
-        return conn;
     }
 //    static {
 //        try {

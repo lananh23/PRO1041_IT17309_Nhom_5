@@ -60,6 +60,13 @@ public class NhaPhanPhoiSV implements NhaPhanPhoiIF{
         }
     }
     
+    public List<NhaPhanPhoi> select2(String ma) {
+        try {
+            return NPPRP.select2(ma);
+        } catch (Exception e) {
+            return null;
+        }
+    }
     
     
     public List<NhaPhanPhoi> update(String Ma, String Ten, String DiaChi, String SDT, String maSP, int Trangthai) {

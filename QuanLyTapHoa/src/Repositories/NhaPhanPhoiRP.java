@@ -134,4 +134,31 @@ public class NhaPhanPhoiRP {
         n1.add(n);
         return n1;
     }
+    
+    public List<NhaPhanPhoi> select2(String ma) throws SQLException {
+        ArrayList<NhaPhanPhoi> n1 = new ArrayList<>();
+        Connection con = DBConnection.getConnection();
+        String sql = "select * from NhaPhanPhoi where MaSP =?";
+        PreparedStatement st = con.prepareStatement(sql);
+        st.setString(1, ma);
+        ResultSet rs = st.executeQuery();
+        while (rs.next()) {
+            String Ma = rs.getString("MaNPP");
+            String Ten = rs.getString("TenNPP");
+            String DiaChi = rs.getString("DiaChi");
+            String Sdt = rs.getString("SDT");
+            String MaSP = rs.getString("MaSP");
+            Integer Trangthai = rs.getInt("TrangThai");
+            NhaPhanPhoi n = new NhaPhanPhoi();
+            n.setMaNPP(Ma);
+            n.setTenNPP(Ten);
+            n.setDiaChi(DiaChi);
+            n.setSdt(Sdt);
+            n.setMaSP(MaSP);
+            n.setTrangThai(Trangthai);
+            n1.add(n);
+        }
+        return n1;
+    }
+    
 }
