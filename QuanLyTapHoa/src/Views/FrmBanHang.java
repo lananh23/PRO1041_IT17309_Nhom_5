@@ -71,14 +71,18 @@ public class FrmBanHang extends javax.swing.JFrame {
         btnThemKH = new javax.swing.JButton();
         jLabel42 = new javax.swing.JLabel();
         jLabel43 = new javax.swing.JLabel();
-        jLabel45 = new javax.swing.JLabel();
-        jLabel46 = new javax.swing.JLabel();
         jLabel47 = new javax.swing.JLabel();
         jTextField9 = new javax.swing.JTextField();
         btnThanhToan = new javax.swing.JButton();
         btnTimKH = new javax.swing.JButton();
         jComboBox1 = new javax.swing.JComboBox<>();
         jButton2 = new javax.swing.JButton();
+        jTextField10 = new javax.swing.JTextField();
+        jTextField11 = new javax.swing.JTextField();
+        lbThanhTien = new javax.swing.JLabel();
+        jLabel48 = new javax.swing.JLabel();
+        jLabel90 = new javax.swing.JLabel();
+        jTextField12 = new javax.swing.JTextField();
         jPanel29 = new javax.swing.JPanel();
         jLabel80 = new javax.swing.JLabel();
         jLabel81 = new javax.swing.JLabel();
@@ -86,21 +90,16 @@ public class FrmBanHang extends javax.swing.JFrame {
         btnLuuTam = new javax.swing.JButton();
         btnCapNhat = new javax.swing.JButton();
         btnXoa = new javax.swing.JButton();
-        jLabel88 = new javax.swing.JLabel();
         lbMaSP = new javax.swing.JLabel();
-        jLabel90 = new javax.swing.JLabel();
-        jLabel91 = new javax.swing.JLabel();
-        jLabel48 = new javax.swing.JLabel();
-        lbThanhTien = new javax.swing.JLabel();
         jScrollPane6 = new javax.swing.JScrollPane();
         tblDSCho = new javax.swing.JTable();
         spnSoLuong = new javax.swing.JSpinner();
+        jTextField13 = new javax.swing.JTextField();
         jPanel1 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
         jScrollPane5 = new javax.swing.JScrollPane();
         tblHoaDonCho = new javax.swing.JTable();
         btnHuyHoaDon = new javax.swing.JButton();
-        jPanel28 = new javax.swing.JPanel();
         jPanel30 = new javax.swing.JPanel();
         jPanel32 = new javax.swing.JPanel();
         jPanel21 = new javax.swing.JPanel();
@@ -115,7 +114,6 @@ public class FrmBanHang extends javax.swing.JFrame {
         jButton42 = new javax.swing.JButton();
         jScrollPane21 = new javax.swing.JScrollPane();
         jTable19 = new javax.swing.JTable();
-        jPanel31 = new javax.swing.JPanel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -178,10 +176,6 @@ public class FrmBanHang extends javax.swing.JFrame {
 
         jLabel43.setText("Trạng thái");
 
-        jLabel45.setText("--");
-
-        jLabel46.setText("--");
-
         btnThanhToan.setText("Thanh toán");
 
         btnTimKH.setText("Tìm");
@@ -189,6 +183,12 @@ public class FrmBanHang extends javax.swing.JFrame {
         jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Chưa thanh toán", "Đã thanh toán" }));
 
         jButton2.setText("Tạo hoá đơn mới");
+
+        lbThanhTien.setText("--");
+
+        jLabel48.setText("Tổng tiền");
+
+        jLabel90.setText("Mã HD");
 
         javax.swing.GroupLayout jPanel16Layout = new javax.swing.GroupLayout(jPanel16);
         jPanel16.setLayout(jPanel16Layout);
@@ -200,37 +200,50 @@ public class FrmBanHang extends javax.swing.JFrame {
                     .addGroup(jPanel16Layout.createSequentialGroup()
                         .addGroup(jPanel16Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel42)
-                            .addComponent(jLabel43))
-                        .addGap(55, 55, 55)
+                            .addComponent(jLabel43)
+                            .addComponent(jLabel48, javax.swing.GroupLayout.PREFERRED_SIZE, 62, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(47, 47, 47)
                         .addGroup(jPanel16Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(jPanel16Layout.createSequentialGroup()
-                                .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, 133, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addGap(0, 0, Short.MAX_VALUE)
                                 .addComponent(jLabel47, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addGroup(jPanel16Layout.createSequentialGroup()
-                                .addComponent(jTextField9, javax.swing.GroupLayout.PREFERRED_SIZE, 133, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(0, 0, Short.MAX_VALUE))))
+                                .addGroup(jPanel16Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, 133, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(lbThanhTien, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addGap(0, 0, Short.MAX_VALUE)))
+                        .addContainerGap())
                     .addGroup(jPanel16Layout.createSequentialGroup()
-                        .addGroup(jPanel16Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel25)
-                            .addComponent(jLabel24))
-                        .addGap(73, 73, 73)
+                        .addGroup(jPanel16Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addGroup(jPanel16Layout.createSequentialGroup()
+                                .addComponent(jLabel25)
+                                .addGap(73, 73, 73)
+                                .addComponent(jTextField10))
+                            .addGroup(jPanel16Layout.createSequentialGroup()
+                                .addComponent(jLabel24)
+                                .addGap(73, 73, 73)
+                                .addComponent(jTextField11, javax.swing.GroupLayout.PREFERRED_SIZE, 82, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addGroup(jPanel16Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(jPanel16Layout.createSequentialGroup()
-                                .addComponent(jLabel45, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(25, 25, 25)
                                 .addComponent(btnThemKH)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addGap(18, 18, 18)
                                 .addComponent(btnTimKH))
-                            .addComponent(jLabel46, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(0, 0, Short.MAX_VALUE)))
-                .addContainerGap())
+                            .addGroup(jPanel16Layout.createSequentialGroup()
+                                .addComponent(jLabel90)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(jTextField12)))
+                        .addGap(23, 23, 23))
+                    .addGroup(jPanel16Layout.createSequentialGroup()
+                        .addGap(109, 109, 109)
+                        .addComponent(jTextField9, javax.swing.GroupLayout.PREFERRED_SIZE, 133, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel16Layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGap(43, 43, 43)
                 .addComponent(jButton2)
-                .addGap(85, 85, 85)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(btnThanhToan)
-                .addGap(47, 47, 47))
+                .addGap(45, 45, 45))
         );
         jPanel16Layout.setVerticalGroup(
             jPanel16Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -240,29 +253,32 @@ public class FrmBanHang extends javax.swing.JFrame {
                     .addComponent(jLabel24)
                     .addComponent(btnThemKH)
                     .addComponent(btnTimKH)
-                    .addComponent(jLabel45))
+                    .addComponent(jTextField11, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(jPanel16Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel25)
-                    .addComponent(jLabel46))
-                .addGap(16, 16, 16)
+                    .addComponent(jTextField10, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel90)
+                    .addComponent(jTextField12, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(13, 13, 13)
                 .addGroup(jPanel16Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel42)
                     .addComponent(jTextField9, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGroup(jPanel16Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel16Layout.createSequentialGroup()
-                        .addGap(36, 36, 36)
-                        .addComponent(jLabel47))
-                    .addGroup(jPanel16Layout.createSequentialGroup()
-                        .addGap(18, 18, 18)
-                        .addGroup(jPanel16Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel43))))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 36, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel16Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(btnThanhToan)
-                    .addComponent(jButton2))
-                .addGap(45, 45, 45))
+                    .addComponent(lbThanhTien)
+                    .addComponent(jLabel48))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 13, Short.MAX_VALUE)
+                .addComponent(jLabel47)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 14, Short.MAX_VALUE)
+                .addGroup(jPanel16Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel43))
+                .addGap(18, 18, 18)
+                .addGroup(jPanel16Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jButton2)
+                    .addComponent(btnThanhToan))
+                .addGap(22, 22, 22))
         );
 
         jPanel29.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
@@ -284,17 +300,7 @@ public class FrmBanHang extends javax.swing.JFrame {
 
         btnXoa.setText("Xóa");
 
-        jLabel88.setText("--");
-
         lbMaSP.setText("--");
-
-        jLabel90.setText("Mã HD");
-
-        jLabel91.setText("--");
-
-        jLabel48.setText("Tổng tiền");
-
-        lbThanhTien.setText("--");
 
         tblDSCho.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -321,40 +327,31 @@ public class FrmBanHang extends javax.swing.JFrame {
                 .addGroup(jPanel29Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel29Layout.createSequentialGroup()
                         .addGroup(jPanel29Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel80)
                             .addComponent(jLabel81)
                             .addComponent(btnLuuTam))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(jPanel29Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(jPanel29Layout.createSequentialGroup()
-                                .addGroup(jPanel29Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(lbMaSP, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(jLabel88, javax.swing.GroupLayout.PREFERRED_SIZE, 72, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(lbMaSP, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(34, 34, 34)
                                 .addGroup(jPanel29Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addGroup(jPanel29Layout.createSequentialGroup()
-                                        .addGroup(jPanel29Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                            .addGroup(jPanel29Layout.createSequentialGroup()
-                                                .addComponent(jLabel90)
-                                                .addGap(18, 18, 18)
-                                                .addComponent(jLabel91, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                            .addGroup(jPanel29Layout.createSequentialGroup()
-                                                .addComponent(jLabel82)
-                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                                .addComponent(spnSoLuong, javax.swing.GroupLayout.PREFERRED_SIZE, 62, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                        .addComponent(jLabel82)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addComponent(spnSoLuong, javax.swing.GroupLayout.PREFERRED_SIZE, 62, javax.swing.GroupLayout.PREFERRED_SIZE)
                                         .addGap(9, 9, 9))
                                     .addGroup(jPanel29Layout.createSequentialGroup()
-                                        .addComponent(jLabel48, javax.swing.GroupLayout.PREFERRED_SIZE, 62, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                        .addGroup(jPanel29Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                            .addGroup(jPanel29Layout.createSequentialGroup()
-                                                .addComponent(lbThanhTien, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                                .addGap(0, 0, Short.MAX_VALUE))
-                                            .addComponent(btnXoa, javax.swing.GroupLayout.DEFAULT_SIZE, 81, Short.MAX_VALUE)))))
+                                        .addGap(74, 74, 74)
+                                        .addComponent(btnXoa, javax.swing.GroupLayout.DEFAULT_SIZE, 81, Short.MAX_VALUE))))
                             .addGroup(jPanel29Layout.createSequentialGroup()
                                 .addGap(29, 29, 29)
                                 .addComponent(btnCapNhat))))
-                    .addComponent(jScrollPane6, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE))
+                    .addComponent(jScrollPane6, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
+                    .addGroup(jPanel29Layout.createSequentialGroup()
+                        .addComponent(jLabel80)
+                        .addGap(18, 18, 18)
+                        .addComponent(jTextField13, javax.swing.GroupLayout.PREFERRED_SIZE, 79, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(0, 0, Short.MAX_VALUE)))
                 .addContainerGap())
         );
         jPanel29Layout.setVerticalGroup(
@@ -363,26 +360,20 @@ public class FrmBanHang extends javax.swing.JFrame {
                 .addContainerGap()
                 .addGroup(jPanel29Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel80)
-                    .addComponent(jLabel88)
-                    .addComponent(jLabel90)
-                    .addComponent(jLabel91))
+                    .addComponent(jTextField13, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel29Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel81)
                     .addComponent(jLabel82)
                     .addComponent(lbMaSP)
                     .addComponent(spnSoLuong, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(jPanel29Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel48)
-                    .addComponent(lbThanhTien))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGap(36, 36, 36)
                 .addGroup(jPanel29Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnCapNhat)
                     .addComponent(btnXoa)
                     .addComponent(btnLuuTam))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jScrollPane6, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
+                .addComponent(jScrollPane6, javax.swing.GroupLayout.DEFAULT_SIZE, 105, Short.MAX_VALUE)
                 .addGap(7, 7, 7))
         );
 
@@ -461,19 +452,6 @@ public class FrmBanHang extends javax.swing.JFrame {
         );
 
         jTabbedPane3.addTab("Bán hàng", jPanel27);
-
-        javax.swing.GroupLayout jPanel28Layout = new javax.swing.GroupLayout(jPanel28);
-        jPanel28.setLayout(jPanel28Layout);
-        jPanel28Layout.setHorizontalGroup(
-            jPanel28Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 0, Short.MAX_VALUE)
-        );
-        jPanel28Layout.setVerticalGroup(
-            jPanel28Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 0, Short.MAX_VALUE)
-        );
-
-        jTabbedPane3.addTab("Đổi hàng", jPanel28);
 
         jPanel21.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
 
@@ -596,19 +574,6 @@ public class FrmBanHang extends javax.swing.JFrame {
         );
 
         jTabbedPane3.addTab("DS hóa đơn bán hàng", jPanel30);
-
-        javax.swing.GroupLayout jPanel31Layout = new javax.swing.GroupLayout(jPanel31);
-        jPanel31.setLayout(jPanel31Layout);
-        jPanel31Layout.setHorizontalGroup(
-            jPanel31Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 0, Short.MAX_VALUE)
-        );
-        jPanel31Layout.setVerticalGroup(
-            jPanel31Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 0, Short.MAX_VALUE)
-        );
-
-        jTabbedPane3.addTab("DS hóa đơn đổi hàng", jPanel31);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -738,16 +703,12 @@ public class FrmBanHang extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel25;
     private javax.swing.JLabel jLabel42;
     private javax.swing.JLabel jLabel43;
-    private javax.swing.JLabel jLabel45;
-    private javax.swing.JLabel jLabel46;
     private javax.swing.JLabel jLabel47;
     private javax.swing.JLabel jLabel48;
     private javax.swing.JLabel jLabel80;
     private javax.swing.JLabel jLabel81;
     private javax.swing.JLabel jLabel82;
-    private javax.swing.JLabel jLabel88;
     private javax.swing.JLabel jLabel90;
-    private javax.swing.JLabel jLabel91;
     private javax.swing.JLabel jLabel95;
     private javax.swing.JLabel jLabel96;
     private javax.swing.JPanel jPanel1;
@@ -755,10 +716,8 @@ public class FrmBanHang extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel20;
     private javax.swing.JPanel jPanel21;
     private javax.swing.JPanel jPanel27;
-    private javax.swing.JPanel jPanel28;
     private javax.swing.JPanel jPanel29;
     private javax.swing.JPanel jPanel30;
-    private javax.swing.JPanel jPanel31;
     private javax.swing.JPanel jPanel32;
     private javax.swing.JPanel jPanel33;
     private javax.swing.JScrollPane jScrollPane19;
@@ -769,6 +728,10 @@ public class FrmBanHang extends javax.swing.JFrame {
     private javax.swing.JTabbedPane jTabbedPane3;
     private javax.swing.JTable jTable18;
     private javax.swing.JTable jTable19;
+    private javax.swing.JTextField jTextField10;
+    private javax.swing.JTextField jTextField11;
+    private javax.swing.JTextField jTextField12;
+    private javax.swing.JTextField jTextField13;
     private javax.swing.JTextField jTextField48;
     private javax.swing.JTextField jTextField49;
     private javax.swing.JTextField jTextField9;
