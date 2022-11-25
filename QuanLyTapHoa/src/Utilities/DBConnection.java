@@ -27,17 +27,16 @@ public class DBConnection {
                             +"encrypt=true;trustServerCertificate=true;sslProtocol=TLSv1.2";
                 conn = DriverManager.getConnection(dbUrl, dbUser, dbPass);
                 System.out.println("Kết nối thành công");
-            } catch (ClassNotFoundException e) {
+            }  catch (ClassNotFoundException e) {
                 e.printStackTrace();
             } catch (SQLException e) {
                 e.printStackTrace();
             }
-            CONNECT_STRING = connectStringBuilder.toString();
-            System.out.println("Connect String co dang: " + CONNECT_STRING);
-            System.out.println("Ket noi thanh cong");
-        } catch (Exception ex) {
+            
         }
+        return conn;
     }
+
 
 //    static {
 //        try {
