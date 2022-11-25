@@ -19,7 +19,7 @@ import javax.swing.table.DefaultTableModel;
  *
  * @author Admin
  */
-public class FrmNguoiDung extends javax.swing.JFrame {
+public class FrmQLNguoiDung extends javax.swing.JFrame {
 
     private DefaultTableModel dtm;
     private NguoiDungService nguoiDungService = new NguoiDungServiceImpl();
@@ -27,7 +27,7 @@ public class FrmNguoiDung extends javax.swing.JFrame {
     /**
      * Creates new form nguoiDung
      */
-    public FrmNguoiDung() {
+    public FrmQLNguoiDung() {
         initComponents();
         loadTable(nguoiDungService.listND());
         List<NguoiDungViewModel> nd = nguoiDungService.listND();
@@ -387,20 +387,30 @@ public class FrmNguoiDung extends javax.swing.JFrame {
         // TODO add your handling code here:
         String maND = txtMa.getText();
         NguoiDung nguoiDung = getForm();
+        int row = tblNguoiDung.getSelectedRow();
+        if(row == -1){
+            JOptionPane.showMessageDialog(this, "Bạn chưa chọn dòng muốn sửa thông tin");
+        }else{
         if (nguoiDungService.sua(nguoiDung, maND)) {
             loadTable(nguoiDungService.listND());
             JOptionPane.showMessageDialog(this, "Bạn đã sửa thành công");
             clearForm();
+        }
         }
     }//GEN-LAST:event_btnSuaActionPerformed
 
     private void btnXoaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnXoaActionPerformed
         // TODO add your handling code here:
         String maND = txtMa.getText();
+        int row = tblNguoiDung.getSelectedRow();
+        if(row == -1){
+            JOptionPane.showMessageDialog(this, "Bạn chưa chọn dòng chứa thông tin muốn xoá");
+        }else{
         if (nguoiDungService.delete(maND)) {
             loadTable(nguoiDungService.listND());
             JOptionPane.showMessageDialog(this, "Bạn đã xóa thành công");
             clearForm();
+        }
         }
     }//GEN-LAST:event_btnXoaActionPerformed
 
@@ -507,13 +517,13 @@ public class FrmNguoiDung extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(FrmNguoiDung.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(FrmQLNguoiDung.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(FrmNguoiDung.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(FrmQLNguoiDung.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(FrmNguoiDung.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(FrmQLNguoiDung.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(FrmNguoiDung.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(FrmQLNguoiDung.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
         //</editor-fold>
@@ -521,7 +531,7 @@ public class FrmNguoiDung extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new FrmNguoiDung().setVisible(true);
+                new FrmQLNguoiDung().setVisible(true);
             }
         });
     }
