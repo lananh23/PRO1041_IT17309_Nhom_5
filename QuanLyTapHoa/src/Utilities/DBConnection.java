@@ -36,6 +36,7 @@ public class DBConnection {
         }
         return conn;
     }
+
 //    static {
 //        try {
 //            DriverManager.registerDriver(new SQLServerDriver());

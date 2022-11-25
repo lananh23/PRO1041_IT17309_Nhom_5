@@ -30,7 +30,14 @@ public class SanPham {
         this.soLuong = soLuong;
     }
 
+<<<<<<< Updated upstream
     
+=======
+    public SanPham(String maSP, int soLuong) {
+        this.maSP = maSP;
+        this.soLuong = soLuong;
+    }
+>>>>>>> Stashed changes
     
 
     public String getMaSP() {
