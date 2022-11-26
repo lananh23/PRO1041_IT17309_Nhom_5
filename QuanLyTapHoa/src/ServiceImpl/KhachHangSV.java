@@ -77,4 +77,10 @@ public class KhachHangSV implements KhachHangIF {
             return null;
         }
     }
+    
+    @Override
+    public Boolean themNhanh(KhachHang kh) {
+        khRP.themNhanh(kh);
+        return true;
+    }
 }
