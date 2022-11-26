@@ -17,10 +17,10 @@ public class PhieuTraHangRepository {
             ps.execute();
             ResultSet rs = ps.getResultSet();
             while (rs.next() == true) {
-                String maHD = rs.getString("MaHD");
-                String maKH = rs.getString("MaKH");
-                String maND = rs.getString("MaND");
                 String maPTH = rs.getString("MaPTH");
+                String maHD = rs.getString("MaHD");
+                String maND = rs.getString("MaND");
+                String maKH = rs.getString("MaKH");
                 Date NgayTra = rs.getDate("NgayTra");
                 double tien = rs.getDouble("TienTraLaiKhach");
                 String loi = rs.getString("LyDoTra");

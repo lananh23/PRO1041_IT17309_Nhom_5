@@ -8,7 +8,10 @@ import ServiceImpl.ManagePhieuTraHangCTService;
 import ServiceImpl.ManagePhieuTraHangService;
 import Services.IManagePhieuTraHangCTService;
 import Services.IManagePhieuTraHangService;
+import ViewModels.ManagePhieuTraHang;
+import ViewModels.ManagePhieuTraHangCT;
 import java.util.List;
+import javax.swing.table.DefaultTableModel;
 
 /**
  *
@@ -23,10 +26,53 @@ public class FrmPhieuTraHang extends javax.swing.JFrame {
         initComponents();
         this.traHangService = new ManagePhieuTraHangService();
         this.traHangCTService = new ManagePhieuTraHangCTService();
+        this.loadTableTH();
     }
 
     public void clearForm(){
         
+    }
+    public void loadTableTH() {
+        DefaultTableModel dtm = (DefaultTableModel) this.tblTraHang.getModel();
+        dtm.setRowCount(0);
+        for (ManagePhieuTraHang sp : this.traHangService.ALL()) {
+            Object[] rowData = {
+                sp.getMaPTH(),
+                sp.getMaHD(),
+                sp.getMaND(),
+                sp.getMaKH(),
+                sp.getNgayTra(),
+                sp.getTienTraLaiKhach(),
+                sp.getLyDoTra()
+            };
+            dtm.addRow(rowData);
+        }
+    }
+    public void loadTableCT() {
+        DefaultTableModel dtm = (DefaultTableModel) this.tblTraHangCT.getModel();
+        dtm.setRowCount(0);
+        for (ManagePhieuTraHangCT sp : this.traHangCTService.ALL()) {
+            Object[] rowData = {
+                sp.getMaSP(),
+                sp.getSoLuong(),
+                sp.getDonGia(),
+                sp.getSoLuong()
+            };
+            dtm.addRow(rowData);
+        }
+    }
+    public void loadTableHD() {
+        DefaultTableModel dtm = (DefaultTableModel) this.tblCTHD.getModel();
+        dtm.setRowCount(0);
+        for (ManagePhieuTraHangCT sp : this.traHangCTService.ALL()) {
+            Object[] rowData = {
+                sp.getMaSP(),
+                sp.getSoLuong(),
+                sp.getDonGia(),
+                sp.getSoLuong()
+            };
+            dtm.addRow(rowData);
+        }
     }
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
@@ -38,7 +84,7 @@ public class FrmPhieuTraHang extends javax.swing.JFrame {
         jScrollPane7 = new javax.swing.JScrollPane();
         jTable7 = new javax.swing.JTable();
         jScrollPane8 = new javax.swing.JScrollPane();
-        jTable8 = new javax.swing.JTable();
+        tblCTHD = new javax.swing.JTable();
         jPanel19 = new javax.swing.JPanel();
         jLabel30 = new javax.swing.JLabel();
         jLabel31 = new javax.swing.JLabel();
@@ -80,13 +126,13 @@ public class FrmPhieuTraHang extends javax.swing.JFrame {
         jTextField43 = new javax.swing.JTextField();
         jButton38 = new javax.swing.JButton();
         jScrollPane15 = new javax.swing.JScrollPane();
-        jTable13 = new javax.swing.JTable();
+        tblTraHang = new javax.swing.JTable();
         jPanel26 = new javax.swing.JPanel();
         jLabel79 = new javax.swing.JLabel();
         jTextField44 = new javax.swing.JTextField();
         jButton39 = new javax.swing.JButton();
         jScrollPane18 = new javax.swing.JScrollPane();
-        jTable16 = new javax.swing.JTable();
+        tblTraHangCT = new javax.swing.JTable();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -101,7 +147,7 @@ public class FrmPhieuTraHang extends javax.swing.JFrame {
         ));
         jScrollPane7.setViewportView(jTable7);
 
-        jTable8.setModel(new javax.swing.table.DefaultTableModel(
+        tblCTHD.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
             },
@@ -109,7 +155,7 @@ public class FrmPhieuTraHang extends javax.swing.JFrame {
                 "Mã SP", "Số lượng", "Đơn giá", "Thành tiền"
             }
         ));
-        jScrollPane8.setViewportView(jTable8);
+        jScrollPane8.setViewportView(tblCTHD);
 
         jPanel19.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
 
@@ -377,7 +423,7 @@ public class FrmPhieuTraHang extends javax.swing.JFrame {
 
         jButton38.setText("Tìm kiếm");
 
-        jTable13.setModel(new javax.swing.table.DefaultTableModel(
+        tblTraHang.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
             },
@@ -385,7 +431,7 @@ public class FrmPhieuTraHang extends javax.swing.JFrame {
                 "Mã PTH", "Mã HD", "Mã ND", "Mã KH", "Ngày trả", "Tiền trả lại", "Lý do trả"
             }
         ));
-        jScrollPane15.setViewportView(jTable13);
+        jScrollPane15.setViewportView(tblTraHang);
 
         javax.swing.GroupLayout jPanel13Layout = new javax.swing.GroupLayout(jPanel13);
         jPanel13.setLayout(jPanel13Layout);
@@ -419,7 +465,7 @@ public class FrmPhieuTraHang extends javax.swing.JFrame {
 
         jButton39.setText("Tìm kiếm");
 
-        jTable16.setModel(new javax.swing.table.DefaultTableModel(
+        tblTraHangCT.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
             },
@@ -427,7 +473,7 @@ public class FrmPhieuTraHang extends javax.swing.JFrame {
                 "Mã SP", "Số lượng", "Đơn giá", "Thành tiền"
             }
         ));
-        jScrollPane18.setViewportView(jTable16);
+        jScrollPane18.setViewportView(tblTraHangCT);
 
         javax.swing.GroupLayout jPanel26Layout = new javax.swing.GroupLayout(jPanel26);
         jPanel26.setLayout(jPanel26Layout);
@@ -597,10 +643,7 @@ public class FrmPhieuTraHang extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane7;
     private javax.swing.JScrollPane jScrollPane8;
     private javax.swing.JScrollPane jScrollPane9;
-    private javax.swing.JTable jTable13;
-    private javax.swing.JTable jTable16;
     private javax.swing.JTable jTable7;
-    private javax.swing.JTable jTable8;
     private javax.swing.JTable jTable9;
     private javax.swing.JTextField jTextField43;
     private javax.swing.JTextField jTextField44;
@@ -612,6 +655,9 @@ public class FrmPhieuTraHang extends javax.swing.JFrame {
     private javax.swing.JLabel lblTienTraLai;
     private javax.swing.JRadioButton rdoLoiSP;
     private javax.swing.JRadioButton rdoMuaSai;
+    private javax.swing.JTable tblCTHD;
+    private javax.swing.JTable tblTraHang;
+    private javax.swing.JTable tblTraHangCT;
     private javax.swing.JTextField txtMaHDTim;
     private javax.swing.JTextField txtMaPhieuTra;
     private javax.swing.JTextField txtMaSPTim;
