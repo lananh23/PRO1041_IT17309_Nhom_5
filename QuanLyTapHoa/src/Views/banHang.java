@@ -1,13 +1,26 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
- */
 package Views;
 
 import DomainModels.SanPham;
 import Repositories.ISanPhamRepository;
 import Repositories.SanPhamRepository;
+<<<<<<< Updated upstream:QuanLyTapHoa/src/Views/banHang.java
 import ViewModels.QLSanPham;
+=======
+import ServiceImpl.ManageHoaDonChiTietService;
+import ServiceImpl.ManageHoaDonService;
+import Services.IManageSanPhamService;
+import ServiceImpl.ManageSanPhamService;
+import Services.IManageHoaDon;
+import Services.IManageHoaDonChiTiet;
+import ViewModels.ManageHoaDon;
+import ViewModels.ManageHoaDonChiTiet;
+import ViewModels.QLSanPham;
+import java.math.BigDecimal;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.Date;
+>>>>>>> Stashed changes:QuanLyTapHoa/src/Views/FrmBanHang.java
 import javax.swing.table.DefaultTableModel;
 import java.util.List;
 import javax.swing.JOptionPane;
@@ -16,19 +29,39 @@ import javax.swing.JOptionPane;
  *
  * @author Admin
  */
+<<<<<<< Updated upstream:QuanLyTapHoa/src/Views/banHang.java
 public class banHang extends javax.swing.JFrame {
 
     private ISanPhamRepository _sanPhamRepo;
     private DefaultTableModel defaultTableModel;
+=======
+
+public class FrmBanHang extends javax.swing.JFrame {
+
+    private IManageSanPhamService banHangService;
+    private IManageHoaDon hdService;
+    private IManageHoaDonChiTiet ctService;
+    private DefaultTableModel dtm;
+    private ArrayList<ManageHoaDonChiTiet> list = new ArrayList<>();
+>>>>>>> Stashed changes:QuanLyTapHoa/src/Views/FrmBanHang.java
 
     /**
      * Creates new form banHang
      */
     public banHang() {
         initComponents();
+<<<<<<< Updated upstream:QuanLyTapHoa/src/Views/banHang.java
         _sanPhamRepo = new SanPhamRepository();
         setLocationRelativeTo(null);
 //        loadToTable();
+=======
+        banHangService = new ManageSanPhamService();
+        this.hdService = new ManageHoaDonService();
+        this.ctService = new ManageHoaDonChiTietService();
+        setLocationRelativeTo(null);
+        loadToTable();
+        this.loadHDC();
+>>>>>>> Stashed changes:QuanLyTapHoa/src/Views/FrmBanHang.java
 
     }
 
@@ -43,6 +76,68 @@ public class banHang extends javax.swing.JFrame {
                 sanPham.getGiaNhap(), sanPham.getGiaBan(), sanPham.getHanSuDung()
             });
         }
+    }
+    public void addSP(List<ManageHoaDonChiTiet> sanPhams){
+
+        dtm= (DefaultTableModel) tblDSCho.getModel();
+        
+        dtm.setRowCount(0);
+        
+        for (ManageHoaDonChiTiet sanPham : sanPhams) {
+            dtm.addRow(new Object[]{
+                sanPham.getMaSP(), sanPham.getTenSP(), sanPham.getSoLuong(),
+                sanPham.getGiaBan(), sanPham.getThanhTien()
+            });
+        }
+    }
+    public void loadHDC(){
+        dtm = (DefaultTableModel) this.tblHoaDonCho.getModel();
+        dtm.setRowCount(0);
+        for (ManageHoaDon sp : this.hdService.AllCho()) {
+            Object[] rowData = {
+                sp.getMaHD()
+            };
+            dtm.addRow(rowData);
+        }
+    }
+    public ManageHoaDonChiTiet getFormData(){
+        String maHDCT = this.txtMaHDCT.getText();
+        String maSP = this.lbMaSP.getText();
+        String maHD = this.txtMaHD.getText();
+        int sLg = (int) this.spnSoLuong.getValue();
+        ManageHoaDonChiTiet s = new ManageHoaDonChiTiet(maHDCT, maHD, maSP, sLg);
+        return s;
+    }
+    public static Date toDate(String s) throws ParseException {
+        SimpleDateFormat sdf = new SimpleDateFormat();
+        sdf.applyPattern("yyyy-mm-dd");
+        Date d = null;
+        try {
+            d = sdf.parse(s);
+        } catch (ParseException e) {
+            e.printStackTrace();
+            throw e;
+        }
+        return d;
+    }
+    public ManageHoaDon getFormDataHD(){
+        String maHD = this.txtMaHD.getText();
+        String maKH = this.txtMaKH.getText();
+        String maND = this.txtMaNV.getText();
+        String ngTao =  this.txtNgTao.getText();
+        SimpleDateFormat sdf = new SimpleDateFormat();
+        sdf.applyPattern("yyyy-mm-dd");
+        Date d;
+        try {
+            d = sdf.parse(ngTao);
+        } catch (ParseException e) {
+            JOptionPane.showMessageDialog(this, "Sai định dạng ngày");
+            return null;
+        }
+        float tongTien = Float.valueOf(this.lbThanhTien.getText()) ;
+        int tt = this.cbbTrangThai.getSelectedIndex();
+        ManageHoaDon s = new ManageHoaDon(maHD, maND, maKH, d, tongTien, tt);
+        return s;
     }
 
     /**
@@ -71,11 +166,20 @@ public class banHang extends javax.swing.JFrame {
         jLabel45 = new javax.swing.JLabel();
         jLabel46 = new javax.swing.JLabel();
         jLabel47 = new javax.swing.JLabel();
-        jTextField9 = new javax.swing.JTextField();
+        txtNgTao = new javax.swing.JTextField();
         btnThanhToan = new javax.swing.JButton();
         btnTimKH = new javax.swing.JButton();
-        jComboBox1 = new javax.swing.JComboBox<>();
+        cbbTrangThai = new javax.swing.JComboBox<>();
         jButton2 = new javax.swing.JButton();
+<<<<<<< Updated upstream:QuanLyTapHoa/src/Views/banHang.java
+=======
+        txtMaNV = new javax.swing.JTextField();
+        txtMaKH = new javax.swing.JTextField();
+        lbThanhTien = new javax.swing.JLabel();
+        jLabel48 = new javax.swing.JLabel();
+        jLabel90 = new javax.swing.JLabel();
+        txtMaHD = new javax.swing.JTextField();
+>>>>>>> Stashed changes:QuanLyTapHoa/src/Views/FrmBanHang.java
         jPanel29 = new javax.swing.JPanel();
         jLabel80 = new javax.swing.JLabel();
         jLabel81 = new javax.swing.JLabel();
@@ -92,6 +196,10 @@ public class banHang extends javax.swing.JFrame {
         jScrollPane6 = new javax.swing.JScrollPane();
         tblDSCho = new javax.swing.JTable();
         spnSoLuong = new javax.swing.JSpinner();
+<<<<<<< Updated upstream:QuanLyTapHoa/src/Views/banHang.java
+=======
+        txtMaHDCT = new javax.swing.JTextField();
+>>>>>>> Stashed changes:QuanLyTapHoa/src/Views/FrmBanHang.java
         jPanel1 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
         jScrollPane5 = new javax.swing.JScrollPane();
@@ -138,6 +246,11 @@ public class banHang extends javax.swing.JFrame {
                 "Mã SP", "Tên SP", "Số lượng", "Giá nhập", "Giá bán", "Hạn sử dụng"
             }
         ));
+        tblDSSanPham.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                tblDSSanPhamMouseClicked(evt);
+            }
+        });
         jScrollPane19.setViewportView(tblDSSanPham);
 
         javax.swing.GroupLayout jPanel20Layout = new javax.swing.GroupLayout(jPanel20);
@@ -185,10 +298,15 @@ public class banHang extends javax.swing.JFrame {
         jLabel46.setText("--");
 
         btnThanhToan.setText("Thanh toán");
+        btnThanhToan.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnThanhToanActionPerformed(evt);
+            }
+        });
 
         btnTimKH.setText("Tìm");
 
-        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Chưa thanh toán", "Đã thanh toán" }));
+        cbbTrangThai.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Chưa thanh toán", "Đã thanh toán" }));
 
         jButton2.setText("Tạo hoá đơn mới");
 
@@ -210,6 +328,7 @@ public class banHang extends javax.swing.JFrame {
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                 .addComponent(jLabel47, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addGroup(jPanel16Layout.createSequentialGroup()
+<<<<<<< Updated upstream:QuanLyTapHoa/src/Views/banHang.java
                                 .addComponent(jTextField9, javax.swing.GroupLayout.PREFERRED_SIZE, 133, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(0, 0, Short.MAX_VALUE))))
                     .addGroup(jPanel16Layout.createSequentialGroup()
@@ -217,16 +336,43 @@ public class banHang extends javax.swing.JFrame {
                             .addComponent(jLabel25)
                             .addComponent(jLabel24))
                         .addGap(73, 73, 73)
+=======
+                                .addGroup(jPanel16Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(cbbTrangThai, javax.swing.GroupLayout.PREFERRED_SIZE, 133, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(lbThanhTien, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addGap(0, 0, Short.MAX_VALUE)))
+                        .addContainerGap())
+                    .addGroup(jPanel16Layout.createSequentialGroup()
+                        .addGroup(jPanel16Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addGroup(jPanel16Layout.createSequentialGroup()
+                                .addComponent(jLabel25)
+                                .addGap(73, 73, 73)
+                                .addComponent(txtMaNV))
+                            .addGroup(jPanel16Layout.createSequentialGroup()
+                                .addComponent(jLabel24)
+                                .addGap(73, 73, 73)
+                                .addComponent(txtMaKH, javax.swing.GroupLayout.PREFERRED_SIZE, 82, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+>>>>>>> Stashed changes:QuanLyTapHoa/src/Views/FrmBanHang.java
                         .addGroup(jPanel16Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(jPanel16Layout.createSequentialGroup()
                                 .addComponent(jLabel45, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(25, 25, 25)
                                 .addComponent(btnThemKH)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+<<<<<<< Updated upstream:QuanLyTapHoa/src/Views/banHang.java
                                 .addComponent(btnTimKH))
                             .addComponent(jLabel46, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(0, 0, Short.MAX_VALUE)))
                 .addContainerGap())
+=======
+                                .addComponent(txtMaHD)))
+                        .addGap(23, 23, 23))
+                    .addGroup(jPanel16Layout.createSequentialGroup()
+                        .addGap(109, 109, 109)
+                        .addComponent(txtNgTao, javax.swing.GroupLayout.PREFERRED_SIZE, 133, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+>>>>>>> Stashed changes:QuanLyTapHoa/src/Views/FrmBanHang.java
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel16Layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jButton2)
@@ -242,6 +388,7 @@ public class banHang extends javax.swing.JFrame {
                     .addComponent(jLabel24)
                     .addComponent(btnThemKH)
                     .addComponent(btnTimKH)
+<<<<<<< Updated upstream:QuanLyTapHoa/src/Views/banHang.java
                     .addComponent(jLabel45))
                 .addGap(18, 18, 18)
                 .addGroup(jPanel16Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -261,6 +408,30 @@ public class banHang extends javax.swing.JFrame {
                             .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jLabel43))))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 36, Short.MAX_VALUE)
+=======
+                    .addComponent(txtMaKH, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addGroup(jPanel16Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel25)
+                    .addComponent(txtMaNV, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel90)
+                    .addComponent(txtMaHD, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(13, 13, 13)
+                .addGroup(jPanel16Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel42)
+                    .addComponent(txtNgTao, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(jPanel16Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(lbThanhTien)
+                    .addComponent(jLabel48))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 13, Short.MAX_VALUE)
+                .addComponent(jLabel47)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 14, Short.MAX_VALUE)
+                .addGroup(jPanel16Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(cbbTrangThai, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel43))
+                .addGap(18, 18, 18)
+>>>>>>> Stashed changes:QuanLyTapHoa/src/Views/FrmBanHang.java
                 .addGroup(jPanel16Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnThanhToan)
                     .addComponent(jButton2))
@@ -278,6 +449,11 @@ public class banHang extends javax.swing.JFrame {
         btnLuuTam.setText("Lưu tạm");
 
         btnCapNhat.setText("Cập nhật ");
+        btnCapNhat.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnCapNhatActionPerformed(evt);
+            }
+        });
 
         btnXoa.setText("Xóa");
 
@@ -339,9 +515,19 @@ public class banHang extends javax.swing.JFrame {
                                             .addComponent(jLabel86, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE)))))
                             .addGroup(jPanel29Layout.createSequentialGroup()
                                 .addGap(29, 29, 29)
+<<<<<<< Updated upstream:QuanLyTapHoa/src/Views/banHang.java
                                 .addComponent(btnCapNhat)))
                         .addGap(0, 28, Short.MAX_VALUE))
                     .addComponent(jScrollPane6, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE))
+=======
+                                .addComponent(btnCapNhat))))
+                    .addComponent(jScrollPane6, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
+                    .addGroup(jPanel29Layout.createSequentialGroup()
+                        .addComponent(jLabel80)
+                        .addGap(18, 18, 18)
+                        .addComponent(txtMaHDCT, javax.swing.GroupLayout.PREFERRED_SIZE, 79, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(0, 0, Short.MAX_VALUE)))
+>>>>>>> Stashed changes:QuanLyTapHoa/src/Views/FrmBanHang.java
                 .addContainerGap())
         );
         jPanel29Layout.setVerticalGroup(
@@ -350,9 +536,13 @@ public class banHang extends javax.swing.JFrame {
                 .addContainerGap()
                 .addGroup(jPanel29Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel80)
+<<<<<<< Updated upstream:QuanLyTapHoa/src/Views/banHang.java
                     .addComponent(jLabel88)
                     .addComponent(jLabel90)
                     .addComponent(jLabel91))
+=======
+                    .addComponent(txtMaHDCT, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+>>>>>>> Stashed changes:QuanLyTapHoa/src/Views/FrmBanHang.java
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel29Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel81)
@@ -657,6 +847,7 @@ public class banHang extends javax.swing.JFrame {
 
             defaultTableModel = (DefaultTableModel) tblDSSanPham.getModel();
 
+<<<<<<< Updated upstream:QuanLyTapHoa/src/Views/banHang.java
             defaultTableModel.setRowCount(0);
             for (SanPham sanPham : sanPhams) {
                 defaultTableModel.addRow(new Object[]{
@@ -668,6 +859,55 @@ public class banHang extends javax.swing.JFrame {
             
         }
     }//GEN-LAST:event_btnTimSPActionPerformed
+=======
+    private void btnLuuTamActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLuuTamActionPerformed
+        // TODO add your handling code here:
+
+        ManageHoaDonChiTiet chiTietHoaDonViewModel = new ManageHoaDonChiTiet();
+        int row = tblDSSanPham.getSelectedRow();
+        chiTietHoaDonViewModel.setMaSP((String) tblDSSanPham.getValueAt(row, 0));
+        chiTietHoaDonViewModel.setTenSP((String) tblDSSanPham.getValueAt(row, 1));
+        chiTietHoaDonViewModel.setSoLuong((int) spnSoLuong.getValue());
+        chiTietHoaDonViewModel.setGiaBan((Float) tblDSSanPham.getValueAt(row, 4));
+        list.add(chiTietHoaDonViewModel);
+        addSP(list);
+        int thanhTien = 0;
+        for(ManageHoaDonChiTiet ct :list){
+            thanhTien = (int) (thanhTien + ct.getThanhTien());
+            lbThanhTien.setText("" + thanhTien);
+        }
+        
+    }//GEN-LAST:event_btnLuuTamActionPerformed
+
+    private void spnSoLuongMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_spnSoLuongMouseClicked
+        // TODO add your handling code here:
+
+    }//GEN-LAST:event_spnSoLuongMouseClicked
+>>>>>>> Stashed changes:QuanLyTapHoa/src/Views/FrmBanHang.java
+
+    private void tblDSSanPhamMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblDSSanPhamMouseClicked
+        int row = this.tblDSSanPham.getSelectedRow();
+        if (row == -1) {
+            return;
+        }
+        String maSP = this.tblDSSanPham.getValueAt(row, 0).toString();
+        this.lbMaSP.setText(maSP);
+    }//GEN-LAST:event_tblDSSanPhamMouseClicked
+
+    private void btnCapNhatActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCapNhatActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnCapNhatActionPerformed
+
+    private void btnThanhToanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnThanhToanActionPerformed
+        ManageHoaDonChiTiet ct = this.getFormData();
+        ManageHoaDon hd = this.getFormDataHD();
+        if (ct == null || hd == null) {
+            return;
+        }
+        this.hdService.insert(hd);
+        this.ctService.insert(ct);
+        JOptionPane.showMessageDialog(this, "thêm thành công");
+    }//GEN-LAST:event_btnThanhToanActionPerformed
 
     /**
      * @param args the command line arguments
@@ -714,12 +954,19 @@ public class banHang extends javax.swing.JFrame {
     private javax.swing.JButton btnTimKH;
     private javax.swing.JButton btnTimSP;
     private javax.swing.JButton btnXoa;
+<<<<<<< Updated upstream:QuanLyTapHoa/src/Views/banHang.java
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton41;
     private javax.swing.JButton jButton42;
     private javax.swing.JComboBox<String> jComboBox1;
     private javax.swing.JComboBox<String> jComboBox2;
+=======
+    private javax.swing.JComboBox<String> cbbTrangThai;
+    private javax.swing.JButton jButton2;
+    private javax.swing.JButton jButton41;
+    private javax.swing.JButton jButton42;
+>>>>>>> Stashed changes:QuanLyTapHoa/src/Views/FrmBanHang.java
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel20;
     private javax.swing.JLabel jLabel24;
@@ -761,12 +1008,16 @@ public class banHang extends javax.swing.JFrame {
     private javax.swing.JTable jTable19;
     private javax.swing.JTextField jTextField48;
     private javax.swing.JTextField jTextField49;
-    private javax.swing.JTextField jTextField9;
     private javax.swing.JLabel lbMaSP;
     private javax.swing.JSpinner spnSoLuong;
     private javax.swing.JTable tblDSCho;
     private javax.swing.JTable tblDSSanPham;
     private javax.swing.JTable tblHoaDonCho;
+    private javax.swing.JTextField txtMaHD;
+    private javax.swing.JTextField txtMaHDCT;
+    private javax.swing.JTextField txtMaKH;
+    private javax.swing.JTextField txtMaNV;
+    private javax.swing.JTextField txtNgTao;
     private javax.swing.JTextField txtTimSP;
     // End of variables declaration//GEN-END:variables
 }

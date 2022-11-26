@@ -181,6 +181,9 @@
                           <TableHeader reorderingAllowed="true" resizingAllowed="true"/>
                         </Property>
                       </Properties>
+                      <Events>
+                        <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="tblDSSanPhamMouseClicked"/>
+                      </Events>
                     </Component>
                   </SubComponents>
                 </Container>
@@ -214,15 +217,36 @@
                                           <Component id="jLabel47" min="-2" pref="35" max="-2" attributes="0"/>
                                       </Group>
                                       <Group type="102" attributes="0">
+<<<<<<< Updated upstream:QuanLyTapHoa/src/Views/banHang.form
                                           <Component id="jTextField9" min="-2" pref="133" max="-2" attributes="0"/>
+=======
+                                          <Group type="103" groupAlignment="0" attributes="0">
+                                              <Component id="cbbTrangThai" alignment="0" min="-2" pref="133" max="-2" attributes="0"/>
+                                              <Component id="lbThanhTien" alignment="0" min="-2" pref="44" max="-2" attributes="0"/>
+                                          </Group>
+>>>>>>> Stashed changes:QuanLyTapHoa/src/Views/FrmBanHang.form
                                           <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
                                       </Group>
                                   </Group>
                               </Group>
                               <Group type="102" alignment="0" attributes="0">
+<<<<<<< Updated upstream:QuanLyTapHoa/src/Views/banHang.form
                                   <Group type="103" groupAlignment="0" attributes="0">
                                       <Component id="jLabel25" alignment="0" min="-2" max="-2" attributes="0"/>
                                       <Component id="jLabel24" alignment="0" min="-2" max="-2" attributes="0"/>
+=======
+                                  <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                                      <Group type="102" alignment="0" attributes="0">
+                                          <Component id="jLabel25" min="-2" max="-2" attributes="0"/>
+                                          <EmptySpace min="-2" pref="73" max="-2" attributes="0"/>
+                                          <Component id="txtMaNV" max="32767" attributes="0"/>
+                                      </Group>
+                                      <Group type="102" alignment="0" attributes="0">
+                                          <Component id="jLabel24" min="-2" max="-2" attributes="0"/>
+                                          <EmptySpace min="-2" pref="73" max="-2" attributes="0"/>
+                                          <Component id="txtMaKH" min="-2" pref="82" max="-2" attributes="0"/>
+                                      </Group>
+>>>>>>> Stashed changes:QuanLyTapHoa/src/Views/FrmBanHang.form
                                   </Group>
                                   <EmptySpace min="-2" pref="73" max="-2" attributes="0"/>
                                   <Group type="103" groupAlignment="0" attributes="0">
@@ -231,11 +255,24 @@
                                           <EmptySpace min="-2" pref="25" max="-2" attributes="0"/>
                                           <Component id="btnThemKH" min="-2" max="-2" attributes="0"/>
                                           <EmptySpace type="unrelated" max="-2" attributes="0"/>
+<<<<<<< Updated upstream:QuanLyTapHoa/src/Views/banHang.form
                                           <Component id="btnTimKH" min="-2" max="-2" attributes="0"/>
+=======
+                                          <Component id="txtMaHD" max="32767" attributes="0"/>
+>>>>>>> Stashed changes:QuanLyTapHoa/src/Views/FrmBanHang.form
                                       </Group>
                                       <Component id="jLabel46" alignment="0" min="-2" pref="35" max="-2" attributes="0"/>
                                   </Group>
+<<<<<<< Updated upstream:QuanLyTapHoa/src/Views/banHang.form
                                   <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
+=======
+                                  <EmptySpace min="-2" pref="23" max="-2" attributes="0"/>
+                              </Group>
+                              <Group type="102" alignment="0" attributes="0">
+                                  <EmptySpace min="-2" pref="109" max="-2" attributes="0"/>
+                                  <Component id="txtNgTao" min="-2" pref="133" max="-2" attributes="0"/>
+                                  <EmptySpace max="32767" attributes="0"/>
+>>>>>>> Stashed changes:QuanLyTapHoa/src/Views/FrmBanHang.form
                               </Group>
                           </Group>
                           <EmptySpace max="-2" attributes="0"/>
@@ -257,18 +294,29 @@
                               <Component id="jLabel24" alignment="3" min="-2" max="-2" attributes="0"/>
                               <Component id="btnThemKH" alignment="3" min="-2" max="-2" attributes="0"/>
                               <Component id="btnTimKH" alignment="3" min="-2" max="-2" attributes="0"/>
+<<<<<<< Updated upstream:QuanLyTapHoa/src/Views/banHang.form
                               <Component id="jLabel45" alignment="3" min="-2" max="-2" attributes="0"/>
+=======
+                              <Component id="txtMaKH" alignment="3" min="-2" max="-2" attributes="0"/>
+>>>>>>> Stashed changes:QuanLyTapHoa/src/Views/FrmBanHang.form
                           </Group>
                           <EmptySpace type="separate" max="-2" attributes="0"/>
                           <Group type="103" groupAlignment="3" attributes="0">
                               <Component id="jLabel25" alignment="3" min="-2" max="-2" attributes="0"/>
+<<<<<<< Updated upstream:QuanLyTapHoa/src/Views/banHang.form
                               <Component id="jLabel46" alignment="3" min="-2" max="-2" attributes="0"/>
+=======
+                              <Component id="txtMaNV" alignment="3" min="-2" max="-2" attributes="0"/>
+                              <Component id="jLabel90" alignment="3" min="-2" max="-2" attributes="0"/>
+                              <Component id="txtMaHD" alignment="3" min="-2" max="-2" attributes="0"/>
+>>>>>>> Stashed changes:QuanLyTapHoa/src/Views/FrmBanHang.form
                           </Group>
                           <EmptySpace min="-2" pref="16" max="-2" attributes="0"/>
                           <Group type="103" groupAlignment="3" attributes="0">
                               <Component id="jLabel42" alignment="3" min="-2" max="-2" attributes="0"/>
-                              <Component id="jTextField9" alignment="3" min="-2" max="-2" attributes="0"/>
+                              <Component id="txtNgTao" alignment="3" min="-2" max="-2" attributes="0"/>
                           </Group>
+<<<<<<< Updated upstream:QuanLyTapHoa/src/Views/banHang.form
                           <Group type="103" groupAlignment="0" attributes="0">
                               <Group type="102" attributes="0">
                                   <EmptySpace min="-2" pref="36" max="-2" attributes="0"/>
@@ -281,6 +329,19 @@
                                       <Component id="jLabel43" alignment="3" min="-2" max="-2" attributes="0"/>
                                   </Group>
                               </Group>
+=======
+                          <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                          <Group type="103" groupAlignment="3" attributes="0">
+                              <Component id="lbThanhTien" alignment="3" min="-2" max="-2" attributes="0"/>
+                              <Component id="jLabel48" alignment="3" min="-2" max="-2" attributes="0"/>
+                          </Group>
+                          <EmptySpace pref="13" max="32767" attributes="0"/>
+                          <Component id="jLabel47" min="-2" max="-2" attributes="0"/>
+                          <EmptySpace pref="14" max="32767" attributes="0"/>
+                          <Group type="103" groupAlignment="3" attributes="0">
+                              <Component id="cbbTrangThai" alignment="3" min="-2" max="-2" attributes="0"/>
+                              <Component id="jLabel43" alignment="3" min="-2" max="-2" attributes="0"/>
+>>>>>>> Stashed changes:QuanLyTapHoa/src/Views/FrmBanHang.form
                           </Group>
                           <EmptySpace pref="36" max="32767" attributes="0"/>
                           <Group type="103" groupAlignment="3" attributes="0">
@@ -330,19 +391,22 @@
                 </Component>
                 <Component class="javax.swing.JLabel" name="jLabel47">
                 </Component>
-                <Component class="javax.swing.JTextField" name="jTextField9">
+                <Component class="javax.swing.JTextField" name="txtNgTao">
                 </Component>
                 <Component class="javax.swing.JButton" name="btnThanhToan">
                   <Properties>
                     <Property name="text" type="java.lang.String" value="Thanh to&#xe1;n"/>
                   </Properties>
+                  <Events>
+                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnThanhToanActionPerformed"/>
+                  </Events>
                 </Component>
                 <Component class="javax.swing.JButton" name="btnTimKH">
                   <Properties>
                     <Property name="text" type="java.lang.String" value="T&#xec;m"/>
                   </Properties>
                 </Component>
-                <Component class="javax.swing.JComboBox" name="jComboBox1">
+                <Component class="javax.swing.JComboBox" name="cbbTrangThai">
                   <Properties>
                     <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
                       <StringArray count="2">
@@ -360,6 +424,30 @@
                     <Property name="text" type="java.lang.String" value="T&#x1ea1;o ho&#xe1; &#x111;&#x1a1;n m&#x1edb;i"/>
                   </Properties>
                 </Component>
+<<<<<<< Updated upstream:QuanLyTapHoa/src/Views/banHang.form
+=======
+                <Component class="javax.swing.JTextField" name="txtMaNV">
+                </Component>
+                <Component class="javax.swing.JTextField" name="txtMaKH">
+                </Component>
+                <Component class="javax.swing.JLabel" name="lbThanhTien">
+                  <Properties>
+                    <Property name="text" type="java.lang.String" value="--"/>
+                  </Properties>
+                </Component>
+                <Component class="javax.swing.JLabel" name="jLabel48">
+                  <Properties>
+                    <Property name="text" type="java.lang.String" value="T&#x1ed5;ng ti&#x1ec1;n"/>
+                  </Properties>
+                </Component>
+                <Component class="javax.swing.JLabel" name="jLabel90">
+                  <Properties>
+                    <Property name="text" type="java.lang.String" value="M&#xe3; HD"/>
+                  </Properties>
+                </Component>
+                <Component class="javax.swing.JTextField" name="txtMaHD">
+                </Component>
+>>>>>>> Stashed changes:QuanLyTapHoa/src/Views/FrmBanHang.form
               </SubComponents>
             </Container>
             <Container class="javax.swing.JPanel" name="jPanel29">
@@ -420,6 +508,15 @@
                                   <EmptySpace min="0" pref="28" max="32767" attributes="0"/>
                               </Group>
                               <Component id="jScrollPane6" alignment="0" pref="0" max="32767" attributes="0"/>
+<<<<<<< Updated upstream:QuanLyTapHoa/src/Views/banHang.form
+=======
+                              <Group type="102" alignment="0" attributes="0">
+                                  <Component id="jLabel80" min="-2" max="-2" attributes="0"/>
+                                  <EmptySpace min="-2" pref="18" max="-2" attributes="0"/>
+                                  <Component id="txtMaHDCT" min="-2" pref="79" max="-2" attributes="0"/>
+                                  <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
+                              </Group>
+>>>>>>> Stashed changes:QuanLyTapHoa/src/Views/FrmBanHang.form
                           </Group>
                           <EmptySpace max="-2" attributes="0"/>
                       </Group>
@@ -431,9 +528,13 @@
                           <EmptySpace max="-2" attributes="0"/>
                           <Group type="103" groupAlignment="3" attributes="0">
                               <Component id="jLabel80" alignment="3" min="-2" max="-2" attributes="0"/>
+<<<<<<< Updated upstream:QuanLyTapHoa/src/Views/banHang.form
                               <Component id="jLabel88" alignment="3" min="-2" max="-2" attributes="0"/>
                               <Component id="jLabel90" alignment="3" min="-2" max="-2" attributes="0"/>
                               <Component id="jLabel91" alignment="3" min="-2" max="-2" attributes="0"/>
+=======
+                              <Component id="txtMaHDCT" alignment="3" min="-2" max="-2" attributes="0"/>
+>>>>>>> Stashed changes:QuanLyTapHoa/src/Views/FrmBanHang.form
                           </Group>
                           <EmptySpace type="unrelated" max="-2" attributes="0"/>
                           <Group type="103" groupAlignment="3" attributes="0">
@@ -485,6 +586,9 @@
                   <Properties>
                     <Property name="text" type="java.lang.String" value="C&#x1ead;p nh&#x1ead;t "/>
                   </Properties>
+                  <Events>
+                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnCapNhatActionPerformed"/>
+                  </Events>
                 </Component>
                 <Component class="javax.swing.JButton" name="btnXoa">
                   <Properties>
@@ -547,6 +651,14 @@
                   </SubComponents>
                 </Container>
                 <Component class="javax.swing.JSpinner" name="spnSoLuong">
+<<<<<<< Updated upstream:QuanLyTapHoa/src/Views/banHang.form
+=======
+                  <Events>
+                    <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="spnSoLuongMouseClicked"/>
+                  </Events>
+                </Component>
+                <Component class="javax.swing.JTextField" name="txtMaHDCT">
+>>>>>>> Stashed changes:QuanLyTapHoa/src/Views/FrmBanHang.form
                 </Component>
               </SubComponents>
             </Container>
