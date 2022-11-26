@@ -2,21 +2,22 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Interface.java to edit this template
  */
-package Repositories.dangNhap;
+package Services;
 
 import DomainModels.dangNhapModel;
+import Repositories.dangNhap.dangNhapRepositories;
 import java.util.List;
-import java.sql.ResultSet;
 
 /**
  *
  * @author Admin
  */
-public interface IsDangNhapRepositories {
+public interface IsDangNhapService {
 
-     public boolean getAllDangNhap(String userName, String pass);
+    public boolean getAllDangNhap(String userName, String pass);
 
-    public boolean SuaMK(String MK, String MaND);
+    public boolean KT_DoiMK(String mkcu, String mkmoi, String nhaplai);
     
-    public boolean doiMK(String mkcu, String mkmoi,  String nhapLai);
+    public boolean KT_SuaMK(String MK, String MaND);
+
 }

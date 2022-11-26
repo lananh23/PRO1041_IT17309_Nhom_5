@@ -4,7 +4,7 @@
  */
 package Repositories.dangNhap;
 
-import DomainModels.DangNhap.dangNhapModel;
+import DomainModels.dangNhapModel;
 import Services.ThongBao.thongBao;
 import Utilities.DBConnection;
 import Views.FrmTrangChu;
@@ -24,19 +24,24 @@ public class dangNhapRepositories implements IsDangNhapRepositories {
     List<dangNhapModel> listDangNhaps;
     public static String TenUser = "", MatKhau = "", ChucVu = "";
 
-    @Override
+   @Override
     public boolean SuaMK(String MK, String MaND) {
 
         try {
+
             connection = DBConnection.getConnection();
-            String sql = "UPDATE dbo.NguoiDung SET Pass = ''" + MatKhau + " WHERE MaND = ''" + TenUser + "";
-            int kq = DBConnection.ExecuteTruyVan(sql);
-            ps.setString(1, MatKhau);
-            ps.setString(2, TenUser);
-            if (kq > 0) {
-                thongBao.thongbao.thongbao("Update Pass Thành Công", "Thông Báo");
+            String sql = "UPDATE dbo.NguoiDung SET Pass = ? WHERE MaND = ?";
+            ps = connection.prepareStatement(sql);
+            ps.setString(1, MK);
+            ps.setString(2, MaND);
+            ps.executeUpdate();
+            if (MK.isEmpty() || MK == null) {
+                thongBao.thongbao("Update Pass Thất Bại", "Thông Báo");
+                return false;
             } else {
-                thongBao.thongbao.thongbao("Update Pass Thất Bại", "Thông Báo");
+                thongBao.thongbao("Update Pass Thành Công", "Thông Báo");
+                return false;
+
             }
 
         } catch (Exception e) {
@@ -50,7 +55,7 @@ public class dangNhapRepositories implements IsDangNhapRepositories {
     public boolean getAllDangNhap(String userName, String pass) {
 
         if (userName.trim().equals("") || pass.trim().equals("")) {
-            thongBao.thongbao.thongbao("Không được bỏ trống", "Thông Báo");
+            thongBao.thongbao("Không được bỏ trống", "Thông Báo");
             return false;
         } else {
 
@@ -63,54 +68,55 @@ public class dangNhapRepositories implements IsDangNhapRepositories {
             ps.setString(2, pass);
             rs = ps.executeQuery();
             while (rs.next()) {
-                if (rs.getString("MaND").matches(userName)) {
-                    if (rs.getString("Pass").matches(pass)) {
-                        thongBao.thongbao.thongbao("Đăng nhập thành công", "");
-                        TenUser = rs.getString("MaND");
-                        MatKhau = rs.getString("Pass");
-                        ChucVu = rs.getString("ChucVu");
-                        return true;
-                    }
-                    thongBao.thongbao.thongbao("Login Failed !!", "Thông Báo");
-                    return false;
-
+                ChucVu = rs.getNString("ChucVu");
+                if (ChucVu.equals("Quản lý")) {
+                    TenUser = rs.getString("MaND");
+                    MatKhau = rs.getString("Pass");
+                    ChucVu = rs.getString("ChucVu");
+                    thongBao.thongbao("Đăng nhập thành công admin", "");
+                    new FrmTrangChu().setVisible(true);
+                    return true;
+                }else if (ChucVu.equals("Nhân viên")) {
+                    TenUser = rs.getString("MaND");
+                    MatKhau = rs.getString("Pass");
+                    ChucVu = rs.getString("ChucVu");
+                    thongBao.thongbao("Đăng nhập thành công user", "");
+                    new FrmTrangChu().setVisible(true);
+                    return true;
                 }
-                thongBao.thongbao.thongbao("Login Failed !!", "Thông Báo");
-                return false;
 
             }
-            thongBao.thongbao.thongbao("Login Failed !!", "Thông Báo");
+            thongBao.thongbao("Login Failed !!", "Thông Báo");
             return false;
 
         } catch (Exception e) {
             System.out.println(e);
         }
-        thongBao.thongbao.thongbao("Login Failed !!", "Thông Báo");
+        thongBao.thongbao("Login Failed !!", "Thông Báo");
         return true;
+
     }
 
     @Override
     public boolean doiMK(String mkcu, String mkmoi, String nhapLai) {
+
         if (mkcu.trim().equals("") || mkmoi.trim().equals("")
                 || nhapLai.trim().equals("")) {
-            thongBao.thongbao.thongbao("Không được bỏ trống", "");
+            thongBao.thongbao("Không được bỏ trống", "");
             return false;
         }
-
         if (!mkcu.equals(MatKhau)) {
-            thongBao.thongbao.thongbao("Mật khẩu cũ sai", "");
+            thongBao.thongbao("Mật khẩu cũ sai", "");
             return false;
         }
         if (mkmoi.length() < 5) {
-            thongBao.thongbao.thongbao("mật khẩu dài hơn 5 ký tự", "");
+            thongBao.thongbao("mật khẩu dài hơn 5 ký tự", "");
             return false;
         }
         if (!mkmoi.equals(nhapLai)) {
-            thongBao.thongbao.thongbao("Mật Khẩu Không Trùng Khớp", "");
+            thongBao.thongbao("Mật Khẩu Không Trùng Khớp", "");
             return false;
         }
-
         return true;
     }
-
 }
