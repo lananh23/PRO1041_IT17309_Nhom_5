@@ -42,6 +42,8 @@ public class FrmBanHang extends javax.swing.JFrame {
     private IManageHoaDon hdService;
     private IManageHoaDonChiTiet ctService;
     private ArrayList<ManageHoaDonChiTiet> list = new ArrayList<>();
+    List<ManageHoaDon> listHoaDons;
+    List<ManageHoaDonChiTiet> listHoaDonChiTiets;
 
     /**
      * Creates new form banHang
@@ -50,6 +52,8 @@ public class FrmBanHang extends javax.swing.JFrame {
         initComponents();
         banHangService = new ManageSanPhamService();
         hdSV = new HoaDonService();
+        listHoaDons = new ArrayList<>();
+        listHoaDonChiTiets = new ArrayList<>();
         setLocationRelativeTo(null);
         loadToTable();
         banHangService = new ManageSanPhamService();
@@ -134,6 +138,119 @@ public class FrmBanHang extends javax.swing.JFrame {
         int tt = this.cbxTT.getSelectedIndex();
         ManageHoaDon s = new ManageHoaDon(maHD, maND, maKH, d, tongTien, tt);
         return s;
+    }
+    void loadTableHoaDon() {
+
+        listHoaDons = hdService.getAllHoaDon();
+        if (listHoaDons == null) {
+            JOptionPane.showMessageDialog(this, "Lỗi");
+        } else if (listHoaDons.isEmpty()) {
+            JOptionPane.showMessageDialog(this, "CSDL Rỗng");
+        } else {
+            model = (DefaultTableModel) tblHoaDon.getModel();
+            model.setRowCount(0);
+            for (hoaDon hd : listHoaDons) {
+                Object[] row = new Object[7];
+                row[0] = hd.getMaND();
+                row[1] = hd.getMaKH();
+                row[2] = hd.getMaHD();
+                row[3] = hd.getNgayTao();
+                row[4] = hd.getTongTien();
+                row[5] = hd.getTrangThai();
+
+                model.addRow(row);
+
+            }
+        }
+    }
+
+    void loadTableHoaDonChiTiet() {
+        listHoaDonChiTiets = hdctService.getAllHoaDonChiTiet();
+        if (listHoaDonChiTiets == null) {
+            JOptionPane.showMessageDialog(this, "Lỗi");
+        } else if (listHoaDonChiTiets.isEmpty()) {
+            JOptionPane.showMessageDialog(this, "CSDL Rỗng");
+        } else {
+            model = (DefaultTableModel) tblHoaDonChiTiet.getModel();
+            model.setRowCount(0);
+            for (hoaDonChiTiet hdct : listHoaDonChiTiets) {
+                Object[] row = new Object[7];
+                row[0] = hdct.getMaSP();
+                row[1] = hdct.getMaHD();
+                row[2] = hdct.getMaHDCT();
+                row[3] = hdct.getSoLuong();
+                row[4] = hdct.getDonGia();
+                row[5] = hdct.getThanhTien();
+
+                model.addRow(row);
+            }
+        }
+    }
+
+    void fillShearchHoaDon() {
+
+        String shearchHD = txtShearchMaHD.getText();
+
+        if (shearchHD == null || shearchHD.isEmpty()) {
+            JOptionPane.showMessageDialog(this, "Chưa Nhập Mã Cần Shearch");
+            return;
+        } else {
+            listHoaDons = hdService.findShearchHoaDon(shearchHD);
+            model = (DefaultTableModel) tblHoaDon.getModel();
+            model.setRowCount(0);
+            for (hoaDon hd : listHoaDons) {
+                Object[] row = new Object[7];
+                row[0] = hd.getMaND();
+                row[1] = hd.getMaKH();
+                row[2] = hd.getMaHD();
+                row[3] = hd.getNgayTao();
+                row[4] = hd.getTongTien();
+                row[5] = hd.getTrangThai();
+
+                model.addRow(row);
+
+            }
+        }
+        if (listHoaDons.isEmpty()) {
+            JOptionPane.showMessageDialog(this, "Shearch Thất Bại");
+            return;
+        } else {
+            JOptionPane.showMessageDialog(this, "Shearch Thành Công");
+            return;
+        }
+
+    }
+
+    void fillShearchHoaDonChiTiet() {
+
+        String shearchHDCT = txtShearchMaSP.getText();
+
+        if (shearchHDCT == null || shearchHDCT.isEmpty()) {
+            JOptionPane.showMessageDialog(this, "Chưa Nhập Mã Cần Shearch");
+            return;
+        } else {
+            listHoaDonChiTiets = hdctService.fillShearchMaSP(shearchHDCT);
+            model = (DefaultTableModel) tblHoaDonChiTiet.getModel();
+            model.setRowCount(0);
+            for (hoaDonChiTiet hdct : listHoaDonChiTiets) {
+                Object[] row = new Object[7];
+                row[0] = hdct.getMaSP();
+                row[1] = hdct.getMaHD();
+                row[2] = hdct.getMaHDCT();
+                row[3] = hdct.getSoLuong();
+                row[4] = hdct.getDonGia();
+                row[5] = hdct.getThanhTien();
+
+                model.addRow(row);
+            }
+        }
+        if (listHoaDonChiTiets.isEmpty()) {
+            JOptionPane.showMessageDialog(this, "Shearch Thất Bại");
+            return;
+        } else {
+            JOptionPane.showMessageDialog(this, "Shearch Thành Công");
+            return;
+        }
     }
     /**
      * This method is called from within the constructor to initialize the form.
