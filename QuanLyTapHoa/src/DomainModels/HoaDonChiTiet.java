@@ -13,9 +13,8 @@ public class HoaDonChiTiet {
     public HoaDonChiTiet() {
     }
 
-    public HoaDonChiTiet(String maSP, String tenSP, int soLuong, float giaBan, float thanhTien) {
+    public HoaDonChiTiet(String maSP,  int soLuong, float giaBan, float thanhTien) {
         this.maSP = maSP;
-        this.tenSP = tenSP;
         this.soLuong = soLuong;
         this.giaBan = giaBan;
         this.thanhTien = thanhTien;
@@ -31,6 +30,16 @@ public class HoaDonChiTiet {
         this.maCu = maCu;
     }
 
+    public HoaDonChiTiet(String maHDCT, String maHD, String maSP, int soLuong, float giaBan, float thanhTien) {
+        this.maHDCT = maHDCT;
+        this.maHD = maHD;
+        this.maSP = maSP;
+        this.soLuong = soLuong;
+        this.giaBan = giaBan;
+        this.thanhTien = thanhTien;
+    }
+    
+    
     
 
     public String getMaHDCT() {

@@ -61,6 +61,7 @@ public class FrmBanHang extends javax.swing.JFrame {
         this.ctService = new ManageHoaDonChiTietService();
         setLocationRelativeTo(null);
         this.loadHDC();
+        this.loadTableHoaDon();
 
     }
 
@@ -76,13 +77,13 @@ public class FrmBanHang extends javax.swing.JFrame {
             });
         }
     }
-    
-    public void addSP(List<ManageHoaDonChiTiet> sanPhams){
 
-        dtm= (DefaultTableModel) tblDSCho.getModel();
-        
+    public void addSP(List<ManageHoaDonChiTiet> sanPhams) {
+
+        dtm = (DefaultTableModel) tblDSCho.getModel();
+
         dtm.setRowCount(0);
-        
+
         for (ManageHoaDonChiTiet sanPham : sanPhams) {
             dtm.addRow(new Object[]{
                 sanPham.getMaSP(), sanPham.getTenSP(), sanPham.getSoLuong(),
@@ -90,7 +91,8 @@ public class FrmBanHang extends javax.swing.JFrame {
             });
         }
     }
-    public void loadHDC(){
+
+    public void loadHDC() {
         dtm = (DefaultTableModel) this.tblHoaDonCho.getModel();
         dtm.setRowCount(0);
         for (ManageHoaDon sp : this.hdService.AllCho()) {
@@ -100,14 +102,19 @@ public class FrmBanHang extends javax.swing.JFrame {
             dtm.addRow(rowData);
         }
     }
-    public ManageHoaDonChiTiet getFormData(){
+
+    public ManageHoaDonChiTiet getFormData() {
+        int row = this.tblDSSanPham.getSelectedRow();
+        String ma = this.tblHoaDon.getValueAt(row, 4).toString();
         String maHDCT = this.txtMaHDCT.getText();
         String maSP = this.lbMaSP.getText();
         String maHD = this.txtMaHD.getText();
         int sLg = (int) this.spnSoLuong.getValue();
-        ManageHoaDonChiTiet s = new ManageHoaDonChiTiet(maHDCT, maHD, maSP, sLg);
+        float donGia = Float.valueOf(ma);
+        ManageHoaDonChiTiet s = new ManageHoaDonChiTiet(maHDCT, maHD, maSP, maSP, sLg, donGia, donGia * sLg);
         return s;
     }
+
     public static Date toDate(String s) throws ParseException {
         SimpleDateFormat sdf = new SimpleDateFormat();
         sdf.applyPattern("yyyy-mm-dd");
@@ -120,11 +127,12 @@ public class FrmBanHang extends javax.swing.JFrame {
         }
         return d;
     }
-    public ManageHoaDon getFormDataHD(){
+
+    public ManageHoaDon getFormDataHD() {
         String maHD = this.txtMaHD.getText();
         String maKH = this.txtMaKH.getText();
         String maND = this.txtMaNV.getText();
-        String ngTao =  this.txtNgayTao.getText();
+        String ngTao = this.txtNgayTao.getText();
         SimpleDateFormat sdf = new SimpleDateFormat();
         sdf.applyPattern("yyyy-mm-dd");
         Date d;
@@ -134,124 +142,116 @@ public class FrmBanHang extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(this, "Sai định dạng ngày");
             return null;
         }
-        float tongTien = Float.valueOf(this.lbThanhTien.getText()) ;
+        float tongTien = Float.valueOf(this.lbThanhTien.getText());
         int tt = this.cbxTT.getSelectedIndex();
         ManageHoaDon s = new ManageHoaDon(maHD, maND, maKH, d, tongTien, tt);
         return s;
     }
+
     void loadTableHoaDon() {
-
-        listHoaDons = hdService.getAllHoaDon();
-        if (listHoaDons == null) {
-            JOptionPane.showMessageDialog(this, "Lỗi");
-        } else if (listHoaDons.isEmpty()) {
-            JOptionPane.showMessageDialog(this, "CSDL Rỗng");
-        } else {
-            model = (DefaultTableModel) tblHoaDon.getModel();
-            model.setRowCount(0);
-            for (hoaDon hd : listHoaDons) {
-                Object[] row = new Object[7];
-                row[0] = hd.getMaND();
-                row[1] = hd.getMaKH();
-                row[2] = hd.getMaHD();
-                row[3] = hd.getNgayTao();
-                row[4] = hd.getTongTien();
-                row[5] = hd.getTrangThai();
-
-                model.addRow(row);
-
-            }
+        dtm = (DefaultTableModel) this.tblHoaDon.getModel();
+        dtm.setRowCount(0);
+        for (ManageHoaDon sp : this.hdService.All()) {
+            Object[] rowData = {
+                sp.getMaHD(),
+                sp.getMaND(),
+                sp.getMaKH(),
+                sp.getNgayTao(),
+                sp.getTongTien(),
+                sp.getTrangThai()
+            };
+            dtm.addRow(rowData);
         }
     }
 
     void loadTableHoaDonChiTiet() {
-        listHoaDonChiTiets = hdctService.getAllHoaDonChiTiet();
-        if (listHoaDonChiTiets == null) {
-            JOptionPane.showMessageDialog(this, "Lỗi");
-        } else if (listHoaDonChiTiets.isEmpty()) {
-            JOptionPane.showMessageDialog(this, "CSDL Rỗng");
-        } else {
-            model = (DefaultTableModel) tblHoaDonChiTiet.getModel();
-            model.setRowCount(0);
-            for (hoaDonChiTiet hdct : listHoaDonChiTiets) {
-                Object[] row = new Object[7];
-                row[0] = hdct.getMaSP();
-                row[1] = hdct.getMaHD();
-                row[2] = hdct.getMaHDCT();
-                row[3] = hdct.getSoLuong();
-                row[4] = hdct.getDonGia();
-                row[5] = hdct.getThanhTien();
-
-                model.addRow(row);
-            }
-        }
+//        listHoaDonChiTiets = hdctService.getAllHoaDonChiTiet();
+//        if (listHoaDonChiTiets == null) {
+//            JOptionPane.showMessageDialog(this, "Lỗi");
+//        } else if (listHoaDonChiTiets.isEmpty()) {
+//            JOptionPane.showMessageDialog(this, "CSDL Rỗng");
+//        } else {
+//            model = (DefaultTableModel) tblHoaDonChiTiet.getModel();
+//            model.setRowCount(0);
+//            for (hoaDonChiTiet hdct : listHoaDonChiTiets) {
+//                Object[] row = new Object[7];
+//                row[0] = hdct.getMaSP();
+//                row[1] = hdct.getMaHD();
+//                row[2] = hdct.getMaHDCT();
+//                row[3] = hdct.getSoLuong();
+//                row[4] = hdct.getDonGia();
+//                row[5] = hdct.getThanhTien();
+//
+//                model.addRow(row);
+//            }
+//        }
     }
 
     void fillShearchHoaDon() {
 
-        String shearchHD = txtShearchMaHD.getText();
-
-        if (shearchHD == null || shearchHD.isEmpty()) {
-            JOptionPane.showMessageDialog(this, "Chưa Nhập Mã Cần Shearch");
-            return;
-        } else {
-            listHoaDons = hdService.findShearchHoaDon(shearchHD);
-            model = (DefaultTableModel) tblHoaDon.getModel();
-            model.setRowCount(0);
-            for (hoaDon hd : listHoaDons) {
-                Object[] row = new Object[7];
-                row[0] = hd.getMaND();
-                row[1] = hd.getMaKH();
-                row[2] = hd.getMaHD();
-                row[3] = hd.getNgayTao();
-                row[4] = hd.getTongTien();
-                row[5] = hd.getTrangThai();
-
-                model.addRow(row);
-
-            }
-        }
-        if (listHoaDons.isEmpty()) {
-            JOptionPane.showMessageDialog(this, "Shearch Thất Bại");
-            return;
-        } else {
-            JOptionPane.showMessageDialog(this, "Shearch Thành Công");
-            return;
-        }
-
+//        String shearchHD = txtShearchMaHD.getText();
+//
+//        if (shearchHD == null || shearchHD.isEmpty()) {
+//            JOptionPane.showMessageDialog(this, "Chưa Nhập Mã Cần Shearch");
+//            return;
+//        } else {
+//            listHoaDons = hdService.findShearchHoaDon(shearchHD);
+//            model = (DefaultTableModel) tblHoaDon.getModel();
+//            model.setRowCount(0);
+//            for (hoaDon hd : listHoaDons) {
+//                Object[] row = new Object[7];
+//                row[0] = hd.getMaND();
+//                row[1] = hd.getMaKH();
+//                row[2] = hd.getMaHD();
+//                row[3] = hd.getNgayTao();
+//                row[4] = hd.getTongTien();
+//                row[5] = hd.getTrangThai();
+//
+//                model.addRow(row);
+//
+//            }
+//        }
+//        if (listHoaDons.isEmpty()) {
+//            JOptionPane.showMessageDialog(this, "Shearch Thất Bại");
+//            return;
+//        } else {
+//            JOptionPane.showMessageDialog(this, "Shearch Thành Công");
+//            return;
+//        }
     }
 
     void fillShearchHoaDonChiTiet() {
 
-        String shearchHDCT = txtShearchMaSP.getText();
-
-        if (shearchHDCT == null || shearchHDCT.isEmpty()) {
-            JOptionPane.showMessageDialog(this, "Chưa Nhập Mã Cần Shearch");
-            return;
-        } else {
-            listHoaDonChiTiets = hdctService.fillShearchMaSP(shearchHDCT);
-            model = (DefaultTableModel) tblHoaDonChiTiet.getModel();
-            model.setRowCount(0);
-            for (hoaDonChiTiet hdct : listHoaDonChiTiets) {
-                Object[] row = new Object[7];
-                row[0] = hdct.getMaSP();
-                row[1] = hdct.getMaHD();
-                row[2] = hdct.getMaHDCT();
-                row[3] = hdct.getSoLuong();
-                row[4] = hdct.getDonGia();
-                row[5] = hdct.getThanhTien();
-
-                model.addRow(row);
-            }
-        }
-        if (listHoaDonChiTiets.isEmpty()) {
-            JOptionPane.showMessageDialog(this, "Shearch Thất Bại");
-            return;
-        } else {
-            JOptionPane.showMessageDialog(this, "Shearch Thành Công");
-            return;
-        }
+//        String shearchHDCT = txtShearchMaSP.getText();
+//
+//        if (shearchHDCT == null || shearchHDCT.isEmpty()) {
+//            JOptionPane.showMessageDialog(this, "Chưa Nhập Mã Cần Shearch");
+//            return;
+//        } else {
+//            listHoaDonChiTiets = hdctService.fillShearchMaSP(shearchHDCT);
+//            model = (DefaultTableModel) tblHoaDonChiTiet.getModel();
+//            model.setRowCount(0);
+//            for (hoaDonChiTiet hdct : listHoaDonChiTiets) {
+//                Object[] row = new Object[7];
+//                row[0] = hdct.getMaSP();
+//                row[1] = hdct.getMaHD();
+//                row[2] = hdct.getMaHDCT();
+//                row[3] = hdct.getSoLuong();
+//                row[4] = hdct.getDonGia();
+//                row[5] = hdct.getThanhTien();
+//
+//                model.addRow(row);
+//            }
+//        }
+//        if (listHoaDonChiTiets.isEmpty()) {
+//            JOptionPane.showMessageDialog(this, "Shearch Thất Bại");
+//            return;
+//        } else {
+//            JOptionPane.showMessageDialog(this, "Shearch Thành Công");
+//            return;
+//        }
     }
+
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -317,7 +317,7 @@ public class FrmBanHang extends javax.swing.JFrame {
         jTextField49 = new javax.swing.JTextField();
         jButton42 = new javax.swing.JButton();
         jScrollPane21 = new javax.swing.JScrollPane();
-        jTable19 = new javax.swing.JTable();
+        tblDHCT = new javax.swing.JTable();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -693,9 +693,14 @@ public class FrmBanHang extends javax.swing.JFrame {
 
             },
             new String [] {
-                "Mã HD", "Mã ND", "Mã KH", "Ngày tạo", "Tổng tiền", "Tiền khách đưa", "Tiền thừa", "trạng thái"
+                "Mã HD", "Mã ND", "Mã KH", "Ngày tạo", "Tổng tiền", "trạng thái"
             }
         ));
+        tblHoaDon.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                tblHoaDonMouseClicked(evt);
+            }
+        });
         jScrollPane20.setViewportView(tblHoaDon);
 
         javax.swing.GroupLayout jPanel21Layout = new javax.swing.GroupLayout(jPanel21);
@@ -730,7 +735,7 @@ public class FrmBanHang extends javax.swing.JFrame {
 
         jButton42.setText("Tìm kiếm");
 
-        jTable19.setModel(new javax.swing.table.DefaultTableModel(
+        tblDHCT.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
             },
@@ -738,7 +743,7 @@ public class FrmBanHang extends javax.swing.JFrame {
                 "Mã SP", "Số lượng", "Đơn giá", "Thành tiền"
             }
         ));
-        jScrollPane21.setViewportView(jTable19);
+        jScrollPane21.setViewportView(tblDHCT);
 
         javax.swing.GroupLayout jPanel33Layout = new javax.swing.GroupLayout(jPanel33);
         jPanel33.setLayout(jPanel33Layout);
@@ -860,11 +865,11 @@ public class FrmBanHang extends javax.swing.JFrame {
         list.add(chiTietHoaDonViewModel);
         addSP(list);
         int thanhTien = 0;
-        for(ManageHoaDonChiTiet ct :list){
+        for (ManageHoaDonChiTiet ct : list) {
             thanhTien = (int) (thanhTien + ct.getThanhTien());
             lbThanhTien.setText("" + thanhTien);
         }
-        
+
 
     }//GEN-LAST:event_btnLuuTamActionPerformed
 
@@ -883,6 +888,7 @@ public class FrmBanHang extends javax.swing.JFrame {
         this.hdService.insert(hd);
         this.ctService.insert(ct);
         this.loadHDC();
+        this.loadTableHoaDon();
         JOptionPane.showMessageDialog(this, "thành công");
     }//GEN-LAST:event_btnThanhToanActionPerformed
 
@@ -935,10 +941,7 @@ public class FrmBanHang extends javax.swing.JFrame {
     private void btnTimActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnTimActionPerformed
         // TODO add your handling code here:
         String sdt = JOptionPane.showInputDialog(null, "nhập sdt để tìm");
-        
-       
 
-        
 
     }//GEN-LAST:event_btnTimActionPerformed
 
@@ -950,6 +953,26 @@ public class FrmBanHang extends javax.swing.JFrame {
         String maSP = this.tblDSSanPham.getValueAt(row, 0).toString();
         this.lbMaSP.setText(maSP);
     }//GEN-LAST:event_tblDSSanPhamMouseClicked
+
+    private void tblHoaDonMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblHoaDonMouseClicked
+
+        int row = this.tblHoaDon.getSelectedRow();
+        if (row == -1) {
+            return;
+        }
+        String ma = this.tblHoaDon.getValueAt(row, 0).toString();
+        dtm = (DefaultTableModel) this.tblDHCT.getModel();
+        dtm.setRowCount(0);
+        for (ManageHoaDonChiTiet sp : this.ctService.All(ma)) {
+            Object[] rowData = {
+                sp.getMaSP(),
+                sp.getSoLuong(),
+                sp.getGiaBan(),
+                sp.getThanhTien()
+            };
+            dtm.addRow(rowData);
+        }
+    }//GEN-LAST:event_tblHoaDonMouseClicked
 
     /**
      * @param args the command line arguments
@@ -1028,13 +1051,13 @@ public class FrmBanHang extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane5;
     private javax.swing.JScrollPane jScrollPane6;
     private javax.swing.JTabbedPane jTabbedPane3;
-    private javax.swing.JTable jTable19;
     private javax.swing.JTextField jTextField48;
     private javax.swing.JTextField jTextField49;
     private javax.swing.JLabel lbMaHD;
     private javax.swing.JLabel lbMaSP;
     private javax.swing.JLabel lbThanhTien;
     private javax.swing.JSpinner spnSoLuong;
+    private javax.swing.JTable tblDHCT;
     private javax.swing.JTable tblDSCho;
     private javax.swing.JTable tblDSSanPham;
     private javax.swing.JTable tblHoaDon;
