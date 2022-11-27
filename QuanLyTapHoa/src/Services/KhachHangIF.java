@@ -8,6 +8,7 @@ import DomainModels.KhachHang;
 import ViewModels.QLKH;
 import java.util.List;
 import java.sql.SQLException;
+
 /**
  *
  * @author caoxu
@@ -23,4 +24,6 @@ public interface KhachHangIF {
     public List<KhachHang> delete(String Ma);
 
     public List<KhachHang> update(String Ma, String Ten, String GioiTinh, String DiaChi, String NgaySinh, String SDT, String NgayDki);
+
+    public Boolean themNhanh(KhachHang kh);
 }

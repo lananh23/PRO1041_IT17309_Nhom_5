@@ -75,6 +75,10 @@ public class HoaDon {
     public void setTrangThai(int trangThai) {
         this.trangThai = trangThai;
     }
+
+    public void setNgayTao(String NgayTao) {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
     
     
 }

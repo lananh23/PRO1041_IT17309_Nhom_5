@@ -65,4 +65,39 @@ public class HoaDonRepository {
         }
         return list;
     }
+    public List<HoaDon> tim(String Sdt) throws SQLException {
+        ArrayList<HoaDon> k = new ArrayList<>();
+        try {
+            Connection con = DBConnection.getConnection();
+            String sql = "Select HoaDon.MaHD,HoaDon.MaND,HoaDon.NgayTao,KhachHang.MaKH,HoaDon.TrangThai,HoaDon.TongTien from KhachHang \n"
+                    + "					join HoaDon on HoaDon.MaKH=KhachHang.MaKH where SDT=?";
+            PreparedStatement st = con.prepareStatement(sql);
+            st.setString(1, Sdt);
+            ResultSet rs = st.executeQuery();
+            while (rs.next()) {
+                String MaHD = rs.getString("MaHD");
+                String MaND = rs.getString("MaND");
+                String MaKH = rs.getString("MaKH");
+                String NgayTao = rs.getString("NgayTao");
+                float TongTien = rs.getFloat("TongTien");
+                int TrangThai = rs.getInt("TrangThai");
+                HoaDon hd = new HoaDon();
+                hd.setMaHD(MaHD);
+                hd.setMaND(MaND);
+                hd.setMaKH(MaKH);
+                hd.setNgayTao(NgayTao);
+                hd.setTongTien(TongTien);
+                hd.setTrangThai(TrangThai);
+                k.add(hd);
+            }
+        } catch (Exception e) {
+            return null;
+        }
+        return k;
+    }
+
+    public List<HoaDon> insert(String MaHD, String MaND, String MaKH, String NgayTao, float TongTien, int TrangThai) {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
+
 }

@@ -141,4 +141,18 @@ public List<KhachHang> select() throws SQLException {
         k.add(kh);
         return k;
     }
+    public Boolean themNhanh(KhachHang kh){
+        String query = "INSERT INTO KhachHang(MaKH,TenKH,SDT) VALUES(?,?,?)";
+        try{Connection con = DBConnection.getConnection();
+            PreparedStatement ps = con.prepareStatement(query);
+            ps.setObject(1, kh.getMaKH());
+            ps.setObject(2, kh.getTenKH());
+            ps.setObject(3, kh.getSdt());
+            ps.executeUpdate();
+            return true;
+        }catch(Exception e){
+            e.printStackTrace();
+        }
+        return false;
+    }
 }
