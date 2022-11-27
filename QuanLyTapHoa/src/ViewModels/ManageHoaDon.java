@@ -1,16 +1,8 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
-package DomainModels;
+package ViewModels;
 
 import java.util.Date;
 
-/**
- *
- * @author caoxu
- */
-public class HoaDon {
+public class ManageHoaDon {
     private String maHD;
     private String maND;
     private String maKH;
@@ -18,7 +10,10 @@ public class HoaDon {
     private float tongTien;
     private int trangThai;
 
-    public HoaDon(String maHD, String maND, String maKH, Date ngayTao, float tongTien, int trangThai) {
+    public ManageHoaDon() {
+    }
+
+    public ManageHoaDon(String maHD, String maND, String maKH, Date ngayTao, float tongTien, int trangThai) {
         this.maHD = maHD;
         this.maND = maND;
         this.maKH = maKH;
@@ -27,14 +22,11 @@ public class HoaDon {
         this.trangThai = trangThai;
     }
 
-    public HoaDon(String maHD) {
+    public ManageHoaDon(String maHD) {
         this.maHD = maHD;
     }
+
     
-
-    public HoaDon() {
-    }
-
     public String getMaHD() {
         return maHD;
     }
@@ -82,7 +74,5 @@ public class HoaDon {
     public void setTrangThai(int trangThai) {
         this.trangThai = trangThai;
     }
-
-   
     
 }

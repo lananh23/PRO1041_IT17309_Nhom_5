@@ -29,19 +29,19 @@ public class HoaDonService implements HoaDonIF {
 
     @Override
     public List<HoaDon> insert(String MaHD, String MaND, String MaKH, String NgayTao,float TongTien, int TrangThai) {
-        try {
-            return hdRP.insert(MaHD, MaND, MaKH, NgayTao, TongTien, TrangThai);
-        } catch (SQLException ex) {
+//        try {
+//            return hdRP.insert(MaHD, MaND, MaKH, NgayTao, TongTien, TrangThai);
+//        } catch (SQLException ex) {
             return null;
-        }
+//        }
     }
 
     @Override
     public List<HoaDon> tim(String Sdt) {
-        try {
-            return hdRP.tim(Sdt);
-        } catch (SQLException ex) {
+//        try {
+//            return hdRP.tim(Sdt);
+//        } catch (SQLException ex) {
             return null;
-        }
+//        }
     }
 }
