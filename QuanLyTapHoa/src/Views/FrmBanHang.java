@@ -105,7 +105,7 @@ public class FrmBanHang extends javax.swing.JFrame {
 
     public ManageHoaDonChiTiet getFormData() {
         int row = this.tblDSSanPham.getSelectedRow();
-        String ma = this.tblHoaDon.getValueAt(row, 4).toString();
+        String ma = this.tblDSSanPham.getValueAt(row, 4).toString();
         String maHDCT = this.txtMaHDCT.getText();
         String maSP = this.lbMaSP.getText();
         String maHD = this.txtMaHD.getText();
@@ -158,10 +158,24 @@ public class FrmBanHang extends javax.swing.JFrame {
                 sp.getMaKH(),
                 sp.getNgayTao(),
                 sp.getTongTien(),
-                sp.getTrangThai()
-            };
+                sp.getTrangThai() == 1 ? "Đã thanh toán" : "",};
             dtm.addRow(rowData);
         }
+    }
+
+    public void clear() {
+        this.txtMaHDCT.setText("");
+        this.lbMaSP.setText("--");
+        this.spnSoLuong.setValue(0);
+        dtm = (DefaultTableModel) this.tblDSCho.getModel();
+        dtm.setRowCount(0);
+        this.txtMaHD.setText("");
+        this.txtMaKH.setText("");
+        this.txtMaNV.setText("");
+        this.txtNgayTao.setText("");
+        this.lbThanhTien.setText("--");
+        this.cbxTT.setSelectedIndex(0);
+
     }
 
     void loadTableHoaDonChiTiet() {
@@ -894,48 +908,84 @@ public class FrmBanHang extends javax.swing.JFrame {
 
     private void btnTaoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnTaoActionPerformed
         // TODO add your handling code here:
-        dtm = (DefaultTableModel) tblHoaDonCho.getModel();
-        String MaHD = txtMaHD.getText();
-        String MaNV = txtMaNV.getText();
-        String MaKH = txtMaKH.getText();
-        String NgayTao = txtNgayTao.getText();
-        int TrangThai = cbxTT.getSelectedIndex();
-
-        if (MaHD.trim().isEmpty()
-                || MaNV.trim().isEmpty()
-                || MaKH.trim().isEmpty()
-                || NgayTao.trim().isEmpty()) {
-            JOptionPane.showMessageDialog(null, "Không được để trống");
+        ManageHoaDonChiTiet ct = this.getFormData();
+        ManageHoaDon hd = this.getFormDataHD();
+        if (ct == null || hd == null) {
             return;
-
         }
-        if (cbxTT.getSelectedIndex() == 0) {
-            List<HoaDon> hd = hdSV.insert(MaHD, MaNV, MaKH, NgayTao, TOP_ALIGNMENT, TrangThai);
-            dtm.setRowCount(0);
-            for (HoaDon ql : hd) {
-                dtm.addRow(new Object[]{
-                    ql.getMaHD(),
-                    ql.getMaND(),
-                    ql.getMaKH(),
-                    ql.getNgayTao(),
-                    ql.getTongTien(),
-                    ql.getTrangThai()
-                });
-            }
-            JOptionPane.showMessageDialog(null, "Thành công");
-            return;
-
-        }
+        this.hdService.insert(hd);
+        this.ctService.insert(ct);
+        this.loadHDC();
+        this.clear();
+        this.loadTableHoaDon();
+//        dtm = (DefaultTableModel) tblHoaDonCho.getModel();
+//        String MaHD = txtMaHD.getText();
+//        String MaNV = txtMaNV.getText();
+//        String MaKH = txtMaKH.getText();
+//        String NgayTao = txtNgayTao.getText();
+//        int TrangThai = cbxTT.getSelectedIndex();
+//
+//        if (MaHD.trim().isEmpty()
+//                || MaNV.trim().isEmpty()
+//                || MaKH.trim().isEmpty()
+//                || NgayTao.trim().isEmpty()) {
+//            JOptionPane.showMessageDialog(null, "Không được để trống");
+//            return;
+//
+//        }
+//        if (cbxTT.getSelectedIndex() == 0) {
+//            List<HoaDon> hd = hdSV.insert(MaHD, MaNV, MaKH, NgayTao, TOP_ALIGNMENT, TrangThai);
+//            dtm.setRowCount(0);
+//            for (HoaDon ql : hd) {
+//                dtm.addRow(new Object[]{
+//                    ql.getMaHD(),
+//                    ql.getMaND(),
+//                    ql.getMaKH(),
+//                    ql.getNgayTao(),
+//                    ql.getTongTien(),
+//                    ql.getTrangThai()
+//                });
+//            }
+//            JOptionPane.showMessageDialog(null, "Thành công");
+//            return;
+//
+//        }
     }//GEN-LAST:event_btnTaoActionPerformed
 
     private void tblHoaDonChoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblHoaDonChoMouseClicked
         // TODO add your handling code here:
-        int row = tblHoaDonCho.getSelectedRow();
-        txtMaHD.setText(tblHoaDonCho.getValueAt(row, 0).toString());
-        txtMaNV.setText(tblHoaDonCho.getValueAt(row, 1).toString());
-        txtMaKH.setText(tblHoaDonCho.getValueAt(row, 2).toString());
-        txtNgayTao.setText(tblHoaDonCho.getValueAt(row, 3).toString());
-        cbxTT.setSelectedItem(tblHoaDonCho.getValueAt(row, 4).toString());
+//        int row = tblHoaDonCho.getSelectedRow();
+//        String maHD = tblHoaDonCho.getValueAt(row, 0).toString();
+//        List<ManageHoaDon> ds = this.hdService.AllCho();
+//        for (ManageHoaDon sp : ds) {
+//            if (sp.getMaHD().equalsIgnoreCase(maHD)) {
+//                this.txtMaHD.setText(sp.getMaHD());
+//                this.txtMaKH.setText(sp.getMaKH());
+//                this.txtMaNV.setText(sp.getMaND());
+//                this.lbThanhTien.setText(String.valueOf(sp.getTongTien()));
+//                this.cbxTT.setSelectedIndex(sp.getTrangThai());
+//            }
+//        }
+//        List<ManageHoaDonChiTiet> ds1 = this.ctService.All(maHD);
+//        for (ManageHoaDonChiTiet sp1 : ds1) {
+//            if (sp1.getMaHD().equalsIgnoreCase(maHD)) {
+//                this.txtMaHDCT.setText(sp1.getMaHDCT());
+//                this.lbMaSP.setText(sp1.getMaSP());
+//                this.spnSoLuong.setValue(sp1.getSoLuong());
+//            }
+//        }
+//        dtm = (DefaultTableModel) this.tblDSCho.getModel();
+//        dtm.setRowCount(0);
+//        for (ManageHoaDonChiTiet sp : this.ctService.All(maHD)) {
+//            Object[] rowData = {
+//                sp.getMaSP(),
+//                sp.getTenSP(),
+//                sp.getSoLuong(),
+//                sp.getGiaBan(),
+//                sp.getThanhTien()
+//            };
+//            dtm.addRow(rowData);
+//        }
     }//GEN-LAST:event_tblHoaDonChoMouseClicked
 
     private void btnTimActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnTimActionPerformed

@@ -100,7 +100,7 @@ public class HoaDonRepository {
         ArrayList<HoaDon> list = new ArrayList<>();
         try {
             Connection conn = DBConnection.getConnection();
-            String query = "SELECT * FROM HoaDon";
+            String query = "SELECT * FROM HoaDon WHERE TrangThai =1";
             PreparedStatement ps = conn.prepareStatement(query);
             ps.execute();
             ResultSet rs = ps.getResultSet();
