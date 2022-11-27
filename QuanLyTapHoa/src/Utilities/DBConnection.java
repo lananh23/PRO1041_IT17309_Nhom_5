@@ -6,7 +6,7 @@ import java.sql.*;
 public class DBConnection {
 
     private static final String USERNAME = "sa";
-    private static final String PASSWORD = "Aa@123456";
+    private static final String PASSWORD = "yenlinh1943";
     private static final String SERVER_NAME = "DESKTOP-CSTQHQ6\\SQLEXPRESS";
     private static final String PORT = "1433";
     private static final String DATABASE_NAME = "QuanLyCuaHangTapHoa";
@@ -21,7 +21,7 @@ public class DBConnection {
         if(conn == null){
             try {
                 Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
-                String dbUser = "sa", dbPass = "Aa@123456",
+                String dbUser = "sa", dbPass = "yenlinh1943",
                         dbUrl = "jdbc:sqlserver://localhost:1433;"
                             +"databaseName=QuanLyCuaHangTapHoa;"
                             +"encrypt=true;trustServerCertificate=true;sslProtocol=TLSv1.2";
