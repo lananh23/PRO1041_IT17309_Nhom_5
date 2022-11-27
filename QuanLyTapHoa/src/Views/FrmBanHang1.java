@@ -11,11 +11,21 @@ import Repositories.ISanPhamRepository;
 import Repositories.SanPhamRepository;
 import ServiceImpl.HoaDonService;
 import ServiceImpl.KhachHangSV;
+import ServiceImpl.ManageHoaDonChiTietService;
+import ServiceImpl.ManageHoaDonService;
 import Services.IManageSanPhamService;
 import ServiceImpl.ManageSanPhamService;
+import Services.IManageHoaDon;
+import Services.IManageHoaDonChiTiet;
+import ViewModels.ManageHoaDon;
+import ViewModels.ManageHoaDonChiTiet;
 import ViewModels.QLHoaDon;
 import ViewModels.QLSanPham;
 import java.math.BigDecimal;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.Date;
 import javax.swing.table.DefaultTableModel;
 import java.util.List;
 import javax.swing.JOptionPane;
@@ -29,6 +39,9 @@ public class FrmBanHang1 extends javax.swing.JFrame {
     private IManageSanPhamService banHangService;
     private DefaultTableModel dtm;
     private HoaDonService hdSV;
+    private IManageHoaDon hdService;
+    private IManageHoaDonChiTiet ctService;
+    private ArrayList<ManageHoaDonChiTiet> list = new ArrayList<>();
 
     /**
      * Creates new form banHang
@@ -39,6 +52,11 @@ public class FrmBanHang1 extends javax.swing.JFrame {
         hdSV = new HoaDonService();
         setLocationRelativeTo(null);
         loadToTable();
+        banHangService = new ManageSanPhamService();
+        this.hdService = new ManageHoaDonService();
+        this.ctService = new ManageHoaDonChiTietService();
+        setLocationRelativeTo(null);
+        this.loadHDC();
 
     }
 
@@ -54,7 +72,68 @@ public class FrmBanHang1 extends javax.swing.JFrame {
             });
         }
     }
-    
+    public void addSP(List<ManageHoaDonChiTiet> sanPhams){
+
+        dtm= (DefaultTableModel) tblDSCho.getModel();
+        
+        dtm.setRowCount(0);
+        
+        for (ManageHoaDonChiTiet sanPham : sanPhams) {
+            dtm.addRow(new Object[]{
+                sanPham.getMaSP(), sanPham.getTenSP(), sanPham.getSoLuong(),
+                sanPham.getGiaBan(), sanPham.getThanhTien()
+            });
+        }
+    }
+    public void loadHDC(){
+        dtm = (DefaultTableModel) this.tblHoaDonCho.getModel();
+        dtm.setRowCount(0);
+        for (ManageHoaDon sp : this.hdService.AllCho()) {
+            Object[] rowData = {
+                sp.getMaHD()
+            };
+            dtm.addRow(rowData);
+        }
+    }
+    public ManageHoaDonChiTiet getFormData(){
+        String maHDCT = this.txtMaHDCT.getText();
+        String maSP = this.lbMaSP.getText();
+        String maHD = this.txtMaHD.getText();
+        int sLg = (int) this.spnSoLuong.getValue();
+        ManageHoaDonChiTiet s = new ManageHoaDonChiTiet(maHDCT, maHD, maSP, sLg);
+        return s;
+    }
+    public static Date toDate(String s) throws ParseException {
+        SimpleDateFormat sdf = new SimpleDateFormat();
+        sdf.applyPattern("yyyy-mm-dd");
+        Date d = null;
+        try {
+            d = sdf.parse(s);
+        } catch (ParseException e) {
+            e.printStackTrace();
+            throw e;
+        }
+        return d;
+    }
+    public ManageHoaDon getFormDataHD(){
+        String maHD = this.txtMaHD.getText();
+        String maKH = this.txtMaKH.getText();
+        String maND = this.txtMaNV.getText();
+        String ngTao =  this.txtNgayTao.getText();
+        SimpleDateFormat sdf = new SimpleDateFormat();
+        sdf.applyPattern("yyyy-mm-dd");
+        Date d;
+        try {
+            d = sdf.parse(ngTao);
+        } catch (ParseException e) {
+            JOptionPane.showMessageDialog(this, "Sai định dạng ngày");
+            return null;
+        }
+        float tongTien = Float.valueOf(this.lbThanhTien.getText()) ;
+        int tt = this.cbxTT.getSelectedIndex();
+        ManageHoaDon s = new ManageHoaDon(maHD, maND, maKH, d, tongTien, tt);
+        return s;
+    }
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -102,7 +181,7 @@ public class FrmBanHang1 extends javax.swing.JFrame {
         jScrollPane6 = new javax.swing.JScrollPane();
         tblDSCho = new javax.swing.JTable();
         spnSoLuong = new javax.swing.JSpinner();
-        jTextField13 = new javax.swing.JTextField();
+        txtMaHDCT = new javax.swing.JTextField();
         jPanel1 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
         jScrollPane5 = new javax.swing.JScrollPane();
@@ -144,6 +223,11 @@ public class FrmBanHang1 extends javax.swing.JFrame {
                 "Mã SP", "Tên SP", "Số lượng", "Giá nhập", "Giá bán", "Hạn sử dụng"
             }
         ));
+        tblDSSanPham.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                tblDSSanPhamMouseClicked(evt);
+            }
+        });
         jScrollPane19.setViewportView(tblDSSanPham);
 
         javax.swing.GroupLayout jPanel20Layout = new javax.swing.GroupLayout(jPanel20);
@@ -378,7 +462,7 @@ public class FrmBanHang1 extends javax.swing.JFrame {
                     .addGroup(jPanel29Layout.createSequentialGroup()
                         .addComponent(jLabel80)
                         .addGap(18, 18, 18)
-                        .addComponent(jTextField13, javax.swing.GroupLayout.PREFERRED_SIZE, 79, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(txtMaHDCT, javax.swing.GroupLayout.PREFERRED_SIZE, 79, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(0, 0, Short.MAX_VALUE)))
                 .addContainerGap())
         );
@@ -388,7 +472,7 @@ public class FrmBanHang1 extends javax.swing.JFrame {
                 .addContainerGap()
                 .addGroup(jPanel29Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel80)
-                    .addComponent(jTextField13, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(txtMaHDCT, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel29Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel81)
@@ -655,23 +739,18 @@ public class FrmBanHang1 extends javax.swing.JFrame {
 
     private void btnLuuTamActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLuuTamActionPerformed
         // TODO add your handling code here:
-        List<QLSanPham> sanPhams = banHangService.getByCode(lbMaSP.getText());
-
-        int soLuong = (int) spnSoLuong.getValue();
-
-        BigDecimal thanhTien = new BigDecimal(soLuong * sanPhams.get(0).getGiaBan());
-
-        lbThanhTien.setText("" + thanhTien);
-
-        dtm = (DefaultTableModel) tblDSCho.getModel();
-
-        dtm.setRowCount(0);
-
-        for (QLSanPham sanPham : sanPhams) {
-            dtm.addRow(new Object[]{
-                sanPham.getMaSP(), sanPham.getTenSP(), soLuong,
-                sanPham.getGiaBan(), thanhTien
-            });
+        ManageHoaDonChiTiet chiTietHoaDonViewModel = new ManageHoaDonChiTiet();
+        int row = tblDSSanPham.getSelectedRow();
+        chiTietHoaDonViewModel.setMaSP((String) tblDSSanPham.getValueAt(row, 0));
+        chiTietHoaDonViewModel.setTenSP((String) tblDSSanPham.getValueAt(row, 1));
+        chiTietHoaDonViewModel.setSoLuong((int) spnSoLuong.getValue());
+        chiTietHoaDonViewModel.setGiaBan((Float) tblDSSanPham.getValueAt(row, 4));
+        list.add(chiTietHoaDonViewModel);
+        addSP(list);
+        int thanhTien = 0;
+        for(ManageHoaDonChiTiet ct :list){
+            thanhTien = (int) (thanhTien + ct.getThanhTien());
+            lbThanhTien.setText("" + thanhTien);
         }
 
     }//GEN-LAST:event_btnLuuTamActionPerformed
@@ -683,27 +762,14 @@ public class FrmBanHang1 extends javax.swing.JFrame {
 
     private void btnThanhToanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnThanhToanActionPerformed
         // TODO add your handling code here:
-        String MaKH = txtMaKH.getText();
-        String MaNV = txtMaNV.getText();
-        String MaHD = txtMaHD.getText();
-        String NgayTao = txtNgayTao.getText();
-        int TrangThai = cbxTT.getSelectedIndex();
-
-        if (MaKH.trim().isEmpty()
-                || MaNV.trim().isEmpty()
-                || MaHD.trim().isEmpty()
-                || NgayTao.trim().isEmpty()) {
-            JOptionPane.showMessageDialog(null, "Không được để trống");
+        ManageHoaDonChiTiet ct = this.getFormData();
+        ManageHoaDon hd = this.getFormDataHD();
+        if (ct == null || hd == null) {
             return;
-
         }
-        if (cbxTT.getSelectedIndex() == 1) {
-            List<HoaDon> hd = hdSV.insert(MaHD, MaNV, MaKH, NgayTao, TOP_ALIGNMENT, TrangThai);
-
-            JOptionPane.showMessageDialog(null, "Thành công");
-            return;
-
-        }
+        this.hdService.insert(hd);
+        this.ctService.insert(ct);
+        JOptionPane.showMessageDialog(this, "thêm thành công");
     }//GEN-LAST:event_btnThanhToanActionPerformed
 
     private void btnTaoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnTaoActionPerformed
@@ -733,6 +799,15 @@ public class FrmBanHang1 extends javax.swing.JFrame {
         FrmThemNhanhKhachHang diem = new FrmThemNhanhKhachHang();
                         diem.setVisible(true);
     }//GEN-LAST:event_btnThemKHActionPerformed
+
+    private void tblDSSanPhamMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblDSSanPhamMouseClicked
+        int row = this.tblDSSanPham.getSelectedRow();
+        if (row == -1) {
+            return;
+        }
+        String maSP = this.tblDSSanPham.getValueAt(row, 0).toString();
+        this.lbMaSP.setText(maSP);
+    }//GEN-LAST:event_tblDSSanPhamMouseClicked
 
     /**
      * @param args the command line arguments
@@ -818,7 +893,6 @@ public class FrmBanHang1 extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane6;
     private javax.swing.JTabbedPane jTabbedPane3;
     private javax.swing.JTable jTable19;
-    private javax.swing.JTextField jTextField13;
     private javax.swing.JTextField jTextField48;
     private javax.swing.JTextField jTextField49;
     private javax.swing.JLabel lbMaHD;
@@ -830,6 +904,7 @@ public class FrmBanHang1 extends javax.swing.JFrame {
     private javax.swing.JTable tblHoaDon;
     private javax.swing.JTable tblHoaDonCho;
     private javax.swing.JTextField txtMaHD;
+    private javax.swing.JTextField txtMaHDCT;
     private javax.swing.JTextField txtMaKH;
     private javax.swing.JTextField txtMaNV;
     private javax.swing.JTextField txtNgayTao;
