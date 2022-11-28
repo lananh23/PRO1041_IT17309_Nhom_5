@@ -38,14 +38,13 @@ public class ManageHoaDonChiTiet {
         this.giaBan = giaBan;
         this.thanhTien = thanhTien;
     }
-    
-    public ManageHoaDonChiTiet(String maHDCT, String maHD, String maSP, int soLuong) {
-        this.maHDCT = maHDCT;
-        this.maHD = maHD;
-        this.maSP = maSP;
-        this.soLuong = soLuong;
-    }
-
+//    public ManageHoaDonChiTiet(String maHD, String maSP,  int soLuong, float giaBan, float thanhTien) {
+//        this.maHD = maHD;
+//        this.maSP = maSP;
+//        this.soLuong = soLuong;
+//        this.giaBan = giaBan;
+//        this.thanhTien = thanhTien;
+//    }
     
 
     public ManageHoaDonChiTiet(String maHDCT, String maHD, String maSP,  int soLuong, float giaBan, float thanhTien, String maCu) {
@@ -63,6 +62,10 @@ public class ManageHoaDonChiTiet {
         this.tenSP = tenSP;
         this.soLuong = soLuong;
         this.giaBan = giaBan;
+    }
+
+    public void setThanhTien(float thanhTien) {
+        this.thanhTien = thanhTien;
     }
 
     public String getMaSP() {

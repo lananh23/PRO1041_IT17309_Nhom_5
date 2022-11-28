@@ -31,5 +31,11 @@ public class ManageHoaDonChiTietService implements IManageHoaDonChiTiet{
         }
         return list;
     }
+
+    @Override
+    public void insertSP(ManageHoaDonChiTiet sp) {
+        HoaDonChiTiet s = new HoaDonChiTiet(sp.getMaHD(), sp.getMaSP(), sp.getSoLuong(), sp.getGiaBan(), sp.getThanhTien());
+        this.hdRepo.insertSP(s);
+    }
     
 }

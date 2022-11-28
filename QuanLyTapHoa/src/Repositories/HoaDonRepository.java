@@ -119,6 +119,29 @@ public class HoaDonRepository {
         }
         return list;
     }
+        public List<HoaDon> AllHD() {
+        ArrayList<HoaDon> list = new ArrayList<>();
+        try {
+            Connection conn = DBConnection.getConnection();
+            String query = "SELECT * FROM HoaDon";
+            PreparedStatement ps = conn.prepareStatement(query);
+            ps.execute();
+            ResultSet rs = ps.getResultSet();
+            while (rs.next() == true) {
+                String maHD = rs.getString("MaHD");
+                String maND = rs.getString("MaND");
+                String maKH = rs.getString("MaKH");
+                Date ngTao = rs.getDate("NgayTao");
+                float tongTien = rs.getFloat("TongTien");
+                int tt = rs.getInt("TrangThai");
+                HoaDon sp = new HoaDon(maHD, maND, maKH, ngTao, tongTien, tt);
+                list.add(sp);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return list;
+    }
     public List<HoaDon> AllCho() {
         ArrayList<HoaDon> list = new ArrayList<>();
         try {

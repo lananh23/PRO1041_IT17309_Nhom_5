@@ -26,7 +26,6 @@ import javax.swing.table.DefaultTableModel;
 import java.util.List;
 import javax.swing.JOptionPane;
 
-
 public class FrmBanHang extends javax.swing.JFrame {
 
     private IManageSanPhamService banHangService;
@@ -38,7 +37,6 @@ public class FrmBanHang extends javax.swing.JFrame {
     private ArrayList<ManageHoaDonChiTiet> list = new ArrayList<>();
     List<ManageHoaDon> listHoaDons;
     List<ManageHoaDonChiTiet> listHoaDonChiTiets;
-
 
     public FrmBanHang() {
         initComponents();
@@ -860,7 +858,7 @@ public class FrmBanHang extends javax.swing.JFrame {
                 for (QLSanPham sanPham : sanPhams) {
                     dtm.addRow(new Object[]{
                         sanPham.getMaSP(), sanPham.getTenSP(), sanPham.getSoLuong(),
-                         sanPham.getGiaBan()
+                        sanPham.getGiaBan()
                     });
                 }
                 lbMaSP.setText(maSP);
@@ -893,19 +891,45 @@ public class FrmBanHang extends javax.swing.JFrame {
     }//GEN-LAST:event_spnSoLuongMouseClicked
 
     private void btnThanhToanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnThanhToanActionPerformed
-        ManageHoaDonChiTiet ct = this.getFormData();
         ManageHoaDon hd = this.getFormDataHD();
-        if (ct == null || hd == null) {
+        if (hd == null) {
             return;
         }
         this.hdService.insert(hd);
-        this.ctService.insert(ct);
-        this.spService.updateSLGH(ct.getSoLuong(), ct.getMaSP());
+        int row = 0;
+        ArrayList<ManageHoaDonChiTiet> listHDCT = new ArrayList<>();
+        for (ManageHoaDonChiTiet a : list) {
+            a.setMaHDCT(this.txtMaHDCT.getText());
+            a.setMaHD(this.txtMaHD.getText());
+            a.setMaSP((String) tblDSCho.getValueAt(row, 0));
+            a.setSoLuong((int) tblDSCho.getValueAt(row, 2));
+            a.setGiaBan((Float) tblDSCho.getValueAt(row, 3));
+            a.setThanhTien((Float) tblDSCho.getValueAt(row, 4));
+            row++;
+            listHDCT.add(a);
+        }
+        for (ManageHoaDonChiTiet hoaDonChiTiet : listHDCT) {
+            ctService.insert(hoaDonChiTiet);
+            this.spService.updateSLGH(hoaDonChiTiet.getSoLuong(), hoaDonChiTiet.getMaSP());
+        }
         this.loadHDC();
         this.loadTableHoaDon();
         this.loadToTable();
         this.clear();
         JOptionPane.showMessageDialog(this, "thành công");
+//        ManageHoaDonChiTiet ct = this.getFormData();
+//        ManageHoaDon hd = this.getFormDataHD();
+//        if (ct == null || hd == null) {
+//            return;
+//        }
+//        this.hdService.insert(hd);
+//        this.ctService.insert(ct);
+//        this.spService.updateSLGH(ct.getSoLuong(), ct.getMaSP());
+//        this.loadHDC();
+//        this.loadTableHoaDon();
+//        this.loadToTable();
+//        this.clear();
+//        JOptionPane.showMessageDialog(this, "thành công");
     }//GEN-LAST:event_btnThanhToanActionPerformed
 
     private void btnTaoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnTaoActionPerformed
@@ -924,38 +948,37 @@ public class FrmBanHang extends javax.swing.JFrame {
     }//GEN-LAST:event_btnTaoActionPerformed
 
     private void tblHoaDonChoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblHoaDonChoMouseClicked
-        // TODO add your handling code here:
-//        int row = tblHoaDonCho.getSelectedRow();
-//        String maHD = tblHoaDonCho.getValueAt(row, 0).toString();
-//        List<ManageHoaDon> ds = this.hdService.AllCho();
-//        for (ManageHoaDon sp : ds) {
-//            if (sp.getMaHD().equalsIgnoreCase(maHD)) {
-//                this.txtMaHD.setText(sp.getMaHD());
-//                this.txtMaKH.setText(sp.getMaKH());
-//                this.txtMaNV.setText(sp.getMaND());
-//                this.lbThanhTien.setText(String.valueOf(sp.getTongTien()));
-//                this.cbxTT.setSelectedIndex(sp.getTrangThai());
-//            }
-//        }
+        int row = tblHoaDonCho.getSelectedRow();
+        String maHD = tblHoaDonCho.getValueAt(row, 0).toString();
+        dtm = (DefaultTableModel) this.tblDSCho.getModel();
+        dtm.setRowCount(0);
+        for (ManageHoaDonChiTiet sp : this.ctService.All(maHD)) {
+            Object[] rowData = {
+                sp.getMaSP(),
+                sp.getTenSP(),
+                sp.getSoLuong(),
+                sp.getGiaBan(),
+                sp.getSoLuong() * sp.getGiaBan()
+            };
+            dtm.addRow(rowData);
+        }
+        for (ManageHoaDon sp : this.hdService.AllHD()) {
+            if (sp.getMaHD().equalsIgnoreCase(maHD)) {
+                this.txtMaKH.setText(sp.getMaKH());
+                this.txtMaNV.setText(sp.getMaND());
+                this.lbThanhTien.setText(String.valueOf(sp.getTongTien()));
+                this.cbxTT.setSelectedIndex(sp.getTrangThai());
+                this.txtMaHD.setText(sp.getMaHD());
+            }
+        }
+
 //        List<ManageHoaDonChiTiet> ds1 = this.ctService.All(maHD);
 //        for (ManageHoaDonChiTiet sp1 : ds1) {
 //            if (sp1.getMaHD().equalsIgnoreCase(maHD)) {
 //                this.txtMaHDCT.setText(sp1.getMaHDCT());
-//                this.lbMaSP.setText(sp1.getMaSP());
-//                this.spnSoLuong.setValue(sp1.getSoLuong());
+////                this.lbMaSP.setText(sp1.getMaSP());
+////                this.spnSoLuong.setValue(sp1.getSoLuong());
 //            }
-//        }
-//        dtm = (DefaultTableModel) this.tblDSCho.getModel();
-//        dtm.setRowCount(0);
-//        for (ManageHoaDonChiTiet sp : this.ctService.All(maHD)) {
-//            Object[] rowData = {
-//                sp.getMaSP(),
-//                sp.getTenSP(),
-//                sp.getSoLuong(),
-//                sp.getGiaBan(),
-//                sp.getThanhTien()
-//            };
-//            dtm.addRow(rowData);
 //        }
     }//GEN-LAST:event_tblHoaDonChoMouseClicked
 

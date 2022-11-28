@@ -31,6 +31,22 @@ public class HoaDonCTRepository {
         }
     
     }
+    public void insertSP(HoaDonChiTiet sp) {
+        try {
+            Connection conn = DBConnection.getConnection();
+            String query = "INSERT INTO HoaDonChiTiet (MaHD, MaSP, SoLuong, DonGia, ThanhTien) VALUES(?,?,?,?,?)";
+            PreparedStatement ps = conn.prepareStatement(query);
+            ps.setString(1, sp.getMaHD());
+            ps.setString(2, sp.getMaSP());
+            ps.setFloat(3, sp.getSoLuong());
+            ps.setFloat(4, sp.getGiaBan());
+            ps.setFloat(5, sp.getThanhTien());
+            ps.execute();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    
+    }
     public List<HoaDonChiTiet> AllSP(String ma) {
         ArrayList<HoaDonChiTiet> list = new ArrayList<>();
         try {

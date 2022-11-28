@@ -13,6 +13,14 @@ public class HoaDonChiTiet {
     public HoaDonChiTiet() {
     }
 
+    public HoaDonChiTiet(String maHD, String maSP, int soLuong, float giaBan, float thanhTien) {
+        this.maHD = maHD;
+        this.maSP = maSP;
+        this.soLuong = soLuong;
+        this.giaBan = giaBan;
+        this.thanhTien = thanhTien;
+    }
+
     public HoaDonChiTiet(String maSP,  int soLuong, float giaBan, float thanhTien) {
         this.maSP = maSP;
         this.soLuong = soLuong;
