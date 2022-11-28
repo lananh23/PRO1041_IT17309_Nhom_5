@@ -91,6 +91,19 @@ public class SanPhamRepository implements ISanPhamRepository {
         }
     }
     @Override
+    public void updateSLGH(int soLg, String maSP) {
+        try {
+            Connection conn = DBConnection.getConnection();
+            String query = "UPDATE SanPham SET SoLuong = SoLuong - ?  WHERE MaSP=?";
+            PreparedStatement ps = conn.prepareStatement(query);
+            ps.setInt(1, soLg);
+            ps.setString(2, maSP);
+            ps.execute();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+    @Override
     public void delete(String maSP) {
         try {
             Connection conn = DBConnection.getConnection();
@@ -130,4 +143,6 @@ public class SanPhamRepository implements ISanPhamRepository {
         }
         return list;
     }
+
+    
 }

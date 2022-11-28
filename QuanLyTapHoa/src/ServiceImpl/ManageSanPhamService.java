@@ -58,4 +58,9 @@ public class ManageSanPhamService implements IManageSanPhamService {
         }
         return list;
     }
+
+    @Override
+    public void updateSLGH(int soLg, String maSP) {
+        this.SanPhamRepo.updateSLGH(soLg, maSP);
+    }
 }

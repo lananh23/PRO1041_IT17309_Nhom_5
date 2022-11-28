@@ -114,4 +114,26 @@ public class HoaDonCTRepository {
         return listHoaDonChiTiets;
 
     }
+    public void updateSL(String maSP) {
+        try {
+            Connection conn = DBConnection.getConnection();
+            String query = "UPDATE HoaDonChiTiet SET SoLuong = ?  WHERE MaSP=?";
+            PreparedStatement ps = conn.prepareStatement(query);
+            ps.setString(1, maSP);
+            ps.execute();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+    public void delete(String maSP) {
+        try {
+            Connection conn = DBConnection.getConnection();
+            String query = "DELETE FROM HoaDonChiTiet  WHERE MaSP=?";
+            PreparedStatement ps = conn.prepareStatement(query);
+            ps.setString(1, maSP);
+            ps.execute();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
 }

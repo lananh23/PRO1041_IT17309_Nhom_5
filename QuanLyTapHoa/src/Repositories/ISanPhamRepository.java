@@ -12,6 +12,8 @@ public interface ISanPhamRepository {
     public void update(String maSP, SanPham sp);
 
     public void updateSL(String maSP);
+    
+    public void updateSLGH(int soLg, String maSP);
 
     public void delete(String maSP);
 
