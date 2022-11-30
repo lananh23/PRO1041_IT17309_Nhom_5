@@ -45,6 +45,15 @@ public class ManageHoaDonChiTiet {
 //        this.giaBan = giaBan;
 //        this.thanhTien = thanhTien;
 //    }
+
+    public ManageHoaDonChiTiet(String maHDCT, String maHD, String maSP, int soLuong, float giaBan, float thanhTien) {
+        this.maHDCT = maHDCT;
+        this.maHD = maHD;
+        this.maSP = maSP;
+        this.soLuong = soLuong;
+        this.giaBan = giaBan;
+        this.thanhTien = thanhTien;
+    }
     
 
     public ManageHoaDonChiTiet(String maHDCT, String maHD, String maSP,  int soLuong, float giaBan, float thanhTien, String maCu) {

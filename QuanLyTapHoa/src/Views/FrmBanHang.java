@@ -96,13 +96,13 @@ public class FrmBanHang extends javax.swing.JFrame {
 
     public ManageHoaDonChiTiet getFormData() {
         int row = this.tblDSSanPham.getSelectedRow();
-        String ma = this.tblDSSanPham.getValueAt(row, 3).toString();
+        String DG = this.tblDSSanPham.getValueAt(row, 3).toString();
         String maHDCT = this.txtMaHDCT.getText();
         String maSP = this.lbMaSP.getText();
         String maHD = this.txtMaHD.getText();
         int sLg = (int) this.spnSoLuong.getValue();
-        float donGia = Float.valueOf(ma);
-        ManageHoaDonChiTiet s = new ManageHoaDonChiTiet(maHDCT, maHD, maSP, maSP, sLg, donGia, donGia * sLg);
+        float donGia = Float.valueOf(DG);
+        ManageHoaDonChiTiet s = new ManageHoaDonChiTiet(maHDCT, maHD, maSP, sLg, donGia, donGia*sLg);
         return s;
     }
 
@@ -309,6 +309,7 @@ public class FrmBanHang extends javax.swing.JFrame {
         jScrollPane5 = new javax.swing.JScrollPane();
         tblHoaDonCho = new javax.swing.JTable();
         btnHuyHoaDon = new javax.swing.JButton();
+        jCheckBox1 = new javax.swing.JCheckBox();
         jPanel30 = new javax.swing.JPanel();
         jPanel32 = new javax.swing.JPanel();
         jPanel21 = new javax.swing.JPanel();
@@ -344,7 +345,15 @@ public class FrmBanHang extends javax.swing.JFrame {
             new String [] {
                 "Mã SP", "Tên SP", "Số lượng", "Giá bán"
             }
-        ));
+        ) {
+            boolean[] canEdit = new boolean [] {
+                false, false, false, false
+            };
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
         tblDSSanPham.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 tblDSSanPhamMouseClicked(evt);
@@ -497,9 +506,9 @@ public class FrmBanHang extends javax.swing.JFrame {
                 .addGroup(jPanel16Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(lbThanhTien)
                     .addComponent(jLabel48))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 13, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jLabel47)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 14, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(jPanel16Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(cbxTT, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel43))
@@ -612,7 +621,7 @@ public class FrmBanHang extends javax.swing.JFrame {
                     .addComponent(btnXoa)
                     .addComponent(btnLuuTam))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jScrollPane6, javax.swing.GroupLayout.DEFAULT_SIZE, 105, Short.MAX_VALUE)
+                .addComponent(jScrollPane6, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
                 .addGap(7, 7, 7))
         );
 
@@ -629,7 +638,15 @@ public class FrmBanHang extends javax.swing.JFrame {
             new String [] {
                 "Mã hoá đơn"
             }
-        ));
+        ) {
+            boolean[] canEdit = new boolean [] {
+                false
+            };
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
         tblHoaDonCho.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 tblHoaDonChoMouseClicked(evt);
@@ -639,16 +656,24 @@ public class FrmBanHang extends javax.swing.JFrame {
 
         btnHuyHoaDon.setText("Huỷ hoá đơn chờ");
 
+        jCheckBox1.setText("Chọn tất cả");
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, 182, Short.MAX_VALUE)
+            .addComponent(btnHuyHoaDon, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 182, Short.MAX_VALUE)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jScrollPane5, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
-                .addContainerGap())
-            .addComponent(btnHuyHoaDon, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 182, Short.MAX_VALUE)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(10, 10, 10)
+                        .addComponent(jCheckBox1)
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addComponent(jScrollPane5, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
+                        .addContainerGap())))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -656,7 +681,9 @@ public class FrmBanHang extends javax.swing.JFrame {
                 .addContainerGap()
                 .addComponent(jLabel1)
                 .addGap(18, 18, 18)
-                .addComponent(jScrollPane5, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
+                .addComponent(jScrollPane5, javax.swing.GroupLayout.PREFERRED_SIZE, 323, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jCheckBox1)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(btnHuyHoaDon)
                 .addContainerGap())
@@ -891,45 +918,45 @@ public class FrmBanHang extends javax.swing.JFrame {
     }//GEN-LAST:event_spnSoLuongMouseClicked
 
     private void btnThanhToanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnThanhToanActionPerformed
-        ManageHoaDon hd = this.getFormDataHD();
-        if (hd == null) {
-            return;
-        }
-        this.hdService.insert(hd);
-        int row = 0;
-        ArrayList<ManageHoaDonChiTiet> listHDCT = new ArrayList<>();
-        for (ManageHoaDonChiTiet a : list) {
-            a.setMaHDCT(this.txtMaHDCT.getText());
-            a.setMaHD(this.txtMaHD.getText());
-            a.setMaSP((String) tblDSCho.getValueAt(row, 0));
-            a.setSoLuong((int) tblDSCho.getValueAt(row, 2));
-            a.setGiaBan((Float) tblDSCho.getValueAt(row, 3));
-            a.setThanhTien((Float) tblDSCho.getValueAt(row, 4));
-            row++;
-            listHDCT.add(a);
-        }
-        for (ManageHoaDonChiTiet hoaDonChiTiet : listHDCT) {
-            ctService.insert(hoaDonChiTiet);
-            this.spService.updateSLGH(hoaDonChiTiet.getSoLuong(), hoaDonChiTiet.getMaSP());
-        }
-        this.loadHDC();
-        this.loadTableHoaDon();
-        this.loadToTable();
-        this.clear();
-        JOptionPane.showMessageDialog(this, "thành công");
-//        ManageHoaDonChiTiet ct = this.getFormData();
 //        ManageHoaDon hd = this.getFormDataHD();
-//        if (ct == null || hd == null) {
+//        if (hd == null) {
 //            return;
 //        }
 //        this.hdService.insert(hd);
-//        this.ctService.insert(ct);
-//        this.spService.updateSLGH(ct.getSoLuong(), ct.getMaSP());
+//        int row = 0;
+//        ArrayList<ManageHoaDonChiTiet> listHDCT = new ArrayList<>();
+//        for (ManageHoaDonChiTiet a : list) {
+//            a.setMaHDCT(this.txtMaHDCT.getText());
+//            a.setMaHD(this.txtMaHD.getText());
+//            a.setMaSP((String) tblDSCho.getValueAt(row, 0));
+//            a.setSoLuong((int) tblDSCho.getValueAt(row, 2));
+//            a.setGiaBan((Float) tblDSCho.getValueAt(row, 3));
+//            a.setThanhTien((Float) tblDSCho.getValueAt(row, 4));
+//            row++;
+//            listHDCT.add(a);
+//        }
+//        for (ManageHoaDonChiTiet hoaDonChiTiet : listHDCT) {
+//            ctService.insert(hoaDonChiTiet);
+//            this.spService.updateSLGH(hoaDonChiTiet.getSoLuong(), hoaDonChiTiet.getMaSP());
+//        }
 //        this.loadHDC();
 //        this.loadTableHoaDon();
 //        this.loadToTable();
 //        this.clear();
 //        JOptionPane.showMessageDialog(this, "thành công");
+        ManageHoaDonChiTiet ct = this.getFormData();
+        ManageHoaDon hd = this.getFormDataHD();
+        if (ct == null || hd == null) {
+            return;
+        }
+        this.hdService.insert(hd);
+        this.ctService.insert(ct);
+        this.spService.updateSLGH(ct.getSoLuong(), ct.getMaSP());
+        this.loadHDC();
+        this.loadTableHoaDon();
+        this.loadToTable();
+        this.clear();
+        JOptionPane.showMessageDialog(this, "thành công");
     }//GEN-LAST:event_btnThanhToanActionPerformed
 
     private void btnTaoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnTaoActionPerformed
@@ -944,7 +971,6 @@ public class FrmBanHang extends javax.swing.JFrame {
         this.loadToTable();
         this.loadHDC();
         this.clear();
-        this.loadTableHoaDon();
     }//GEN-LAST:event_btnTaoActionPerformed
 
     private void tblHoaDonChoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblHoaDonChoMouseClicked
@@ -1075,6 +1101,7 @@ public class FrmBanHang extends javax.swing.JFrame {
     private javax.swing.JComboBox<String> cbxTT;
     private javax.swing.JButton jButton41;
     private javax.swing.JButton jButton42;
+    private javax.swing.JCheckBox jCheckBox1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel20;
     private javax.swing.JLabel jLabel24;
