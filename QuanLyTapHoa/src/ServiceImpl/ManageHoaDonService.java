@@ -52,5 +52,15 @@ public class ManageHoaDonService implements IManageHoaDon{
         }
         return list;
     }
+
+    @Override
+    public void deleteMa(String ma) {
+        this.deleteMa(ma);
+    }
+
+    @Override
+    public void delete() {
+        this.delete();
+    }
     
 }

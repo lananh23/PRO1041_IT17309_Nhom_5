@@ -152,4 +152,25 @@ public class HoaDonCTRepository {
             e.printStackTrace();
         }
     }
+    public void deleteALL() {
+        try {
+            Connection conn = DBConnection.getConnection();
+            String query = "DELETE FROM HoaDonChiTiet";
+            PreparedStatement ps = conn.prepareStatement(query);
+            ps.execute();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+    public void deleteMaHD(String ma) {
+        try {
+            Connection conn = DBConnection.getConnection();
+            String query = "DELETE FROM HoaDonChiTiet WHERE MaHD =? ";
+            PreparedStatement ps = conn.prepareStatement(query);
+            ps.setString(1, ma);
+            ps.execute();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
 }

@@ -160,4 +160,25 @@ public class HoaDonRepository {
         }
         return list;
     }
+    public void delete() {
+        try {
+            Connection conn = DBConnection.getConnection();
+            String query = "DELETE FROM HoaDon";
+            PreparedStatement ps = conn.prepareStatement(query);
+            ps.execute();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+    public void deleteMa(String ma) {
+        try {
+            Connection conn = DBConnection.getConnection();
+            String query = "DELETE FROM HoaDon WHERE MaHD =? ";
+            PreparedStatement ps = conn.prepareStatement(query);
+            ps.setString(1, ma);
+            ps.execute();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
 }

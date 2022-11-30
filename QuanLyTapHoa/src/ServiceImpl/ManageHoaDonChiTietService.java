@@ -37,5 +37,15 @@ public class ManageHoaDonChiTietService implements IManageHoaDonChiTiet{
         HoaDonChiTiet s = new HoaDonChiTiet(sp.getMaHD(), sp.getMaSP(), sp.getSoLuong(), sp.getGiaBan(), sp.getThanhTien());
         this.hdRepo.insertSP(s);
     }
+
+    @Override
+    public void deleteALL() {
+        this.hdRepo.deleteALL();
+    }
+
+    @Override
+    public void deleteMaHD(String ma) {
+        this.hdRepo.deleteMaHD(ma);
+    }
     
 }

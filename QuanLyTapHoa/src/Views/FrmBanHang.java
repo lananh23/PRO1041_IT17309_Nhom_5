@@ -309,7 +309,7 @@ public class FrmBanHang extends javax.swing.JFrame {
         jScrollPane5 = new javax.swing.JScrollPane();
         tblHoaDonCho = new javax.swing.JTable();
         btnHuyHoaDon = new javax.swing.JButton();
-        jCheckBox1 = new javax.swing.JCheckBox();
+        cbxAll = new javax.swing.JCheckBox();
         jPanel30 = new javax.swing.JPanel();
         jPanel32 = new javax.swing.JPanel();
         jPanel21 = new javax.swing.JPanel();
@@ -660,8 +660,13 @@ public class FrmBanHang extends javax.swing.JFrame {
         jScrollPane5.setViewportView(tblHoaDonCho);
 
         btnHuyHoaDon.setText("Huỷ hoá đơn chờ");
+        btnHuyHoaDon.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnHuyHoaDonActionPerformed(evt);
+            }
+        });
 
-        jCheckBox1.setText("Chọn tất cả");
+        cbxAll.setText("Chọn tất cả");
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -674,7 +679,7 @@ public class FrmBanHang extends javax.swing.JFrame {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGap(10, 10, 10)
-                        .addComponent(jCheckBox1)
+                        .addComponent(cbxAll)
                         .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addComponent(jScrollPane5, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
@@ -688,7 +693,7 @@ public class FrmBanHang extends javax.swing.JFrame {
                 .addGap(18, 18, 18)
                 .addComponent(jScrollPane5, javax.swing.GroupLayout.PREFERRED_SIZE, 323, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jCheckBox1)
+                .addComponent(cbxAll)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(btnHuyHoaDon)
                 .addContainerGap())
@@ -900,16 +905,17 @@ public class FrmBanHang extends javax.swing.JFrame {
     }//GEN-LAST:event_btnTimSPActionPerformed
 
     private void btnLuuTamActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLuuTamActionPerformed
+        ArrayList<ManageHoaDonChiTiet> listS = new ArrayList<>();
         ManageHoaDonChiTiet chiTietHoaDonViewModel = new ManageHoaDonChiTiet();
         int row = tblDSSanPham.getSelectedRow();
         chiTietHoaDonViewModel.setMaSP((String) tblDSSanPham.getValueAt(row, 0));
         chiTietHoaDonViewModel.setTenSP((String) tblDSSanPham.getValueAt(row, 1));
         chiTietHoaDonViewModel.setSoLuong((int) spnSoLuong.getValue());
         chiTietHoaDonViewModel.setGiaBan((Float) tblDSSanPham.getValueAt(row, 3));
-        list.add(chiTietHoaDonViewModel);
-        addSP(list);
+        listS.add(chiTietHoaDonViewModel);
+        addSP(listS);
         int thanhTien = 0;
-        for (ManageHoaDonChiTiet ct : list) {
+        for (ManageHoaDonChiTiet ct : listS) {
             thanhTien = (int) (thanhTien + ct.getThanhTien());
             lbThanhTien.setText("" + thanhTien);
         }
@@ -1063,6 +1069,18 @@ public class FrmBanHang extends javax.swing.JFrame {
                         dispose();
     }//GEN-LAST:event_btnThemActionPerformed
 
+    private void btnHuyHoaDonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnHuyHoaDonActionPerformed
+        int row = tblHoaDonCho.getSelectedRow();
+        if(row == -1){
+            JOptionPane.showMessageDialog(this, "vui lòng chọn 1 dòng");
+            return;
+        }
+        String ma = this.tblHoaDonCho.getValueAt(row, 0).toString();
+        this.ctService.deleteMaHD(ma);
+        this.hdService.deleteMa(ma);
+        JOptionPane.showMessageDialog(this, "Hủy thành công");
+    }//GEN-LAST:event_btnHuyHoaDonActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -1109,10 +1127,10 @@ public class FrmBanHang extends javax.swing.JFrame {
     private javax.swing.JButton btnTim;
     private javax.swing.JButton btnTimSP;
     private javax.swing.JButton btnXoa;
+    private javax.swing.JCheckBox cbxAll;
     private javax.swing.JComboBox<String> cbxTT;
     private javax.swing.JButton jButton41;
     private javax.swing.JButton jButton42;
-    private javax.swing.JCheckBox jCheckBox1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel20;
     private javax.swing.JLabel jLabel24;
