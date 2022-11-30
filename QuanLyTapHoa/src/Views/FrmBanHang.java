@@ -277,7 +277,7 @@ public class FrmBanHang extends javax.swing.JFrame {
         jPanel16 = new javax.swing.JPanel();
         jLabel24 = new javax.swing.JLabel();
         jLabel25 = new javax.swing.JLabel();
-        btnThemKH = new javax.swing.JButton();
+        btnThem = new javax.swing.JButton();
         jLabel42 = new javax.swing.JLabel();
         jLabel43 = new javax.swing.JLabel();
         jLabel47 = new javax.swing.JLabel();
@@ -393,7 +393,12 @@ public class FrmBanHang extends javax.swing.JFrame {
 
         jLabel25.setText("Mã NV");
 
-        btnThemKH.setText("Thêm");
+        btnThem.setText("Thêm");
+        btnThem.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnThemActionPerformed(evt);
+            }
+        });
 
         jLabel42.setText("Ngày tạo");
 
@@ -464,7 +469,7 @@ public class FrmBanHang extends javax.swing.JFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addGroup(jPanel16Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(jPanel16Layout.createSequentialGroup()
-                                .addComponent(btnThemKH)
+                                .addComponent(btnThem)
                                 .addGap(18, 18, 18)
                                 .addComponent(btnTim))
                             .addGroup(jPanel16Layout.createSequentialGroup()
@@ -489,7 +494,7 @@ public class FrmBanHang extends javax.swing.JFrame {
                 .addContainerGap()
                 .addGroup(jPanel16Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel24)
-                    .addComponent(btnThemKH)
+                    .addComponent(btnThem)
                     .addComponent(btnTim)
                     .addComponent(txtMaKH, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
@@ -1052,6 +1057,12 @@ public class FrmBanHang extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_btnXoaActionPerformed
 
+    private void btnThemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnThemActionPerformed
+                FrmThemNhanhKhachHang diem = new FrmThemNhanhKhachHang();
+                        diem.setVisible(true);
+                        dispose();
+    }//GEN-LAST:event_btnThemActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -1094,7 +1105,7 @@ public class FrmBanHang extends javax.swing.JFrame {
     private javax.swing.JButton btnLuuTam;
     private javax.swing.JButton btnTao;
     private javax.swing.JButton btnThanhToan;
-    private javax.swing.JButton btnThemKH;
+    private javax.swing.JButton btnThem;
     private javax.swing.JButton btnTim;
     private javax.swing.JButton btnTimSP;
     private javax.swing.JButton btnXoa;
