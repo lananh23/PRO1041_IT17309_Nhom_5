@@ -21,6 +21,10 @@ public class HoaDonChiTiet {
         this.thanhTien = thanhTien;
     }
 
+    public HoaDonChiTiet(String maHDCT) {
+        this.maHDCT = maHDCT;
+    }
+
     public HoaDonChiTiet(String maSP,  int soLuong, float giaBan, float thanhTien) {
         this.maSP = maSP;
         this.soLuong = soLuong;

@@ -55,12 +55,22 @@ public class ManageHoaDonService implements IManageHoaDon{
 
     @Override
     public void deleteMa(String ma) {
-        this.deleteMa(ma);
+        this.hdRepo.deleteMa(ma);
     }
 
     @Override
     public void delete() {
-        this.delete();
+        this.hdRepo.delete();
+    }
+
+    @Override
+    public List<ManageHoaDon> AllMa(String ma) {
+        list = new ArrayList<>();
+        List<HoaDon> List_CH = this.hdRepo.AllMa(ma);
+        for (HoaDon o : List_CH) {
+            list.add(new ManageHoaDon(o.getMaHD(), o.getMaND(), o.getMaKH() ,o.getNgayTao(),o.getTongTien(), o.getTrangThai()));
+        }
+        return list;
     }
     
 }

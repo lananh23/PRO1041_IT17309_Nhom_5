@@ -8,10 +8,11 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class HoaDonCTRepository {
-        Connection connection;
+
+    Connection connection;
     PreparedStatement ps;
     ResultSet rs;
-        List<HoaDonChiTiet> listHoaDonChiTiets;
+    List<HoaDonChiTiet> listHoaDonChiTiets;
 
     public void insert(HoaDonChiTiet sp) {
         try {
@@ -29,8 +30,9 @@ public class HoaDonCTRepository {
         } catch (SQLException e) {
             e.printStackTrace();
         }
-    
+
     }
+
     public void insertSP(HoaDonChiTiet sp) {
         try {
             Connection conn = DBConnection.getConnection();
@@ -45,8 +47,9 @@ public class HoaDonCTRepository {
         } catch (SQLException e) {
             e.printStackTrace();
         }
-    
+
     }
+
     public List<HoaDonChiTiet> AllSP(String ma) {
         ArrayList<HoaDonChiTiet> list = new ArrayList<>();
         try {
@@ -62,6 +65,32 @@ public class HoaDonCTRepository {
                 float donGia = rs.getFloat("DonGia");
                 float thanhTien = rs.getFloat("ThanhTien");
                 HoaDonChiTiet sp = new HoaDonChiTiet(maSP, soLuong, donGia, thanhTien);
+                list.add(sp);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return list;
+    }
+
+    public List<HoaDonChiTiet> AllMa(String ma) {
+        ArrayList<HoaDonChiTiet> list = new ArrayList<>();
+        try {
+            Connection conn = DBConnection.getConnection();
+            String query = "SELECT * FROM HoaDonChiTiet WHERE MaHD = ? ";
+            PreparedStatement ps = conn.prepareStatement(query);
+            ps.setString(1, ma);
+            ps.execute();
+            ResultSet rs = ps.getResultSet();
+            while (rs.next() == true) {
+                String maS = rs.getString("MaHDCT");
+                String maSP = rs.getString("MaSP");
+                String maHD = rs.getString("MaHD");
+                String maHDCT = rs.getString("Ma_HDCT_Cu");
+                int soLuong = rs.getInt("SoLuong");
+                float donGia = rs.getFloat("DonGia");
+                float thanhTien = rs.getFloat("ThanhTien");
+                HoaDonChiTiet sp = new HoaDonChiTiet(maS, maHD, maSP, soLuong, donGia, thanhTien, maHDCT);
                 list.add(sp);
             }
         } catch (SQLException e) {
@@ -130,6 +159,7 @@ public class HoaDonCTRepository {
         return listHoaDonChiTiets;
 
     }
+
     public void updateSL(String maSP) {
         try {
             Connection conn = DBConnection.getConnection();
@@ -141,6 +171,7 @@ public class HoaDonCTRepository {
             e.printStackTrace();
         }
     }
+
     public void delete(String maSP) {
         try {
             Connection conn = DBConnection.getConnection();
@@ -152,6 +183,7 @@ public class HoaDonCTRepository {
             e.printStackTrace();
         }
     }
+
     public void deleteALL() {
         try {
             Connection conn = DBConnection.getConnection();
@@ -162,6 +194,7 @@ public class HoaDonCTRepository {
             e.printStackTrace();
         }
     }
+
     public void deleteMaHD(String ma) {
         try {
             Connection conn = DBConnection.getConnection();

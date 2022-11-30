@@ -22,6 +22,10 @@ public class ManageHoaDonChiTiet {
         this.thanhTien = thanhTien;
     }
 
+    public ManageHoaDonChiTiet(String maHDCT) {
+        this.maHDCT = maHDCT;
+    }
+
     public ManageHoaDonChiTiet(String maHDCT, String maHD, String maSP, String tenSP, int soLuong, float giaBan, float thanhTien) {
         this.maHDCT = maHDCT;
         this.maHD = maHD;

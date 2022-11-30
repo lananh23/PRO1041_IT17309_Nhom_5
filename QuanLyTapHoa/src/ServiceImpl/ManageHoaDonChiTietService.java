@@ -47,5 +47,15 @@ public class ManageHoaDonChiTietService implements IManageHoaDonChiTiet{
     public void deleteMaHD(String ma) {
         this.hdRepo.deleteMaHD(ma);
     }
+
+    @Override
+    public List<ManageHoaDonChiTiet> AllMa(String ma) {
+        list = new ArrayList<>();
+        List<HoaDonChiTiet> List_CH = this.hdRepo.AllMa(ma);
+        for (HoaDonChiTiet o : List_CH) {
+            list.add(new ManageHoaDonChiTiet(o.getMaHDCT(), o.getMaHD(), o.getMaSP(), o.getSoLuong(), o.getGiaBan(),o.getThanhTien(), o.getMaCu()));
+        }
+        return list;
+    }
     
 }

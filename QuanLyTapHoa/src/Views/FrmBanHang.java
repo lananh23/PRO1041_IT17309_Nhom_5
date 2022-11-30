@@ -17,6 +17,8 @@ import ViewModels.ManageHoaDon;
 import ViewModels.ManageHoaDonChiTiet;
 import ViewModels.QLHoaDon;
 import ViewModels.QLSanPham;
+import java.awt.event.ItemEvent;
+import java.awt.event.ItemListener;
 import java.math.BigDecimal;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -102,7 +104,7 @@ public class FrmBanHang extends javax.swing.JFrame {
         String maHD = this.txtMaHD.getText();
         int sLg = (int) this.spnSoLuong.getValue();
         float donGia = Float.valueOf(DG);
-        ManageHoaDonChiTiet s = new ManageHoaDonChiTiet(maHDCT, maHD, maSP, sLg, donGia, donGia*sLg);
+        ManageHoaDonChiTiet s = new ManageHoaDonChiTiet(maHDCT, maHD, maSP, sLg, donGia, donGia * sLg);
         return s;
     }
 
@@ -167,6 +169,14 @@ public class FrmBanHang extends javax.swing.JFrame {
         this.lbThanhTien.setText("--");
         this.cbxTT.setSelectedIndex(0);
 
+    }
+
+    public boolean itemStateChanged(ItemEvent e) {
+        if (e.getStateChange() == 1) {
+            return true;
+        } else {
+            return false;
+        }
     }
 
     void loadTableHoaDonChiTiet() {
@@ -441,22 +451,6 @@ public class FrmBanHang extends javax.swing.JFrame {
                 .addContainerGap()
                 .addGroup(jPanel16Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel16Layout.createSequentialGroup()
-                        .addGroup(jPanel16Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel42)
-                            .addComponent(jLabel43)
-                            .addComponent(jLabel48, javax.swing.GroupLayout.PREFERRED_SIZE, 62, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(47, 47, 47)
-                        .addGroup(jPanel16Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(jPanel16Layout.createSequentialGroup()
-                                .addGap(0, 0, Short.MAX_VALUE)
-                                .addComponent(jLabel47, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(jPanel16Layout.createSequentialGroup()
-                                .addGroup(jPanel16Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(cbxTT, javax.swing.GroupLayout.PREFERRED_SIZE, 133, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(lbThanhTien, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addGap(0, 0, Short.MAX_VALUE)))
-                        .addContainerGap())
-                    .addGroup(jPanel16Layout.createSequentialGroup()
                         .addGroup(jPanel16Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addGroup(jPanel16Layout.createSequentialGroup()
                                 .addComponent(jLabel25)
@@ -478,9 +472,26 @@ public class FrmBanHang extends javax.swing.JFrame {
                                 .addComponent(txtMaHD)))
                         .addGap(23, 23, 23))
                     .addGroup(jPanel16Layout.createSequentialGroup()
-                        .addGap(109, 109, 109)
-                        .addComponent(txtNgayTao, javax.swing.GroupLayout.PREFERRED_SIZE, 133, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+                        .addGroup(jPanel16Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel16Layout.createSequentialGroup()
+                                .addGroup(jPanel16Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jLabel42)
+                                    .addComponent(jLabel43)
+                                    .addComponent(jLabel48, javax.swing.GroupLayout.PREFERRED_SIZE, 62, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addGap(47, 47, 47)
+                                .addGroup(jPanel16Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addGroup(jPanel16Layout.createSequentialGroup()
+                                        .addGap(0, 0, Short.MAX_VALUE)
+                                        .addComponent(jLabel47, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addGroup(jPanel16Layout.createSequentialGroup()
+                                        .addGroup(jPanel16Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                            .addComponent(cbxTT, javax.swing.GroupLayout.PREFERRED_SIZE, 133, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                            .addComponent(lbThanhTien, javax.swing.GroupLayout.PREFERRED_SIZE, 122, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                        .addGap(0, 0, Short.MAX_VALUE))))
+                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel16Layout.createSequentialGroup()
+                                .addGap(109, 109, 109)
+                                .addComponent(txtNgayTao, javax.swing.GroupLayout.PREFERRED_SIZE, 133, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addContainerGap())))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel16Layout.createSequentialGroup()
                 .addGap(43, 43, 43)
                 .addComponent(btnTao)
@@ -955,33 +966,46 @@ public class FrmBanHang extends javax.swing.JFrame {
 //        this.loadToTable();
 //        this.clear();
 //        JOptionPane.showMessageDialog(this, "thành công");
-        ManageHoaDonChiTiet ct = this.getFormData();
-        ManageHoaDon hd = this.getFormDataHD();
-        if (ct == null || hd == null) {
+        if (this.cbxTT.getSelectedIndex() == 0) {
+            JOptionPane.showMessageDialog(this, "Khách hàng chưa thanh toán vui lòng thanh toán");
             return;
+        } else {
+            ManageHoaDonChiTiet ct = this.getFormData();
+            ManageHoaDon hd = this.getFormDataHD();
+            if (ct == null || hd == null) {
+                return;
+            }
+            this.hdService.insert(hd);
+            this.ctService.insert(ct);
+            this.spService.updateSLGH(ct.getSoLuong(), ct.getMaSP());
+            this.loadHDC();
+            this.loadTableHoaDon();
+            this.loadToTable();
+            this.clear();
+            JOptionPane.showMessageDialog(this, "thành công");
         }
-        this.hdService.insert(hd);
-        this.ctService.insert(ct);
-        this.spService.updateSLGH(ct.getSoLuong(), ct.getMaSP());
-        this.loadHDC();
-        this.loadTableHoaDon();
-        this.loadToTable();
-        this.clear();
-        JOptionPane.showMessageDialog(this, "thành công");
+
     }//GEN-LAST:event_btnThanhToanActionPerformed
 
     private void btnTaoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnTaoActionPerformed
-        ManageHoaDonChiTiet ct = this.getFormData();
-        ManageHoaDon hd = this.getFormDataHD();
-        if (ct == null || hd == null) {
+        if (this.cbxTT.getSelectedIndex() == 1) {
+            JOptionPane.showMessageDialog(this, "Khách hàng đã thanh toán vui lòng chọn thanh toán");
             return;
+        } else {
+            ManageHoaDonChiTiet ct = this.getFormData();
+            ManageHoaDon hd = this.getFormDataHD();
+            if (ct == null || hd == null) {
+                return;
+            }
+            this.hdService.insert(hd);
+            this.ctService.insert(ct);
+            this.spService.updateSLGH(ct.getSoLuong(), ct.getMaSP());
+            this.loadToTable();
+            this.loadHDC();
+            this.clear();
+            JOptionPane.showMessageDialog(this, "Hóa đơn đã được thêm vào hàng chờ");
         }
-        this.hdService.insert(hd);
-        this.ctService.insert(ct);
-        this.spService.updateSLGH(ct.getSoLuong(), ct.getMaSP());
-        this.loadToTable();
-        this.loadHDC();
-        this.clear();
+
     }//GEN-LAST:event_btnTaoActionPerformed
 
     private void tblHoaDonChoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblHoaDonChoMouseClicked
@@ -999,24 +1023,22 @@ public class FrmBanHang extends javax.swing.JFrame {
             };
             dtm.addRow(rowData);
         }
-        for (ManageHoaDon sp : this.hdService.AllHD()) {
+        for (ManageHoaDon sp : this.hdService.AllMa(maHD)) {
             if (sp.getMaHD().equalsIgnoreCase(maHD)) {
                 this.txtMaKH.setText(sp.getMaKH());
                 this.txtMaNV.setText(sp.getMaND());
                 this.lbThanhTien.setText(String.valueOf(sp.getTongTien()));
                 this.cbxTT.setSelectedIndex(sp.getTrangThai());
                 this.txtMaHD.setText(sp.getMaHD());
+                this.txtNgayTao.setText(sp.getNgayTao().toString());
             }
         }
 
-//        List<ManageHoaDonChiTiet> ds1 = this.ctService.All(maHD);
-//        for (ManageHoaDonChiTiet sp1 : ds1) {
-//            if (sp1.getMaHD().equalsIgnoreCase(maHD)) {
-//                this.txtMaHDCT.setText(sp1.getMaHDCT());
-////                this.lbMaSP.setText(sp1.getMaSP());
-////                this.spnSoLuong.setValue(sp1.getSoLuong());
-//            }
-//        }
+        for (ManageHoaDonChiTiet sp1 : this.ctService.AllMa(maHD)) {
+            if (sp1.getMaHD().equalsIgnoreCase(maHD)) {
+                this.txtMaHDCT.setText(sp1.getMaHDCT());
+            }
+        }
     }//GEN-LAST:event_tblHoaDonChoMouseClicked
 
     private void btnTimActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnTimActionPerformed
@@ -1064,21 +1086,39 @@ public class FrmBanHang extends javax.swing.JFrame {
     }//GEN-LAST:event_btnXoaActionPerformed
 
     private void btnThemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnThemActionPerformed
-                FrmThemNhanhKhachHang diem = new FrmThemNhanhKhachHang();
-                        diem.setVisible(true);
-                        dispose();
+        FrmThemNhanhKhachHang diem = new FrmThemNhanhKhachHang();
+        diem.setVisible(true);
+        dispose();
     }//GEN-LAST:event_btnThemActionPerformed
 
     private void btnHuyHoaDonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnHuyHoaDonActionPerformed
-        int row = tblHoaDonCho.getSelectedRow();
-        if(row == -1){
-            JOptionPane.showMessageDialog(this, "vui lòng chọn 1 dòng");
-            return;
+        if (cbxAll.isSelected() == true) {
+            int cofirm = JOptionPane.showConfirmDialog(this, "bạn muốn hủy tất cả không");
+            if (cofirm != JOptionPane.YES_OPTION) {
+                return;
+            }
+            this.ctService.deleteALL();
+            this.hdService.delete();
+            this.loadHDC();
+            this.clear();
+            JOptionPane.showMessageDialog(this, "Hủy thành công");
+        } else {
+            int row = tblHoaDonCho.getSelectedRow();
+            if (row == -1) {
+                JOptionPane.showMessageDialog(this, "vui lòng chọn 1 dòng");
+                return;
+            }
+            int cofirm = JOptionPane.showConfirmDialog(this, "bạn muốn hủy không");
+            if (cofirm != JOptionPane.YES_OPTION) {
+                return;
+            }
+            String ma = this.tblHoaDonCho.getValueAt(row, 0).toString();
+            this.ctService.deleteMaHD(ma);
+            this.hdService.deleteMa(ma);
+            this.loadHDC();
+            this.clear();
+            JOptionPane.showMessageDialog(this, "Hủy thành công");
         }
-        String ma = this.tblHoaDonCho.getValueAt(row, 0).toString();
-        this.ctService.deleteMaHD(ma);
-        this.hdService.deleteMa(ma);
-        JOptionPane.showMessageDialog(this, "Hủy thành công");
     }//GEN-LAST:event_btnHuyHoaDonActionPerformed
 
     /**

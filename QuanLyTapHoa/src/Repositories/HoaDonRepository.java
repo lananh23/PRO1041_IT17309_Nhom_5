@@ -47,7 +47,6 @@ public class HoaDonRepository {
 //        }
 //        return k;
 //    }
-
 //    public List<HoaDon> tim(String Sdt) throws SQLException {
 //        ArrayList<HoaDon> k = new ArrayList<>();
 //        try {
@@ -78,7 +77,6 @@ public class HoaDonRepository {
 //        }
 //        return k;
 //    }
-
     public void insert(HoaDon sp) {
         try {
             Connection conn = DBConnection.getConnection();
@@ -96,11 +94,12 @@ public class HoaDonRepository {
             e.printStackTrace();
         }
     }
+
     public List<HoaDon> All() {
         ArrayList<HoaDon> list = new ArrayList<>();
         try {
             Connection conn = DBConnection.getConnection();
-            String query = "SELECT * FROM HoaDon WHERE TrangThai =1";
+            String query = "SELECT * FROM HoaDon WHERE TrangThai = 1";
             PreparedStatement ps = conn.prepareStatement(query);
             ps.execute();
             ResultSet rs = ps.getResultSet();
@@ -119,12 +118,38 @@ public class HoaDonRepository {
         }
         return list;
     }
-        public List<HoaDon> AllHD() {
+
+    public List<HoaDon> AllHD() {
         ArrayList<HoaDon> list = new ArrayList<>();
         try {
             Connection conn = DBConnection.getConnection();
             String query = "SELECT * FROM HoaDon";
             PreparedStatement ps = conn.prepareStatement(query);
+            ps.execute();
+            ResultSet rs = ps.getResultSet();
+            while (rs.next() == true) {
+                String maHD = rs.getString("MaHD");
+                String maND = rs.getString("MaND");
+                String maKH = rs.getString("MaKH");
+                Date ngTao = rs.getDate("NgayTao");
+                float tongTien = rs.getFloat("TongTien");
+                int tt = rs.getInt("TrangThai");
+                HoaDon sp = new HoaDon(maHD, maND, maKH, ngTao, tongTien, tt);
+                list.add(sp);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return list;
+    }
+
+    public List<HoaDon> AllMa(String ma) {
+        ArrayList<HoaDon> list = new ArrayList<>();
+        try {
+            Connection conn = DBConnection.getConnection();
+            String query = "SELECT * FROM HoaDon WHERE MaHD = ?";
+            PreparedStatement ps = conn.prepareStatement(query);
+            ps.setString(1, ma);
             ps.execute();
             ResultSet rs = ps.getResultSet();
             while (rs.next() == true) {
@@ -160,6 +185,7 @@ public class HoaDonRepository {
         }
         return list;
     }
+
     public void delete() {
         try {
             Connection conn = DBConnection.getConnection();
@@ -170,6 +196,7 @@ public class HoaDonRepository {
             e.printStackTrace();
         }
     }
+
     public void deleteMa(String ma) {
         try {
             Connection conn = DBConnection.getConnection();

@@ -61,7 +61,7 @@ public class xuatExcel {
                 row.createCell(6).setCellValue(hd.getTrangThai());
             }
 
-            FileOutputStream out = new FileOutputStream(new File("D:\\hoaDon1.xlsx"));
+            FileOutputStream out = new FileOutputStream(new File("D:\\hoaDon5.xlsx"));
             workbook.write(out);
             out.close();
         } catch (Exception e) {
