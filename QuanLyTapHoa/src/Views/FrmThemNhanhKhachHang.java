@@ -5,6 +5,8 @@
 package Views;
 
 import DomainModels.KhachHang;
+import ServiceImpl.KhachHangSV;
+import Services.KhachHangIF;
 import javax.swing.JOptionPane;
 
 /**
@@ -13,11 +15,10 @@ import javax.swing.JOptionPane;
  */
 public class FrmThemNhanhKhachHang extends javax.swing.JFrame {
 
-    /**
-     * Creates new form FrmThemNhanhKhachHang
-     */
+    private KhachHangIF khService;
     public FrmThemNhanhKhachHang() {
         initComponents();
+        this.khService = new KhachHangSV();
         setLocationRelativeTo(null);
     }
 
