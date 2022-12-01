@@ -26,6 +26,7 @@ public class FrmPhieuTraHang extends javax.swing.JFrame {
         initComponents();
         this.traHangService = new ManagePhieuTraHangService();
         this.traHangCTService = new ManagePhieuTraHangCTService();
+        this.setLocationRelativeTo(null);
         this.loadTableTH();
     }
 

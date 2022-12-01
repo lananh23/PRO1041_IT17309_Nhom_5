@@ -12,7 +12,7 @@ public class PhieuTraHangRepository {
         ArrayList<PhieuTraHang> list = new ArrayList<>();
         try {
             Connection conn = DBConnection.getConnection();
-            String query = "SELECT * FROM SanPhamLoi";
+            String query = "SELECT * FROM PhieuTraHang";
             PreparedStatement ps = conn.prepareStatement(query);
             ps.execute();
             ResultSet rs = ps.getResultSet();
