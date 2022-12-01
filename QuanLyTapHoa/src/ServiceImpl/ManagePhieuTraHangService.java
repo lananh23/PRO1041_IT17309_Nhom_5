@@ -28,7 +28,7 @@ public class ManagePhieuTraHangService implements IManagePhieuTraHangService{
 
     @Override
     public void insert(ManagePhieuTraHang p) {
-        PhieuTraHang s = new PhieuTraHang (p.getMaHD(), p.getMaKH(), p.getMaND(), p.getMaPTH(), p.getNgayTra(), p.getTienTraLaiKhach(), p.getLyDoTra());
+        PhieuTraHang s = new PhieuTraHang (p.getMaPTH(),p.getMaHD(),  p.getMaND(),p.getMaKH(),  p.getNgayTra(), p.getTienTraLaiKhach(), p.getLyDoTra());
         this.PhieuTraHangRepo.insert(s);
     }
 

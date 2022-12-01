@@ -12,15 +12,15 @@ public class PhieuTraHangRepository {
         ArrayList<PhieuTraHang> list = new ArrayList<>();
         try {
             Connection conn = DBConnection.getConnection();
-            String query = "SELECT * FROM SanPhamLoi";
+            String query = "SELECT * FROM PhieuTraHang";
             PreparedStatement ps = conn.prepareStatement(query);
             ps.execute();
             ResultSet rs = ps.getResultSet();
             while (rs.next() == true) {
-                String maHD = rs.getString("MaHD");
-                String maKH = rs.getString("MaKH");
-                String maND = rs.getString("MaND");
                 String maPTH = rs.getString("MaPTH");
+                String maHD = rs.getString("MaHD");
+                String maND = rs.getString("MaND");
+                String maKH = rs.getString("MaKH");
                 Date NgayTra = rs.getDate("NgayTra");
                 double tien = rs.getDouble("TienTraLaiKhach");
                 String loi = rs.getString("LyDoTra");

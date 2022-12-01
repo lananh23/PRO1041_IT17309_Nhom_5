@@ -1,6 +1,10 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 
 <Form version="1.5" maxVersion="1.9" type="org.netbeans.modules.form.forminfo.JFrameFormInfo">
+  <NonVisualComponents>
+    <Component class="javax.swing.ButtonGroup" name="buttonGroup1">
+    </Component>
+  </NonVisualComponents>
   <Properties>
     <Property name="defaultCloseOperation" type="int" value="3"/>
   </Properties>
@@ -62,9 +66,9 @@
                           <Group type="102" alignment="0" attributes="0">
                               <Component id="jLabel75" min="-2" max="-2" attributes="0"/>
                               <EmptySpace type="separate" max="-2" attributes="0"/>
-                              <Component id="jTextField41" min="-2" pref="158" max="-2" attributes="0"/>
+                              <Component id="txtMaHDTim" min="-2" pref="158" max="-2" attributes="0"/>
                               <EmptySpace min="-2" pref="30" max="-2" attributes="0"/>
-                              <Component id="jButton37" min="-2" max="-2" attributes="0"/>
+                              <Component id="btnTimKiemMaHD" min="-2" max="-2" attributes="0"/>
                           </Group>
                       </Group>
                       <Group type="103" groupAlignment="0" attributes="0">
@@ -79,9 +83,9 @@
                               <EmptySpace min="-2" pref="35" max="-2" attributes="0"/>
                               <Component id="jLabel77" min="-2" max="-2" attributes="0"/>
                               <EmptySpace min="-2" pref="29" max="-2" attributes="0"/>
-                              <Component id="jTextField42" min="-2" pref="147" max="-2" attributes="0"/>
+                              <Component id="txtMaSPTim" min="-2" pref="147" max="-2" attributes="0"/>
                               <EmptySpace type="separate" max="-2" attributes="0"/>
-                              <Component id="jButton15" min="-2" max="-2" attributes="0"/>
+                              <Component id="btnTimMaSP" min="-2" max="-2" attributes="0"/>
                           </Group>
                       </Group>
                       <EmptySpace pref="127" max="32767" attributes="0"/>
@@ -94,11 +98,11 @@
                       <EmptySpace max="32767" attributes="0"/>
                       <Group type="103" groupAlignment="3" attributes="0">
                           <Component id="jLabel75" alignment="3" min="-2" max="-2" attributes="0"/>
-                          <Component id="jTextField41" alignment="3" min="-2" max="-2" attributes="0"/>
-                          <Component id="jButton37" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="txtMaHDTim" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="btnTimKiemMaHD" alignment="3" min="-2" max="-2" attributes="0"/>
                           <Component id="jLabel77" alignment="3" min="-2" max="-2" attributes="0"/>
-                          <Component id="jTextField42" alignment="3" min="-2" max="-2" attributes="0"/>
-                          <Component id="jButton15" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="txtMaSPTim" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="btnTimMaSP" alignment="3" min="-2" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="0" max="-2" attributes="0">
@@ -154,7 +158,7 @@
 
               <Layout class="org.netbeans.modules.form.compat2.layouts.support.JScrollPaneSupportLayout"/>
               <SubComponents>
-                <Component class="javax.swing.JTable" name="jTable8">
+                <Component class="javax.swing.JTable" name="tblCTHD">
                   <Properties>
                     <Property name="model" type="javax.swing.table.TableModel" editor="org.netbeans.modules.form.editors2.TableModelEditor">
                       <Table columnCount="4" rowCount="0">
@@ -189,9 +193,9 @@
                               <Group type="102" alignment="0" attributes="0">
                                   <Component id="jLabel36" min="-2" max="-2" attributes="0"/>
                                   <EmptySpace type="separate" max="-2" attributes="0"/>
-                                  <Component id="jRadioButton3" min="-2" max="-2" attributes="0"/>
+                                  <Component id="rdoLoiSP" min="-2" max="-2" attributes="0"/>
                                   <EmptySpace type="separate" max="-2" attributes="0"/>
-                                  <Component id="jRadioButton4" min="-2" max="-2" attributes="0"/>
+                                  <Component id="rdoMuaSai" min="-2" max="-2" attributes="0"/>
                               </Group>
                               <Group type="102" alignment="0" attributes="0">
                                   <Group type="103" groupAlignment="0" attributes="0">
@@ -204,12 +208,12 @@
                                   </Group>
                                   <EmptySpace type="separate" max="-2" attributes="0"/>
                                   <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                                      <Component id="jLabel41" alignment="0" min="-2" pref="116" max="-2" attributes="0"/>
-                                      <Component id="jLabel40" alignment="0" min="-2" pref="116" max="-2" attributes="0"/>
-                                      <Component id="jLabel39" alignment="0" min="-2" pref="116" max="-2" attributes="0"/>
-                                      <Component id="jLabel38" alignment="0" min="-2" pref="116" max="-2" attributes="0"/>
-                                      <Component id="jTextField14" alignment="0" max="32767" attributes="0"/>
-                                      <Component id="jTextField36" alignment="0" pref="149" max="32767" attributes="0"/>
+                                      <Component id="lblTienTraLai" alignment="0" min="-2" pref="116" max="-2" attributes="0"/>
+                                      <Component id="lblMaHDct" alignment="0" min="-2" pref="116" max="-2" attributes="0"/>
+                                      <Component id="lblMaNV" alignment="0" min="-2" pref="116" max="-2" attributes="0"/>
+                                      <Component id="lblMaKH" alignment="0" min="-2" pref="116" max="-2" attributes="0"/>
+                                      <Component id="txtNgayTra" alignment="0" max="32767" attributes="0"/>
+                                      <Component id="txtMaPhieuTra" alignment="0" pref="149" max="32767" attributes="0"/>
                                   </Group>
                               </Group>
                           </Group>
@@ -217,7 +221,7 @@
                       </Group>
                       <Group type="102" alignment="1" attributes="0">
                           <EmptySpace max="32767" attributes="0"/>
-                          <Component id="jButton16" min="-2" max="-2" attributes="0"/>
+                          <Component id="btnHoanTra" min="-2" max="-2" attributes="0"/>
                           <EmptySpace min="-2" pref="147" max="-2" attributes="0"/>
                       </Group>
                   </Group>
@@ -228,41 +232,41 @@
                           <EmptySpace max="-2" attributes="0"/>
                           <Group type="103" groupAlignment="3" attributes="0">
                               <Component id="jLabel30" alignment="3" min="-2" max="-2" attributes="0"/>
-                              <Component id="jTextField36" alignment="3" min="-2" max="-2" attributes="0"/>
+                              <Component id="txtMaPhieuTra" alignment="3" min="-2" max="-2" attributes="0"/>
                           </Group>
                           <EmptySpace type="unrelated" max="-2" attributes="0"/>
                           <Group type="103" groupAlignment="3" attributes="0">
                               <Component id="jLabel31" alignment="3" min="-2" max="-2" attributes="0"/>
-                              <Component id="jLabel38" alignment="3" min="-2" max="-2" attributes="0"/>
+                              <Component id="lblMaKH" alignment="3" min="-2" max="-2" attributes="0"/>
                           </Group>
                           <EmptySpace type="separate" max="-2" attributes="0"/>
                           <Group type="103" groupAlignment="3" attributes="0">
                               <Component id="jLabel32" alignment="3" min="-2" max="-2" attributes="0"/>
-                              <Component id="jLabel39" alignment="3" min="-2" max="-2" attributes="0"/>
+                              <Component id="lblMaNV" alignment="3" min="-2" max="-2" attributes="0"/>
                           </Group>
                           <EmptySpace type="unrelated" max="-2" attributes="0"/>
                           <Group type="103" groupAlignment="3" attributes="0">
                               <Component id="jLabel33" alignment="3" min="-2" max="-2" attributes="0"/>
-                              <Component id="jLabel40" alignment="3" min="-2" max="-2" attributes="0"/>
+                              <Component id="lblMaHDct" alignment="3" min="-2" max="-2" attributes="0"/>
                           </Group>
                           <EmptySpace type="separate" max="-2" attributes="0"/>
                           <Group type="103" groupAlignment="3" attributes="0">
                               <Component id="jLabel34" alignment="3" min="-2" max="-2" attributes="0"/>
-                              <Component id="jTextField14" alignment="3" min="-2" max="-2" attributes="0"/>
+                              <Component id="txtNgayTra" alignment="3" min="-2" max="-2" attributes="0"/>
                           </Group>
                           <EmptySpace min="-2" pref="10" max="-2" attributes="0"/>
                           <Group type="103" groupAlignment="3" attributes="0">
                               <Component id="jLabel35" alignment="3" min="-2" max="-2" attributes="0"/>
-                              <Component id="jLabel41" alignment="3" min="-2" max="-2" attributes="0"/>
+                              <Component id="lblTienTraLai" alignment="3" min="-2" max="-2" attributes="0"/>
                           </Group>
                           <EmptySpace max="-2" attributes="0"/>
                           <Group type="103" groupAlignment="3" attributes="0">
                               <Component id="jLabel36" alignment="3" min="-2" max="-2" attributes="0"/>
-                              <Component id="jRadioButton3" alignment="3" min="-2" max="-2" attributes="0"/>
-                              <Component id="jRadioButton4" alignment="3" min="-2" max="-2" attributes="0"/>
+                              <Component id="rdoLoiSP" alignment="3" min="-2" max="-2" attributes="0"/>
+                              <Component id="rdoMuaSai" alignment="3" min="-2" max="-2" attributes="0"/>
                           </Group>
                           <EmptySpace max="32767" attributes="0"/>
-                          <Component id="jButton16" min="-2" max="-2" attributes="0"/>
+                          <Component id="btnHoanTra" min="-2" max="-2" attributes="0"/>
                           <EmptySpace max="-2" attributes="0"/>
                       </Group>
                   </Group>
@@ -304,44 +308,50 @@
                     <Property name="text" type="java.lang.String" value="L&#xfd; do ho&#xe0;n tr&#x1ea3;"/>
                   </Properties>
                 </Component>
-                <Component class="javax.swing.JButton" name="jButton16">
+                <Component class="javax.swing.JButton" name="btnHoanTra">
                   <Properties>
                     <Property name="text" type="java.lang.String" value="Ho&#xe0;n tr&#x1ea3;"/>
                   </Properties>
                 </Component>
-                <Component class="javax.swing.JLabel" name="jLabel38">
+                <Component class="javax.swing.JLabel" name="lblMaKH">
                   <Properties>
                     <Property name="text" type="java.lang.String" value="--"/>
                   </Properties>
                 </Component>
-                <Component class="javax.swing.JLabel" name="jLabel39">
+                <Component class="javax.swing.JLabel" name="lblMaNV">
                   <Properties>
                     <Property name="text" type="java.lang.String" value="--"/>
                   </Properties>
                 </Component>
-                <Component class="javax.swing.JLabel" name="jLabel40">
+                <Component class="javax.swing.JLabel" name="lblMaHDct">
                   <Properties>
                     <Property name="text" type="java.lang.String" value="--"/>
                   </Properties>
                 </Component>
-                <Component class="javax.swing.JRadioButton" name="jRadioButton3">
+                <Component class="javax.swing.JRadioButton" name="rdoLoiSP">
                   <Properties>
+                    <Property name="buttonGroup" type="javax.swing.ButtonGroup" editor="org.netbeans.modules.form.RADComponent$ButtonGroupPropertyEditor">
+                      <ComponentRef name="buttonGroup1"/>
+                    </Property>
                     <Property name="text" type="java.lang.String" value="S&#x1ea3;n ph&#x1ea9;m l&#x1ed7;i"/>
                   </Properties>
                 </Component>
-                <Component class="javax.swing.JRadioButton" name="jRadioButton4">
+                <Component class="javax.swing.JRadioButton" name="rdoMuaSai">
                   <Properties>
+                    <Property name="buttonGroup" type="javax.swing.ButtonGroup" editor="org.netbeans.modules.form.RADComponent$ButtonGroupPropertyEditor">
+                      <ComponentRef name="buttonGroup1"/>
+                    </Property>
                     <Property name="text" type="java.lang.String" value="Mua sai"/>
                   </Properties>
                 </Component>
-                <Component class="javax.swing.JLabel" name="jLabel41">
+                <Component class="javax.swing.JLabel" name="lblTienTraLai">
                   <Properties>
                     <Property name="text" type="java.lang.String" value="--"/>
                   </Properties>
                 </Component>
-                <Component class="javax.swing.JTextField" name="jTextField14">
+                <Component class="javax.swing.JTextField" name="txtNgayTra">
                 </Component>
-                <Component class="javax.swing.JTextField" name="jTextField36">
+                <Component class="javax.swing.JTextField" name="txtMaPhieuTra">
                 </Component>
               </SubComponents>
             </Container>
@@ -363,26 +373,26 @@
                               <Group type="102" alignment="0" attributes="0">
                                   <Component id="jLabel28" min="-2" max="-2" attributes="0"/>
                                   <EmptySpace type="separate" max="-2" attributes="0"/>
-                                  <Component id="jLabel94" min="-2" pref="57" max="-2" attributes="0"/>
+                                  <Component id="lblMaSP" min="-2" pref="57" max="-2" attributes="0"/>
                                   <EmptySpace pref="43" max="32767" attributes="0"/>
                                   <Component id="jLabel29" min="-2" max="-2" attributes="0"/>
                                   <EmptySpace min="-2" pref="54" max="-2" attributes="0"/>
-                                  <Component id="jTextField11" min="-2" pref="95" max="-2" attributes="0"/>
+                                  <Component id="txtSoLuong" min="-2" pref="95" max="-2" attributes="0"/>
                               </Group>
                               <Component id="jScrollPane9" alignment="1" pref="0" max="32767" attributes="0"/>
                               <Group type="102" alignment="0" attributes="0">
                                   <Group type="103" groupAlignment="0" attributes="0">
                                       <Group type="102" alignment="0" attributes="0">
-                                          <Component id="jButton14" min="-2" max="-2" attributes="0"/>
+                                          <Component id="btnLuuTam" min="-2" max="-2" attributes="0"/>
                                           <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                                          <Component id="jButton13" min="-2" max="-2" attributes="0"/>
+                                          <Component id="btnCapNhat" min="-2" max="-2" attributes="0"/>
                                           <EmptySpace min="-2" pref="27" max="-2" attributes="0"/>
-                                          <Component id="jButton12" min="-2" max="-2" attributes="0"/>
+                                          <Component id="btnXoa" min="-2" max="-2" attributes="0"/>
                                       </Group>
                                       <Group type="102" alignment="0" attributes="0">
                                           <Component id="jLabel92" min="-2" max="-2" attributes="0"/>
                                           <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                                          <Component id="jLabel93" min="-2" pref="46" max="-2" attributes="0"/>
+                                          <Component id="lblMaHD" min="-2" pref="46" max="-2" attributes="0"/>
                                       </Group>
                                   </Group>
                                   <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
@@ -398,20 +408,20 @@
                           <EmptySpace max="-2" attributes="0"/>
                           <Group type="103" groupAlignment="3" attributes="0">
                               <Component id="jLabel92" alignment="3" min="-2" max="-2" attributes="0"/>
-                              <Component id="jLabel93" alignment="3" min="-2" max="-2" attributes="0"/>
+                              <Component id="lblMaHD" alignment="3" min="-2" max="-2" attributes="0"/>
                           </Group>
                           <EmptySpace min="-2" pref="24" max="-2" attributes="0"/>
                           <Group type="103" groupAlignment="3" attributes="0">
-                              <Component id="jTextField11" alignment="3" min="-2" max="-2" attributes="0"/>
+                              <Component id="txtSoLuong" alignment="3" min="-2" max="-2" attributes="0"/>
                               <Component id="jLabel29" alignment="3" min="-2" max="-2" attributes="0"/>
                               <Component id="jLabel28" alignment="3" min="-2" max="-2" attributes="0"/>
-                              <Component id="jLabel94" alignment="3" min="-2" max="-2" attributes="0"/>
+                              <Component id="lblMaSP" alignment="3" min="-2" max="-2" attributes="0"/>
                           </Group>
                           <EmptySpace min="-2" pref="16" max="-2" attributes="0"/>
                           <Group type="103" groupAlignment="3" attributes="0">
-                              <Component id="jButton14" alignment="3" min="-2" max="-2" attributes="0"/>
-                              <Component id="jButton13" alignment="3" min="-2" max="-2" attributes="0"/>
-                              <Component id="jButton12" alignment="3" min="-2" max="-2" attributes="0"/>
+                              <Component id="btnLuuTam" alignment="3" min="-2" max="-2" attributes="0"/>
+                              <Component id="btnCapNhat" alignment="3" min="-2" max="-2" attributes="0"/>
+                              <Component id="btnXoa" alignment="3" min="-2" max="-2" attributes="0"/>
                           </Group>
                           <EmptySpace type="separate" max="-2" attributes="0"/>
                           <Component id="jScrollPane9" pref="0" max="32767" attributes="0"/>
@@ -421,7 +431,7 @@
                 </DimensionLayout>
               </Layout>
               <SubComponents>
-                <Component class="javax.swing.JTextField" name="jTextField11">
+                <Component class="javax.swing.JTextField" name="txtSoLuong">
                 </Component>
                 <Component class="javax.swing.JLabel" name="jLabel28">
                   <Properties>
@@ -433,17 +443,17 @@
                     <Property name="text" type="java.lang.String" value="S&#x1ed1; l&#x1b0;&#x1ee3;ng"/>
                   </Properties>
                 </Component>
-                <Component class="javax.swing.JButton" name="jButton12">
+                <Component class="javax.swing.JButton" name="btnXoa">
                   <Properties>
                     <Property name="text" type="java.lang.String" value="X&#xf3;a"/>
                   </Properties>
                 </Component>
-                <Component class="javax.swing.JButton" name="jButton13">
+                <Component class="javax.swing.JButton" name="btnCapNhat">
                   <Properties>
                     <Property name="text" type="java.lang.String" value="C&#x1ead;p nh&#x1ead;t"/>
                   </Properties>
                 </Component>
-                <Component class="javax.swing.JButton" name="jButton14">
+                <Component class="javax.swing.JButton" name="btnLuuTam">
                   <Properties>
                     <Property name="text" type="java.lang.String" value="L&#x1b0;u t&#x1ea1;m"/>
                   </Properties>
@@ -477,12 +487,12 @@
                     <Property name="text" type="java.lang.String" value="M&#xe3; HD"/>
                   </Properties>
                 </Component>
-                <Component class="javax.swing.JLabel" name="jLabel93">
+                <Component class="javax.swing.JLabel" name="lblMaHD">
                   <Properties>
                     <Property name="text" type="java.lang.String" value="--"/>
                   </Properties>
                 </Component>
-                <Component class="javax.swing.JLabel" name="jLabel94">
+                <Component class="javax.swing.JLabel" name="lblMaSP">
                   <Properties>
                     <Property name="text" type="java.lang.String" value="--"/>
                   </Properties>
@@ -494,24 +504,27 @@
                 <Property name="text" type="java.lang.String" value="M&#xe3; HD"/>
               </Properties>
             </Component>
-            <Component class="javax.swing.JTextField" name="jTextField41">
+            <Component class="javax.swing.JTextField" name="txtMaHDTim">
             </Component>
-            <Component class="javax.swing.JButton" name="jButton37">
+            <Component class="javax.swing.JButton" name="btnTimKiemMaHD">
               <Properties>
                 <Property name="text" type="java.lang.String" value="T&#xec;m ki&#x1ebf;m"/>
               </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnTimKiemMaHDActionPerformed"/>
+              </Events>
             </Component>
             <Component class="javax.swing.JLabel" name="jLabel77">
               <Properties>
                 <Property name="text" type="java.lang.String" value="M&#xe3; SP"/>
               </Properties>
             </Component>
-            <Component class="javax.swing.JTextField" name="jTextField42">
+            <Component class="javax.swing.JTextField" name="txtMaSPTim">
               <Events>
-                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jTextField42ActionPerformed"/>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="txtMaSPTimActionPerformed"/>
               </Events>
             </Component>
-            <Component class="javax.swing.JButton" name="jButton15">
+            <Component class="javax.swing.JButton" name="btnTimMaSP">
               <Properties>
                 <Property name="text" type="java.lang.String" value="T&#xec;m ki&#x1ebf;m"/>
               </Properties>
@@ -612,7 +625,7 @@
 
                   <Layout class="org.netbeans.modules.form.compat2.layouts.support.JScrollPaneSupportLayout"/>
                   <SubComponents>
-                    <Component class="javax.swing.JTable" name="jTable13">
+                    <Component class="javax.swing.JTable" name="tblTraHang">
                       <Properties>
                         <Property name="model" type="javax.swing.table.TableModel" editor="org.netbeans.modules.form.editors2.TableModelEditor">
                           <Table columnCount="7" rowCount="0">
@@ -693,7 +706,7 @@
 
                   <Layout class="org.netbeans.modules.form.compat2.layouts.support.JScrollPaneSupportLayout"/>
                   <SubComponents>
-                    <Component class="javax.swing.JTable" name="jTable16">
+                    <Component class="javax.swing.JTable" name="tblTraHangCT">
                       <Properties>
                         <Property name="model" type="javax.swing.table.TableModel" editor="org.netbeans.modules.form.editors2.TableModelEditor">
                           <Table columnCount="4" rowCount="0">
