@@ -72,5 +72,9 @@ public class ManageHoaDonService implements IManageHoaDon{
         }
         return list;
     }
-    
+
+    @Override
+    public void Ma() {
+        this.hdRepo.Ma();
+    }
 }

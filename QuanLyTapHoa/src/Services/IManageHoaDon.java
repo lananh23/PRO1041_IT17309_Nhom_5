@@ -10,6 +10,7 @@ public interface IManageHoaDon {
     public List<ManageHoaDon> AllHD() ;
     public List<ManageHoaDon> AllMa( String ma) ;
     public List<ManageHoaDon> AllCho() ;
+    public void Ma() ;
     public void deleteMa(String ma);
     public void delete();
 }

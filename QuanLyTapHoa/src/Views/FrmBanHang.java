@@ -70,7 +70,10 @@ public class FrmBanHang extends javax.swing.JFrame {
             });
         }
     }
-
+//    public void idHD(){
+//        this.hdService.Ma() ;
+//        this.lblHD.setText("HD" + this.hdService.Ma() + 1);
+//    }
     public void addSP(List<ManageHoaDonChiTiet> sanPhams) {
 
         dtm = (DefaultTableModel) tblDSCho.getModel();
@@ -302,6 +305,7 @@ public class FrmBanHang extends javax.swing.JFrame {
         jLabel48 = new javax.swing.JLabel();
         lbMaHD = new javax.swing.JLabel();
         txtMaHD = new javax.swing.JTextField();
+        lblHD = new javax.swing.JLabel();
         jPanel29 = new javax.swing.JPanel();
         jLabel80 = new javax.swing.JLabel();
         jLabel81 = new javax.swing.JLabel();
@@ -443,6 +447,8 @@ public class FrmBanHang extends javax.swing.JFrame {
 
         lbMaHD.setText("Mã HD");
 
+        lblHD.setText("--");
+
         javax.swing.GroupLayout jPanel16Layout = new javax.swing.GroupLayout(jPanel16);
         jPanel16.setLayout(jPanel16Layout);
         jPanel16Layout.setHorizontalGroup(
@@ -490,7 +496,10 @@ public class FrmBanHang extends javax.swing.JFrame {
                                         .addGap(0, 0, Short.MAX_VALUE))))
                             .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel16Layout.createSequentialGroup()
                                 .addGap(109, 109, 109)
-                                .addComponent(txtNgayTao, javax.swing.GroupLayout.PREFERRED_SIZE, 133, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                .addComponent(txtNgayTao, javax.swing.GroupLayout.PREFERRED_SIZE, 133, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(18, 18, 18)
+                                .addComponent(lblHD, javax.swing.GroupLayout.PREFERRED_SIZE, 78, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(0, 0, Short.MAX_VALUE)))
                         .addContainerGap())))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel16Layout.createSequentialGroup()
                 .addGap(43, 43, 43)
@@ -517,7 +526,8 @@ public class FrmBanHang extends javax.swing.JFrame {
                 .addGap(13, 13, 13)
                 .addGroup(jPanel16Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel42)
-                    .addComponent(txtNgayTao, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(txtNgayTao, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(lblHD))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel16Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(lbThanhTien)
@@ -919,14 +929,15 @@ public class FrmBanHang extends javax.swing.JFrame {
         ArrayList<ManageHoaDonChiTiet> listS = new ArrayList<>();
         ManageHoaDonChiTiet chiTietHoaDonViewModel = new ManageHoaDonChiTiet();
         int row = tblDSSanPham.getSelectedRow();
+        //chiTietHoaDonViewModel.setMaHDCT(this.txtMaHDCT);
         chiTietHoaDonViewModel.setMaSP((String) tblDSSanPham.getValueAt(row, 0));
         chiTietHoaDonViewModel.setTenSP((String) tblDSSanPham.getValueAt(row, 1));
         chiTietHoaDonViewModel.setSoLuong((int) spnSoLuong.getValue());
         chiTietHoaDonViewModel.setGiaBan((Float) tblDSSanPham.getValueAt(row, 3));
-        listS.add(chiTietHoaDonViewModel);
-        addSP(listS);
+        list.add(chiTietHoaDonViewModel);
+        addSP(list);
         int thanhTien = 0;
-        for (ManageHoaDonChiTiet ct : listS) {
+        for (ManageHoaDonChiTiet ct : list) {
             thanhTien = (int) (thanhTien + ct.getThanhTien());
             lbThanhTien.setText("" + thanhTien);
         }
@@ -1204,6 +1215,7 @@ public class FrmBanHang extends javax.swing.JFrame {
     private javax.swing.JLabel lbMaHD;
     private javax.swing.JLabel lbMaSP;
     private javax.swing.JLabel lbThanhTien;
+    private javax.swing.JLabel lblHD;
     private javax.swing.JSpinner spnSoLuong;
     private javax.swing.JTable tblDHCT;
     private javax.swing.JTable tblDSCho;

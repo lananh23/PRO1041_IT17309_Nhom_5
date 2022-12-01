@@ -167,6 +167,7 @@ public class HoaDonRepository {
         }
         return list;
     }
+
     public List<HoaDon> AllCho() {
         ArrayList<HoaDon> list = new ArrayList<>();
         try {
@@ -184,6 +185,19 @@ public class HoaDonRepository {
             e.printStackTrace();
         }
         return list;
+    }
+
+    public void Ma() {
+        try {
+            Connection conn = DBConnection.getConnection();
+            String query = "select TOP 1 SUBSTRING(MaHD, 3, LEN(MaHD)-2) as 's' from HoaDon\n" +
+                            "order by s DESC";
+            PreparedStatement ps = conn.prepareStatement(query);
+            ps.execute();
+            
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
     }
 
     public void delete() {
