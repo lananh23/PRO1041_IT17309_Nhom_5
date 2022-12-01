@@ -40,16 +40,16 @@ public class SanPham {
         this.maSP = maSP;
         this.soLuong = soLuong;
     }
-
-    public SanPham(String maSP, String maLSP, String tenSP, int soLuong, float giaNhap, float giaBan, Date hanSuDung) {
-        this.MaSP = maSP;
-        this.MaLSP = maLSP;
-        this.TenSP = tenSP;
-        this.soLuong = soLuong;
-        this.giaNhap = giaNhap;
-        this.giaBan = giaBan;
-        this.hanSuDung = hanSuDung;
-    }
+//
+//    public SanPham(String maSP, String maLSP, String tenSP, int soLuong, float giaNhap, float giaBan, Date hanSuDung) {
+//        this.MaSP = maSP;
+//        this.MaLSP = maLSP;
+//        this.TenSP = tenSP;
+//        this.soLuong = soLuong;
+//        this.giaNhap = giaNhap;
+//        this.giaBan = giaBan;
+//        this.hanSuDung = hanSuDung;
+//    }
 
     
 

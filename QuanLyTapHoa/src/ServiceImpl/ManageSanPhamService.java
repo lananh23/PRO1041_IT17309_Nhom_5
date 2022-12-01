@@ -53,8 +53,7 @@ public class ManageSanPhamService implements IManageSanPhamService {
         list = new ArrayList<>();
         List<SanPham> List_CH = SanPhamRepo.findByCode(code);
         for (SanPham o : List_CH) {
-            list.add(new QLSanPham(o.getMaSP(), o.getMaLSP(), o.getTenSP(), 
-                    o.getSoLuong(), o.getGiaNhap(), o.getGiaBan(), o.getHanSuDung()));
+            list.add(new QLSanPham(o.getMaSP(), o.getMaLSP(), o.getTenSP(), o.getSoLuong(), o.getGiaNhap(), o.getGiaBan(), o.getHanSuDung()));
         }
         return list;
     }
