@@ -20,7 +20,7 @@ import javax.swing.JOptionPane;
  */
 public class KhachHangRP {
 
-public List<KhachHang> select() throws SQLException {
+    public List<KhachHang> select() throws SQLException {
         ArrayList<KhachHang> k = new ArrayList<>();
         Connection con = DBConnection.getConnection();
         String sql = "select * from KhachHang";
@@ -46,6 +46,7 @@ public List<KhachHang> select() throws SQLException {
         }
         return k;
     }
+
     public List<KhachHang> select1(String ma) throws SQLException {
         ArrayList<KhachHang> k = new ArrayList<>();
         Connection con = DBConnection.getConnection();
@@ -75,31 +76,31 @@ public List<KhachHang> select() throws SQLException {
         return k;
     }
 
-    public List<KhachHang> insert(String Ma, String Ten, String GioiTinh, String DiaChi, String NgaySinh, String SDT, String NgayDki){
+    public List<KhachHang> insert(String Ma, String Ten, String GioiTinh, String DiaChi, String NgaySinh, String SDT, String NgayDki) {
         ArrayList<KhachHang> k = new ArrayList<>();
         try {
-        Connection con = DBConnection.getConnection();
-        String sql = "insert KhachHang (MaKH,TenKH,GioiTinh,DiaChi,NgaySinh,SDT,NgayDangKy) values (?,?,?,?,?,?,?)";
-        PreparedStatement st = con.prepareStatement(sql);
-        st.setString(1, Ma);
-        st.setString(2, Ten);
-        st.setString(3, GioiTinh);
-        st.setString(4, DiaChi);
-        st.setString(5, NgaySinh);
-        st.setString(6, SDT);
-        st.setString(7, NgayDki);
-        st.executeUpdate();
-        KhachHang kh = new KhachHang();
-        kh.setMaKH(Ma);
-        kh.setTenKH(Ten);
-        kh.setGioiTinh(GioiTinh);
-        kh.setDiaChi(DiaChi);
-        kh.setNgaySinh(NgaySinh);
-        kh.setSdt(SDT);
-        kh.setNgayDki(NgayDki);
-        k.add(kh);
+            Connection con = DBConnection.getConnection();
+            String sql = "insert KhachHang (MaKH,TenKH,GioiTinh,DiaChi,NgaySinh,SDT,NgayDangKy) values (?,?,?,?,?,?,?)";
+            PreparedStatement st = con.prepareStatement(sql);
+            st.setString(1, Ma);
+            st.setString(2, Ten);
+            st.setString(3, GioiTinh);
+            st.setString(4, DiaChi);
+            st.setString(5, NgaySinh);
+            st.setString(6, SDT);
+            st.setString(7, NgayDki);
+            st.executeUpdate();
+            KhachHang kh = new KhachHang();
+            kh.setMaKH(Ma);
+            kh.setTenKH(Ten);
+            kh.setGioiTinh(GioiTinh);
+            kh.setDiaChi(DiaChi);
+            kh.setNgaySinh(NgaySinh);
+            kh.setSdt(SDT);
+            kh.setNgayDki(NgayDki);
+            k.add(kh);
         } catch (Exception e) {
-            return  null;
+            return null;
         }
         return k;
     }
@@ -140,5 +141,21 @@ public List<KhachHang> select() throws SQLException {
         kh.setMaKH(Ma);
         k.add(kh);
         return k;
+    }
+
+    public Boolean themNhanh(KhachHang kh) {
+        String query = "INSERT INTO KhachHang(MaKH,TenKH,SDT) VALUES(?,?,?)";
+        try {
+            Connection con = DBConnection.getConnection();
+            PreparedStatement ps = con.prepareStatement(query);
+            ps.setObject(1, kh.getMaKH());
+            ps.setObject(2, kh.getTenKH());
+            ps.setObject(3, kh.getSdt());
+            ps.executeUpdate();
+            return true;
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return false;
     }
 }

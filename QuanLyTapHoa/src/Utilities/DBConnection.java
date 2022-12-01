@@ -6,7 +6,7 @@ import java.sql.*;
 public class DBConnection {
 
     private static final String USERNAME = "sa";
-    private static final String PASSWORD = "Aa@123456";
+    private static final String PASSWORD = "yenlinh1943";
     private static final String SERVER_NAME = "DESKTOP-CSTQHQ6\\SQLEXPRESS";
     private static final String PORT = "1433";
     private static final String DATABASE_NAME = "QuanLyCuaHangTapHoa";

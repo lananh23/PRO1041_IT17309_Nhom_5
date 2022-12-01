@@ -21,6 +21,7 @@ public interface KhachHangIF {
     public List<KhachHang> insert(String Ma, String Ten, String GioiTinh, String DiaChi, String NgaySinh, String SDT, String NgayDki);
 
     public List<KhachHang> delete(String Ma);
+    public Boolean themNhanh(KhachHang kh);
 
     public List<KhachHang> update(String Ma, String Ten, String GioiTinh, String DiaChi, String NgaySinh, String SDT, String NgayDki);
 }

@@ -91,6 +91,19 @@ public class SanPhamRepository implements ISanPhamRepository {
         }
     }
     @Override
+    public void updateSLGH(int soLg, String maSP) {
+        try {
+            Connection conn = DBConnection.getConnection();
+            String query = "UPDATE SanPham SET SoLuong = SoLuong - ?  WHERE MaSP=?";
+            PreparedStatement ps = conn.prepareStatement(query);
+            ps.setInt(1, soLg);
+            ps.setString(2, maSP);
+            ps.execute();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+    @Override
     public void delete(String maSP) {
         try {
             Connection conn = DBConnection.getConnection();
@@ -120,6 +133,7 @@ public class SanPhamRepository implements ISanPhamRepository {
                 float giaNhap = rs.getInt("GiaNhap");
                 float giaBan = rs.getFloat("GiaBan");
                 Date hanSuDung = rs.getDate("HanSuDung");
+                
                 SanPham sp = new SanPham(maSP, maLSP, tenSP, soLuong, giaNhap, giaBan, hanSuDung);
 
                 list.add(sp);
@@ -129,4 +143,6 @@ public class SanPhamRepository implements ISanPhamRepository {
         }
         return list;
     }
+
+    
 }
