@@ -9,7 +9,6 @@ import DomainModels.KhachHang;
 import DomainModels.SanPham;
 import Repositories.ISanPhamRepository;
 import Repositories.SanPhamRepository;
-import ServiceImpl.HoaDonService;
 import ServiceImpl.KhachHangSV;
 import Services.IManageSanPhamService;
 import ServiceImpl.ManageSanPhamService;
@@ -20,14 +19,18 @@ import javax.swing.table.DefaultTableModel;
 import java.util.List;
 import javax.swing.JOptionPane;
 
+<<<<<<< Updated upstream
 /**
  *
  * @author Admin
  */
+=======
+>>>>>>> Stashed changes
 public class FrmBanHang extends javax.swing.JFrame {
 
     private IManageSanPhamService banHangService;
     private DefaultTableModel dtm;
+<<<<<<< Updated upstream
     private HoaDonService hdSV;
 
     /**
@@ -37,6 +40,20 @@ public class FrmBanHang extends javax.swing.JFrame {
         initComponents();
         banHangService = new ManageSanPhamService();
         hdSV = new HoaDonService();
+=======
+    private IManageHoaDon hdService;
+    private IManageHoaDonChiTiet ctService;
+    private IManageSanPhamService spService;
+    private ArrayList<ManageHoaDonChiTiet> list = new ArrayList<>();
+    List<ManageHoaDon> listHoaDons;
+    List<ManageHoaDonChiTiet> listHoaDonChiTiets;
+
+    public FrmBanHang() {
+        initComponents();
+        banHangService = new ManageSanPhamService();
+        listHoaDons = new ArrayList<>();
+        listHoaDonChiTiets = new ArrayList<>();
+>>>>>>> Stashed changes
         setLocationRelativeTo(null);
         loadToTable();
 
@@ -638,7 +655,11 @@ public class FrmBanHang extends javax.swing.JFrame {
                 for (QLSanPham sanPham : sanPhams) {
                     dtm.addRow(new Object[]{
                         sanPham.getMaSP(), sanPham.getTenSP(), sanPham.getSoLuong(),
+<<<<<<< Updated upstream
                         sanPham.getGiaNhap(), sanPham.getGiaBan(), sanPham.getHanSuDung()
+=======
+                        sanPham.getGiaBan()
+>>>>>>> Stashed changes
                     });
                 }
                 lbMaSP.setText(maSP);
@@ -749,10 +770,32 @@ public class FrmBanHang extends javax.swing.JFrame {
     private void btnTimActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnTimActionPerformed
         // TODO add your handling code here:
         String sdt = JOptionPane.showInputDialog(null, "nhập sdt để tìm");
+<<<<<<< Updated upstream
         
        
 
         
+=======
+        String dangSDT = "0\\d{9,10}";
+        if (sdt.trim().isEmpty()) {
+            JOptionPane.showMessageDialog(null, "Sdt ko đc để trống");
+            return;
+        }
+        if (!sdt.matches(dangSDT)) {
+            JOptionPane.showMessageDialog(null, "Số điện thoại không đúng định dạng!");
+            return;
+        }
+        try {
+            List<KhachHang> k = hdService.tim(sdt);
+            for (KhachHang kh : k) {
+                txtMaKH.setText(kh.getMaKH());
+            }
+            JOptionPane.showMessageDialog(null, "đã hiện mã khách hàng muốn tìm");
+            return;
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+>>>>>>> Stashed changes
 
     }//GEN-LAST:event_btnTimActionPerformed
 
