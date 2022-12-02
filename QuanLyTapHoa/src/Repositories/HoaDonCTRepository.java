@@ -104,7 +104,7 @@ public class HoaDonCTRepository {
         listHoaDonChiTiets = new ArrayList<>();
         try {
             connection = DBConnection.getConnection();
-            String sql = "SELECT MaSP, MaHD, MaHDCT, SoLuong, DonGia, ThanhTien  FROM  HoaDonChiTiet";
+            String sql = "SELECT MaSP, MaHD, MaHDCT, SoLuong, DonGia, ThanhTien  FROM  HoaDonChiTiet ORDER BY MaHD";
             ps = connection.prepareStatement(sql);
             rs = ps.executeQuery();
             while (rs.next()) {
@@ -118,9 +118,6 @@ public class HoaDonCTRepository {
 
                 listHoaDonChiTiets.add(new HoaDonChiTiet(maHDCT, maHD, maSP, soLuong, donGia, thanhTien));
             }
-            rs.close();
-            ps.close();
-            connection.close();
         } catch (Exception e) {
             System.out.println(e);
         }
@@ -149,9 +146,6 @@ public class HoaDonCTRepository {
 
                 listHoaDonChiTiets.add(new HoaDonChiTiet(maHDCT, maHD, maSPP, soLuong, donGia, thanhTien));
             }
-            rs.close();
-            ps.close();
-            connection.close();
         } catch (Exception e) {
             System.out.println(e);
         }

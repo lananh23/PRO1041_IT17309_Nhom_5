@@ -123,7 +123,7 @@ public class HoaDonRepository {
         ArrayList<HoaDon> list = new ArrayList<>();
         try {
             Connection conn = DBConnection.getConnection();
-            String query = "SELECT * FROM HoaDon";
+            String query = "SELECT * FROM HoaDon ORDER BY MaHD";
             PreparedStatement ps = conn.prepareStatement(query);
             ps.execute();
             ResultSet rs = ps.getResultSet();
