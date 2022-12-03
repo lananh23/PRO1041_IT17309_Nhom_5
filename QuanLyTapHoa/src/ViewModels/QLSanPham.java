@@ -11,12 +11,11 @@ public class QLSanPham {
     private float giaNhap;
     private float giaBan;
     private Date hanSuDung;
-    private String maQR;
 
     public QLSanPham() {
     }
 
-    public QLSanPham(String maSP, String maLSP, String tenSP, int soLuong, float giaNhap, float giaBan, Date hanSuDung, String maQR) {
+    public QLSanPham(String maSP, String maLSP, String tenSP, int soLuong, float giaNhap, float giaBan, Date hanSuDung) {
         this.maSP = maSP;
         this.maLSP = maLSP;
         this.tenSP = tenSP;
@@ -24,7 +23,6 @@ public class QLSanPham {
         this.giaNhap = giaNhap;
         this.giaBan = giaBan;
         this.hanSuDung = hanSuDung;
-        this.maQR = maQR;
     }
     public QLSanPham(String maSP, String maLSP, String tenSP, int soLuong, float giaNhap, float giaBan, Date hanSuDung) {
         this.maSP = maSP;
@@ -90,14 +88,6 @@ public class QLSanPham {
 
     public void setHanSuDung(Date hanSuDung) {
         this.hanSuDung = hanSuDung;
-    }
-
-    public String getMaQR() {
-        return maQR;
-    }
-
-    public void setMaQR(String maQR) {
-        this.maQR = maQR;
     }
 
 }

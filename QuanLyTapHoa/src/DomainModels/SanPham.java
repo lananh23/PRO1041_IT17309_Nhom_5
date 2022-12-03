@@ -11,12 +11,11 @@ public class SanPham {
     private float giaNhap;
     private float giaBan;
     private Date hanSuDung;
-    private String maQR;
 
     public SanPham() {
     }
 
-    public SanPham(String maSP, String maLSP, String tenSP, int soLuong, float giaNhap, float giaBan, Date hanSuDung, String maQR) {
+    public SanPham(String maSP, String maLSP, String tenSP, int soLuong, float giaNhap, float giaBan, Date hanSuDung) {
         this.maSP = maSP;
         this.maLSP = maLSP;
         this.tenSP = tenSP;
@@ -24,7 +23,6 @@ public class SanPham {
         this.giaNhap = giaNhap;
         this.giaBan = giaBan;
         this.hanSuDung = hanSuDung;
-        this.maQR = maQR;
     }
 
     public SanPham(String maSP, String maLSP, String tenSP, int soLuong, float giaNhap, float giaBan, Date hanSuDung) {
@@ -107,19 +105,6 @@ public class SanPham {
 
     public void setHanSuDung(Date hanSuDung) {
         this.hanSuDung = hanSuDung;
-    }
-
-    public String getMaQR() {
-        return tenSP;
-    }
-
-    public void setMaQR(String maQR) {
-        this.tenSP = tenSP;
-    }
-
-    @Override
-    public String toString() {
-        return maLSP + " " + tenSP;
     }
 
 }

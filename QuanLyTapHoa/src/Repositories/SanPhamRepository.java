@@ -13,7 +13,7 @@ public class SanPhamRepository implements ISanPhamRepository {
         ArrayList<SanPham> list = new ArrayList<>();
         try {
             Connection conn = DBConnection.getConnection();
-            String query = "select MaSP, MaLSP, TenSP, SoLuong, GiaNhap, GiaBan, HanSuDung, MaQR from SanPham ";
+            String query = "select MaSP, MaLSP, TenSP, SoLuong, GiaNhap, GiaBan, HanSuDung from SanPham ";
             PreparedStatement ps = conn.prepareStatement(query);
             ps.execute();
             ResultSet rs = ps.getResultSet();
@@ -25,9 +25,8 @@ public class SanPhamRepository implements ISanPhamRepository {
                 float giaNhap = rs.getFloat("GiaNhap");
                 float giaBan = rs.getFloat("GiaBan");
                 Date hanSuDung = rs.getDate("HanSuDung");
-                String maQR = rs.getString("MaQR");
 
-                SanPham sp = new SanPham(maSP, maLSP, tenSP, soLuong, giaNhap, giaBan, hanSuDung, maQR);
+                SanPham sp = new SanPham(maSP, maLSP, tenSP, soLuong, giaNhap, giaBan, hanSuDung);
 
                 list.add(sp);
             }
@@ -41,7 +40,7 @@ public class SanPhamRepository implements ISanPhamRepository {
     public void insert(SanPham sp) {
         try {
             Connection conn = DBConnection.getConnection();
-            String query = "INSERT INTO SanPham (MaSP, MaLSP, TenSP, SoLuong, GiaNhap, GiaBan, HanSuDung, MaQR) VALUES(?,?,?,?,?,?,?,?)";
+            String query = "INSERT INTO SanPham (MaSP, MaLSP, TenSP, SoLuong, GiaNhap, GiaBan, HanSuDung) VALUES(?,?,?,?,?,?,?)";
             PreparedStatement ps = conn.prepareStatement(query);
             ps.setString(1, sp.getMaSP());
             ps.setString(2, sp.getMaLSP());
@@ -61,7 +60,7 @@ public class SanPhamRepository implements ISanPhamRepository {
     public void update(String maSP, SanPham sp) {
         try {
             Connection conn = DBConnection.getConnection();
-            String query = "UPDATE SanPham SET MaSP=?, MaLSP=?, TenSP=?, SoLuong=?, GiaNhap=?, GiaBan=?, HanSuDung=?, MaQR=?  WHERE MaSP=?";
+            String query = "UPDATE SanPham SET MaSP=?, MaLSP=?, TenSP=?, SoLuong=?, GiaNhap=?, GiaBan=?, HanSuDung=?  WHERE MaSP=?";
             PreparedStatement ps = conn.prepareStatement(query);
             ps.setString(1, sp.getMaSP());
             ps.setString(2, sp.getMaLSP());
@@ -71,8 +70,7 @@ public class SanPhamRepository implements ISanPhamRepository {
             ps.setFloat(6, sp.getGiaBan());
             java.sql.Date date = new java.sql.Date(sp.getHanSuDung().getTime());
             ps.setDate(7, date);
-            ps.setString(8, sp.getMaQR());
-            ps.setString(9, maSP);
+            ps.setString(8, maSP);
             ps.execute();
         } catch (SQLException e) {
             e.printStackTrace();
