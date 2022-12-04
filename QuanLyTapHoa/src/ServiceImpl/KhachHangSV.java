@@ -4,7 +4,6 @@
  */
 package ServiceImpl;
 
-
 import DomainModels.KhachHang;
 import Repositories.KhachHangRP;
 import Services.KhachHangIF;
@@ -13,7 +12,6 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 import javax.swing.JOptionPane;
-
 
 /**
  *
@@ -46,7 +44,7 @@ public class KhachHangSV implements KhachHangIF {
     }
 
     public List<KhachHang> insert(String Ma, String Ten, String GioiTinh, String DiaChi, String NgaySinh, String SDT, String NgayDki) {
-        try {        
+        try {
             return khRP.insert(Ma, Ten, GioiTinh, DiaChi, NgaySinh, SDT, NgayDki);
         } catch (Exception e) {
             return null;
@@ -55,7 +53,7 @@ public class KhachHangSV implements KhachHangIF {
 
     public List<KhachHang> select1(String ma) {
         try {
-          
+
             return khRP.select1(ma);
         } catch (Exception e) {
             return null;
@@ -76,5 +74,20 @@ public class KhachHangSV implements KhachHangIF {
         } catch (Exception e) {
             return null;
         }
+    }
+
+    @Override
+    public List<KhachHang> searchMaKH(String sdt) {
+        try {
+            return khRP.searchMaKH(sdt);
+        } catch (Exception e) {
+            return null;
+        }
+    }
+
+    @Override
+    public Boolean themNhanh(KhachHang kh) {
+        khRP.themNhanh(kh);
+        return true;
     }
 }

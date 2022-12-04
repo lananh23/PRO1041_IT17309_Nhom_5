@@ -23,4 +23,8 @@ public interface KhachHangIF {
     public List<KhachHang> delete(String Ma);
 
     public List<KhachHang> update(String Ma, String Ten, String GioiTinh, String DiaChi, String NgaySinh, String SDT, String NgayDki);
+    
+    public List<KhachHang> searchMaKH(String sdt);
+    
+     public Boolean themNhanh(KhachHang kh);
 }

@@ -48,4 +48,15 @@ public class ManageSanPhamService implements IManageSanPhamService {
     public void updateSL(String maSP) {
         this.SanPhamRepo.updateSL(maSP);
     }
+
+    @Override
+    public List<QLSanPham> findByCode(String maSP) {
+         list = new ArrayList<>();
+        List<SanPham> List_CH = SanPhamRepo.findByCode(maSP);
+        for (SanPham o : List_CH) {
+            list.add(new QLSanPham(o.getMaSP(), o.getMaLSP(), o.getTenSP(),
+                    o.getSoLuong(), o.getGiaNhap(), o.getGiaBan(), o.getHanSuDung()));
+        }
+        return list;
+    }
 }

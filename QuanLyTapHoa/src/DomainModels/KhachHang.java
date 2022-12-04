@@ -37,6 +37,15 @@ public class KhachHang {
         this.NgayDki = NgayDki;
     }
 
+    public KhachHang(String maKH, String sdt) {
+         this.MaKH = MaKH;
+         this.Sdt = Sdt;
+    }
+
+    public KhachHang(String maKH) {
+        this.MaKH = MaKH;
+    }
+
     public String getMaKH() {
         return MaKH;
     }

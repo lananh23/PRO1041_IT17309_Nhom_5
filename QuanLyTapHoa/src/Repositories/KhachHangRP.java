@@ -141,4 +141,38 @@ public List<KhachHang> select() throws SQLException {
         k.add(kh);
         return k;
     }
+    public List<KhachHang> searchMaKH(String sdt){
+        ArrayList<KhachHang> kh = new ArrayList<>();
+        try {
+            Connection con = DBConnection.getConnection();
+            String sql = "SELECT MaKH FROM KhachHang WHERE SDT = ?";
+            PreparedStatement ps = con.prepareStatement(sql);
+            ps.setString(1, sdt);
+            ps.execute();
+            ResultSet rs = ps.getResultSet();
+            while(rs.next()){
+                ps.setString(1, sdt);
+                String maKH = rs.getString("MaKH");
+                KhachHang kHang = new KhachHang(maKH, sdt);
+                kh.add(kHang);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return kh;
+    }
+    public Boolean themNhanh(KhachHang kh){
+        String query = "INSERT INTO KhachHang(MaKH,TenKH,SDT) VALUES(?,?,?)";
+        try{Connection con = DBConnection.getConnection();
+            PreparedStatement ps = con.prepareStatement(query);
+            ps.setObject(1, kh.getMaKH());
+            ps.setObject(2, kh.getTenKH());
+            ps.setObject(3, kh.getSdt());
+            ps.executeUpdate();
+            return true;
+        }catch(Exception e){
+            e.printStackTrace();
+        }
+        return false;
+    }
 }
