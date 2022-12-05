@@ -25,15 +25,15 @@ public class SanPham {
         this.hanSuDung = hanSuDung;
     }
 
-    public SanPham(String maSP, String maLSP, String tenSP, int soLuong, float giaNhap, float giaBan, Date hanSuDung) {
-        this.maSP = maSP;
-        this.maLSP = maLSP;
-        this.tenSP = tenSP;
-        this.soLuong = soLuong;
-        this.giaNhap = giaNhap;
-        this.giaBan = giaBan;
-        this.hanSuDung = hanSuDung;
-    }
+//    public SanPham(String maSP, String maLSP, String tenSP, int soLuong, float giaNhap, float giaBan, Date hanSuDung) {
+//        this.maSP = maSP;
+//        this.maLSP = maLSP;
+//        this.tenSP = tenSP;
+//        this.soLuong = soLuong;
+//        this.giaNhap = giaNhap;
+//        this.giaBan = giaBan;
+//        this.hanSuDung = hanSuDung;
+//    }
     public SanPham(String maSP, int soLuong) {
         this.maSP = maSP;
         this.soLuong = soLuong;

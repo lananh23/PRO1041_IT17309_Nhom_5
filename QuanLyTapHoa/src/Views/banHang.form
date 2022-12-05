@@ -241,40 +241,36 @@
                                           <Component id="lblHD" min="-2" pref="78" max="-2" attributes="0"/>
                                       </Group>
                                   </Group>
-                                  <EmptySpace max="32767" attributes="0"/>
+                                  <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
                               </Group>
                               <Group type="102" alignment="0" attributes="0">
-                                  <Group type="103" groupAlignment="1" attributes="0">
-                                      <Group type="102" alignment="0" attributes="0">
-                                          <Group type="103" groupAlignment="0" attributes="0">
-                                              <Component id="jLabel42" alignment="0" min="-2" max="-2" attributes="0"/>
-                                              <Component id="jLabel43" alignment="0" min="-2" max="-2" attributes="0"/>
-                                              <Component id="jLabel48" alignment="0" min="-2" pref="62" max="-2" attributes="0"/>
-                                          </Group>
-                                          <EmptySpace min="-2" pref="47" max="-2" attributes="0"/>
-                                          <Group type="103" groupAlignment="0" attributes="0">
-                                              <Group type="102" attributes="0">
-                                                  <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
-                                                  <Component id="jLabel47" min="-2" pref="35" max="-2" attributes="0"/>
-                                              </Group>
-                                              <Group type="102" attributes="0">
-                                                  <Group type="103" groupAlignment="0" attributes="0">
-                                                      <Component id="cbxTT" min="-2" pref="133" max="-2" attributes="0"/>
-                                                      <Component id="lbThanhTien" alignment="0" min="-2" pref="122" max="-2" attributes="0"/>
-                                                  </Group>
-                                                  <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
-                                              </Group>
-                                          </Group>
+                                  <Group type="103" groupAlignment="0" attributes="0">
+                                      <Component id="jLabel42" alignment="0" min="-2" max="-2" attributes="0"/>
+                                      <Component id="jLabel43" alignment="0" min="-2" max="-2" attributes="0"/>
+                                      <Component id="jLabel48" alignment="0" min="-2" pref="62" max="-2" attributes="0"/>
+                                  </Group>
+                                  <EmptySpace min="-2" pref="47" max="-2" attributes="0"/>
+                                  <Group type="103" groupAlignment="0" attributes="0">
+                                      <Group type="102" attributes="0">
+                                          <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
+                                          <Component id="jLabel47" min="-2" pref="35" max="-2" attributes="0"/>
                                       </Group>
-                                      <Group type="102" alignment="0" attributes="0">
-                                          <EmptySpace min="-2" pref="109" max="-2" attributes="0"/>
-                                          <Component id="txtNgayTao" min="-2" pref="133" max="-2" attributes="0"/>
+                                      <Group type="102" attributes="0">
+                                          <Group type="103" groupAlignment="0" attributes="0">
+                                              <Component id="cbxTT" min="-2" pref="133" max="-2" attributes="0"/>
+                                              <Component id="lbThanhTien" alignment="0" min="-2" pref="122" max="-2" attributes="0"/>
+                                          </Group>
                                           <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
                                       </Group>
                                   </Group>
-                                  <EmptySpace max="-2" attributes="0"/>
+                              </Group>
+                              <Group type="102" alignment="0" attributes="0">
+                                  <EmptySpace min="-2" pref="109" max="-2" attributes="0"/>
+                                  <Component id="txtNgayTao" min="-2" pref="133" max="-2" attributes="0"/>
+                                  <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
                               </Group>
                           </Group>
+                          <EmptySpace max="-2" attributes="0"/>
                       </Group>
                       <Group type="102" alignment="1" attributes="0">
                           <EmptySpace min="-2" pref="43" max="-2" attributes="0"/>
@@ -458,7 +454,7 @@
                                           <Group type="103" groupAlignment="0" attributes="0">
                                               <Group type="102" alignment="0" attributes="0">
                                                   <EmptySpace min="-2" pref="74" max="-2" attributes="0"/>
-                                                  <Component id="btnXoa" pref="81" max="32767" attributes="0"/>
+                                                  <Component id="btnXoa" pref="107" max="32767" attributes="0"/>
                                               </Group>
                                               <Group type="102" alignment="0" attributes="0">
                                                   <Component id="jLabel82" min="-2" max="-2" attributes="0"/>
@@ -470,10 +466,14 @@
                                       </Group>
                                       <Group type="102" attributes="0">
                                           <Group type="103" groupAlignment="0" attributes="0">
-                                              <Component id="lblMaHDCT" min="-2" pref="77" max="-2" attributes="0"/>
-                                              <Group type="102" alignment="0" attributes="0">
+                                              <Group type="102" attributes="0">
                                                   <EmptySpace min="-2" pref="29" max="-2" attributes="0"/>
                                                   <Component id="btnCapNhat" min="-2" max="-2" attributes="0"/>
+                                              </Group>
+                                              <Group type="102" alignment="0" attributes="0">
+                                                  <Component id="lblMaHDCT" min="-2" pref="77" max="-2" attributes="0"/>
+                                                  <EmptySpace max="-2" attributes="0"/>
+                                                  <Component id="txtMaHDCT" min="-2" max="-2" attributes="0"/>
                                               </Group>
                                           </Group>
                                           <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
@@ -493,6 +493,7 @@
                           <Group type="103" groupAlignment="3" attributes="0">
                               <Component id="jLabel80" alignment="3" min="-2" max="-2" attributes="0"/>
                               <Component id="lblMaHDCT" alignment="3" min="-2" max="-2" attributes="0"/>
+                              <Component id="txtMaHDCT" alignment="3" min="-2" max="-2" attributes="0"/>
                           </Group>
                           <EmptySpace type="unrelated" max="-2" attributes="0"/>
                           <Group type="103" groupAlignment="3" attributes="0">
@@ -630,6 +631,11 @@
                       <Font name="Segoe UI" size="14" style="1"/>
                     </Property>
                     <Property name="text" type="java.lang.String" value="--"/>
+                  </Properties>
+                </Component>
+                <Component class="javax.swing.JTextField" name="txtMaHDCT">
+                  <Properties>
+                    <Property name="text" type="java.lang.String" value="jTextField1"/>
                   </Properties>
                 </Component>
               </SubComponents>
@@ -773,6 +779,8 @@
                   </Border>
                 </Property>
               </Properties>
+
+              <Layout class="org.netbeans.modules.form.compat2.layouts.DesignFlowLayout"/>
               <SubComponents>
                 <Component class="javax.swing.JLabel" name="jLabel2">
                   <Properties>

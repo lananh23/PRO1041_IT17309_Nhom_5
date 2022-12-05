@@ -24,15 +24,15 @@ public class QLSanPham {
         this.giaBan = giaBan;
         this.hanSuDung = hanSuDung;
     }
-    public QLSanPham(String maSP, String maLSP, String tenSP, int soLuong, float giaNhap, float giaBan, Date hanSuDung) {
-        this.maSP = maSP;
-        this.maLSP = maLSP;
-        this.tenSP = tenSP;
-        this.soLuong = soLuong;
-        this.giaNhap = giaNhap;
-        this.giaBan = giaBan;
-        this.hanSuDung = hanSuDung;
-    }
+//    public QLSanPham(String maSP, String maLSP, String tenSP, int soLuong, float giaNhap, float giaBan, Date hanSuDung) {
+//        this.maSP = maSP;
+//        this.maLSP = maLSP;
+//        this.tenSP = tenSP;
+//        this.soLuong = soLuong;
+//        this.giaNhap = giaNhap;
+//        this.giaBan = giaBan;
+//        this.hanSuDung = hanSuDung;
+//    }
 
     public String getMaSP() {
         return maSP;
