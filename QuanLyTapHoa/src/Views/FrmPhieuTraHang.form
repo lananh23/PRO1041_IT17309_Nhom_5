@@ -172,6 +172,9 @@
                       <TableHeader reorderingAllowed="true" resizingAllowed="true"/>
                     </Property>
                   </Properties>
+                  <Events>
+                    <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="tblCTHDMouseClicked"/>
+                  </Events>
                 </Component>
               </SubComponents>
             </Container>
@@ -376,11 +379,12 @@
                                   <Component id="lblMaSP" min="-2" pref="57" max="-2" attributes="0"/>
                                   <EmptySpace pref="43" max="32767" attributes="0"/>
                                   <Component id="jLabel29" min="-2" max="-2" attributes="0"/>
-                                  <EmptySpace min="-2" pref="54" max="-2" attributes="0"/>
-                                  <Component id="txtSoLuong" min="-2" pref="95" max="-2" attributes="0"/>
+                                  <EmptySpace min="-2" pref="28" max="-2" attributes="0"/>
+                                  <Component id="spnSoLuong" min="-2" pref="62" max="-2" attributes="0"/>
+                                  <EmptySpace min="-2" pref="59" max="-2" attributes="0"/>
                               </Group>
                               <Component id="jScrollPane9" alignment="1" pref="0" max="32767" attributes="0"/>
-                              <Group type="102" alignment="0" attributes="0">
+                              <Group type="102" attributes="0">
                                   <Group type="103" groupAlignment="0" attributes="0">
                                       <Group type="102" alignment="0" attributes="0">
                                           <Component id="btnLuuTam" min="-2" max="-2" attributes="0"/>
@@ -410,12 +414,12 @@
                               <Component id="jLabel92" alignment="3" min="-2" max="-2" attributes="0"/>
                               <Component id="lblMaHD" alignment="3" min="-2" max="-2" attributes="0"/>
                           </Group>
-                          <EmptySpace min="-2" pref="24" max="-2" attributes="0"/>
+                          <EmptySpace min="-2" pref="21" max="-2" attributes="0"/>
                           <Group type="103" groupAlignment="3" attributes="0">
-                              <Component id="txtSoLuong" alignment="3" min="-2" max="-2" attributes="0"/>
                               <Component id="jLabel29" alignment="3" min="-2" max="-2" attributes="0"/>
                               <Component id="jLabel28" alignment="3" min="-2" max="-2" attributes="0"/>
                               <Component id="lblMaSP" alignment="3" min="-2" max="-2" attributes="0"/>
+                              <Component id="spnSoLuong" alignment="3" min="-2" max="-2" attributes="0"/>
                           </Group>
                           <EmptySpace min="-2" pref="16" max="-2" attributes="0"/>
                           <Group type="103" groupAlignment="3" attributes="0">
@@ -431,8 +435,6 @@
                 </DimensionLayout>
               </Layout>
               <SubComponents>
-                <Component class="javax.swing.JTextField" name="txtSoLuong">
-                </Component>
                 <Component class="javax.swing.JLabel" name="jLabel28">
                   <Properties>
                     <Property name="text" type="java.lang.String" value="M&#xe3; SP"/>
@@ -496,6 +498,11 @@
                   <Properties>
                     <Property name="text" type="java.lang.String" value="--"/>
                   </Properties>
+                </Component>
+                <Component class="javax.swing.JSpinner" name="spnSoLuong">
+                  <Events>
+                    <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="spnSoLuongMouseClicked"/>
+                  </Events>
                 </Component>
               </SubComponents>
             </Container>
@@ -642,6 +649,9 @@
                           <TableHeader reorderingAllowed="true" resizingAllowed="true"/>
                         </Property>
                       </Properties>
+                      <Events>
+                        <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="tblTraHangMouseClicked"/>
+                      </Events>
                     </Component>
                   </SubComponents>
                 </Container>

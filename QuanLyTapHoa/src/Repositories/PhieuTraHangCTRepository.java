@@ -31,6 +31,29 @@ public class PhieuTraHangCTRepository {
         return list;
     }
 
+    public List<PhieuTraHangCT> AllP(String ma) {
+        ArrayList<PhieuTraHangCT> list = new ArrayList<>();
+        try {
+            Connection conn = DBConnection.getConnection();
+            String query = "SELECT * FROM PhieuTraHangChiTiet WHERE MaPTH = ?";
+            PreparedStatement ps = conn.prepareStatement(query);
+            ps.setString(1, ma);
+            ps.execute();
+            ResultSet rs = ps.getResultSet();
+            while (rs.next() == true) {
+                String maPth = rs.getString("MaPTH");
+                String maSP = rs.getString("MaSP");
+                int soLuong  = rs.getInt("SoLuong");
+                double gia = rs.getDouble("DonGia");
+                double tien = rs.getDouble("ThanhTien");
+                PhieuTraHangCT p = new PhieuTraHangCT(maPth, maSP, soLuong, gia, tien);
+                list.add(p);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return list;
+    }
     public void insert(PhieuTraHangCT p) {
         try {
             Connection conn = DBConnection.getConnection();

@@ -1,7 +1,4 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
- */
+
 package Views;
 
 import ServiceImpl.ManagePhieuTraHangCTService;
@@ -21,6 +18,7 @@ public class FrmPhieuTraHang extends javax.swing.JFrame {
 
     private IManagePhieuTraHangService traHangService;
     private IManagePhieuTraHangCTService traHangCTService;
+    private DefaultTableModel dtm;
     
     public FrmPhieuTraHang() {
         initComponents();
@@ -104,7 +102,6 @@ public class FrmPhieuTraHang extends javax.swing.JFrame {
         txtNgayTra = new javax.swing.JTextField();
         txtMaPhieuTra = new javax.swing.JTextField();
         jPanel18 = new javax.swing.JPanel();
-        txtSoLuong = new javax.swing.JTextField();
         jLabel28 = new javax.swing.JLabel();
         jLabel29 = new javax.swing.JLabel();
         btnXoa = new javax.swing.JButton();
@@ -115,6 +112,7 @@ public class FrmPhieuTraHang extends javax.swing.JFrame {
         jLabel92 = new javax.swing.JLabel();
         lblMaHD = new javax.swing.JLabel();
         lblMaSP = new javax.swing.JLabel();
+        spnSoLuong = new javax.swing.JSpinner();
         jLabel75 = new javax.swing.JLabel();
         txtMaHDTim = new javax.swing.JTextField();
         btnTimKiemMaHD = new javax.swing.JButton();
@@ -156,6 +154,11 @@ public class FrmPhieuTraHang extends javax.swing.JFrame {
                 "Mã SP", "Số lượng", "Đơn giá", "Thành tiền"
             }
         ));
+        tblCTHD.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                tblCTHDMouseClicked(evt);
+            }
+        });
         jScrollPane8.setViewportView(tblCTHD);
 
         jPanel19.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
@@ -290,6 +293,12 @@ public class FrmPhieuTraHang extends javax.swing.JFrame {
 
         lblMaSP.setText("--");
 
+        spnSoLuong.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                spnSoLuongMouseClicked(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel18Layout = new javax.swing.GroupLayout(jPanel18);
         jPanel18.setLayout(jPanel18Layout);
         jPanel18Layout.setHorizontalGroup(
@@ -303,8 +312,9 @@ public class FrmPhieuTraHang extends javax.swing.JFrame {
                         .addComponent(lblMaSP, javax.swing.GroupLayout.PREFERRED_SIZE, 57, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 43, Short.MAX_VALUE)
                         .addComponent(jLabel29)
-                        .addGap(54, 54, 54)
-                        .addComponent(txtSoLuong, javax.swing.GroupLayout.PREFERRED_SIZE, 95, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(28, 28, 28)
+                        .addComponent(spnSoLuong, javax.swing.GroupLayout.PREFERRED_SIZE, 62, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(59, 59, 59))
                     .addComponent(jScrollPane9, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
                     .addGroup(jPanel18Layout.createSequentialGroup()
                         .addGroup(jPanel18Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -328,12 +338,12 @@ public class FrmPhieuTraHang extends javax.swing.JFrame {
                 .addGroup(jPanel18Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel92)
                     .addComponent(lblMaHD))
-                .addGap(24, 24, 24)
+                .addGap(21, 21, 21)
                 .addGroup(jPanel18Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(txtSoLuong, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel29)
                     .addComponent(jLabel28)
-                    .addComponent(lblMaSP))
+                    .addComponent(lblMaSP)
+                    .addComponent(spnSoLuong, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(16, 16, 16)
                 .addGroup(jPanel18Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnLuuTam)
@@ -432,6 +442,11 @@ public class FrmPhieuTraHang extends javax.swing.JFrame {
                 "Mã PTH", "Mã HD", "Mã ND", "Mã KH", "Ngày trả", "Tiền trả lại", "Lý do trả"
             }
         ));
+        tblTraHang.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                tblTraHangMouseClicked(evt);
+            }
+        });
         jScrollPane15.setViewportView(tblTraHang);
 
         javax.swing.GroupLayout jPanel13Layout = new javax.swing.GroupLayout(jPanel13);
@@ -572,6 +587,38 @@ public class FrmPhieuTraHang extends javax.swing.JFrame {
 //        }
     }//GEN-LAST:event_btnTimKiemMaHDActionPerformed
 
+    private void tblTraHangMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblTraHangMouseClicked
+        int row = this.tblTraHang.getSelectedRow();
+        if (row == -1) {
+            return;
+        }
+        String ma = this.tblTraHang.getValueAt(row, 0).toString();
+        dtm = (DefaultTableModel) this.tblTraHangCT.getModel();
+        dtm.setRowCount(0);
+        for (ManagePhieuTraHangCT sp : this.traHangCTService.ALLP(ma)) {
+            Object[] rowData = {
+                sp.getMaSP(),
+                sp.getSoLuong(),
+                sp.getDonGia(),
+                sp.getThanhTien()
+            };
+            dtm.addRow(rowData);
+        }
+    }//GEN-LAST:event_tblTraHangMouseClicked
+
+    private void tblCTHDMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblCTHDMouseClicked
+       int row = this.tblCTHD.getSelectedRow();
+        if (row == -1) {
+            return;
+        }
+        String ma = this.tblCTHD.getValueAt(row, 0).toString();
+        this.lblMaSP.setText(ma);
+    }//GEN-LAST:event_tblCTHDMouseClicked
+
+    private void spnSoLuongMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_spnSoLuongMouseClicked
+        // TODO add your handling code here:
+    }//GEN-LAST:event_spnSoLuongMouseClicked
+
     /**
      * @param args the command line arguments
      */
@@ -656,6 +703,7 @@ public class FrmPhieuTraHang extends javax.swing.JFrame {
     private javax.swing.JLabel lblTienTraLai;
     private javax.swing.JRadioButton rdoLoiSP;
     private javax.swing.JRadioButton rdoMuaSai;
+    private javax.swing.JSpinner spnSoLuong;
     private javax.swing.JTable tblCTHD;
     private javax.swing.JTable tblTraHang;
     private javax.swing.JTable tblTraHangCT;
@@ -663,6 +711,5 @@ public class FrmPhieuTraHang extends javax.swing.JFrame {
     private javax.swing.JTextField txtMaPhieuTra;
     private javax.swing.JTextField txtMaSPTim;
     private javax.swing.JTextField txtNgayTra;
-    private javax.swing.JTextField txtSoLuong;
     // End of variables declaration//GEN-END:variables
 }
