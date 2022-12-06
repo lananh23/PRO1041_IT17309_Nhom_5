@@ -4,9 +4,9 @@
  */
 package Views;
 
-import DomainModels.DangNhap.dangNhapModel;
-import Repositories.dangNhap.dangNhapRepositories;
-import Services.dangNhap.dangNhapService;
+import DomainModels.dangNhapModel;
+import Repositories.dangNhapRepositories;
+import ServiceImpl.dangNhapService;
 import Utilities.DBConnection;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -42,9 +42,8 @@ public class FrmDangNhap extends javax.swing.JFrame {
 
         String userName = txtUsername.getText();
         String password = new String(txtPassword.getPassword());
-        boolean dn = dangNhapService.getAllDangNhap(userName, password);
-        if (dn) {
-            new FrmTrangChu().setVisible(true);
+        
+        if (dangNhapService.find_getAllDangNhap(userName, password)) {
             this.dispose();
         }
     }
