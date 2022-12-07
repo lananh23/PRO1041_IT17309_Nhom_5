@@ -8,6 +8,7 @@ public class HoaDon {
     private String maHD;
     private String maND;
     private String maKH;
+    private String maHD_2;
     private Date ngayTao;
     private float tongTien;
     private int trangThai;
@@ -19,6 +20,27 @@ public class HoaDon {
         this.ngayTao = ngayTao;
         this.tongTien = tongTien;
         this.trangThai = trangThai;
+    }
+
+    public HoaDon(String maHD, String maND, String maKH) {
+        this.maHD = maHD;
+        this.maND = maND;
+        this.maKH = maKH;
+    }
+
+    public HoaDon(String maHD, String maND, String maKH, String maHD_2) {
+        this.maHD = maHD;
+        this.maND = maND;
+        this.maKH = maKH;
+        this.maHD_2 = maHD_2;
+    }
+
+    public String getMaHD_2() {
+        return maHD_2;
+    }
+
+    public void setMaHD_2(String maHD_2) {
+        this.maHD_2 = maHD_2;
     }
 
     public HoaDon(String maHD) {

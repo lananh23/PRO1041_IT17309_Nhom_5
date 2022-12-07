@@ -6,6 +6,7 @@ public class ManageHoaDon {
     private String maHD;
     private String maND;
     private String maKH;
+    private String maHD_2;
     private Date ngayTao;
     private float tongTien;
     private int trangThai;
@@ -20,6 +21,19 @@ public class ManageHoaDon {
         this.ngayTao = ngayTao;
         this.tongTien = tongTien;
         this.trangThai = trangThai;
+    }
+
+    public ManageHoaDon(String maHD, String maND, String maKH, String maHD_2) {
+        this.maHD = maHD;
+        this.maND = maND;
+        this.maKH = maKH;
+        this.maHD_2 = maHD_2;
+    }
+
+    public ManageHoaDon(String maHD, String maND, String maKH) {
+        this.maHD = maHD;
+        this.maND = maND;
+        this.maKH = maKH;
     }
 
     public ManageHoaDon(String maHD) {
@@ -73,6 +87,10 @@ public class ManageHoaDon {
 
     public void setTrangThai(int trangThai) {
         this.trangThai = trangThai;
+    }
+
+    public Object getMaHD_2() {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
     
 }

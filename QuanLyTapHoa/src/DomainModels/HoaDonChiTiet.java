@@ -113,4 +113,8 @@ public class HoaDonChiTiet {
     public void setMaHD(String maHD) {
         this.maHD = maHD;
     }
+
+    public void setThanhTien(float aFloat) {
+        this.thanhTien = giaBan*soLuong;
+    }
 }

@@ -34,6 +34,13 @@ public class QLSanPham {
         this.hanSuDung = hanSuDung;
     }
 
+    public QLSanPham(String maSP, String tenSP, int soLuong, float giaBan) {
+        this.maSP = maSP;
+        this.tenSP = tenSP;
+        this.soLuong = soLuong;
+        this.giaBan = giaBan;
+    }
+
     public String getMaSP() {
         return maSP;
     }

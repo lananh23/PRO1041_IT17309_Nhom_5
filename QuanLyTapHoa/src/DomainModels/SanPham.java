@@ -38,6 +38,7 @@ public class SanPham {
         this.maSP = maSP;
         this.soLuong = soLuong;
     }
+    
 //
 //    public SanPham(String maSP, String maLSP, String tenSP, int soLuong, float giaNhap, float giaBan, Date hanSuDung) {
 //        this.MaSP = maSP;
@@ -48,6 +49,13 @@ public class SanPham {
 //        this.giaBan = giaBan;
 //        this.hanSuDung = hanSuDung;
 //    }
+
+    public SanPham(String maSP, String tenSP, int soLuong, float giaBan) {
+        this.maSP = maSP;
+        this.tenSP = tenSP;
+        this.soLuong = soLuong;
+        this.giaBan = giaBan;
+    }
 
     
 
