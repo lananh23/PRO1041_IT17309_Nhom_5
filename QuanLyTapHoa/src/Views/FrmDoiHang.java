@@ -160,8 +160,8 @@ public class FrmDoiHang extends javax.swing.JFrame {
         tblHoaDon = new javax.swing.JTable();
         jPanel26 = new javax.swing.JPanel();
         jLabel79 = new javax.swing.JLabel();
-        jTextField44 = new javax.swing.JTextField();
-        jButton39 = new javax.swing.JButton();
+        txtSPD = new javax.swing.JTextField();
+        btnSPD = new javax.swing.JButton();
         jScrollPane18 = new javax.swing.JScrollPane();
         tblHDCT = new javax.swing.JTable();
 
@@ -489,7 +489,12 @@ public class FrmDoiHang extends javax.swing.JFrame {
 
         jLabel79.setText("Mã SP");
 
-        jButton39.setText("Tìm kiếm");
+        btnSPD.setText("Tìm kiếm");
+        btnSPD.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnSPDActionPerformed(evt);
+            }
+        });
 
         tblHDCT.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -509,9 +514,9 @@ public class FrmDoiHang extends javax.swing.JFrame {
                 .addContainerGap()
                 .addComponent(jLabel79)
                 .addGap(36, 36, 36)
-                .addComponent(jTextField44, javax.swing.GroupLayout.PREFERRED_SIZE, 122, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(txtSPD, javax.swing.GroupLayout.PREFERRED_SIZE, 122, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 35, Short.MAX_VALUE)
-                .addComponent(jButton39)
+                .addComponent(btnSPD)
                 .addGap(58, 58, 58))
             .addComponent(jScrollPane18, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
         );
@@ -521,8 +526,8 @@ public class FrmDoiHang extends javax.swing.JFrame {
                 .addContainerGap()
                 .addGroup(jPanel26Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel79)
-                    .addComponent(jTextField44, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButton39))
+                    .addComponent(txtSPD, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnSPD))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jScrollPane18, javax.swing.GroupLayout.DEFAULT_SIZE, 375, Short.MAX_VALUE))
         );
@@ -698,6 +703,21 @@ public class FrmDoiHang extends javax.swing.JFrame {
 
     private void btnHDActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnHDActionPerformed
         // TODO add your handling code here:
+        String maHD_2 = txtTimMaHD.getText();
+        if(maHD_2 == null || maHD_2.isEmpty()){
+            JOptionPane.showMessageDialog(this, "Bạn chưa nhập mã hoá đơn cần tìm");
+        }else{
+            List<ManageHoaDon> hdd = doiHangService.listHDD(maHD_2);
+            if(hdd.isEmpty()){
+                JOptionPane.showMessageDialog(this, "Không tồn tại mã hoá đơn đổi");
+            }else{
+                dtm = (DefaultTableModel) tblHoaDon.getModel();
+                dtm.setRowCount(0);
+                for(ManageHoaDon hd : hdd){
+                    dtm.addRow(new Object[]{hd.getMaHD(), hd.getMaHD_2(), hd.getMaKH(), hd.getMaND()});
+                }
+            }
+        }
     }//GEN-LAST:event_btnHDActionPerformed
 
     private void tblHoaDonMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblHoaDonMouseClicked
@@ -717,6 +737,28 @@ public class FrmDoiHang extends javax.swing.JFrame {
     private void txtMaSPActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtMaSPActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_txtMaSPActionPerformed
+
+    private void btnSPDActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSPDActionPerformed
+        // TODO add your handling code here:
+        String maSPD = txtSPD.getText();
+        int row = tblHoaDon.getSelectedRow();
+        String maHD_2 = tblHoaDon.getValueAt(row, 1).toString();
+        List<ManageHoaDon> hdd = doiHangService.listHDD(maHD_2);
+            if(hdd.isEmpty()){
+                return;
+            }else{
+                List<ManageHoaDonChiTiet> sanPham = doiHangService.searchSP_2(maSPD);
+                if(sanPham.isEmpty()){
+                    JOptionPane.showMessageDialog(this, "Không tồn tại mã sản phẩm này trong hoá đơn đổi");
+                }else{
+                    dtm = (DefaultTableModel) tblHDCT.getModel();
+                    dtm.setRowCount(0);
+                    for(ManageHoaDonChiTiet sp : sanPham){
+                        dtm.addRow(new Object[]{sp.getMaSP(), sp.getSoLuong(), sp.getGiaBan(), sp.getThanhTien()});
+                    }
+                }
+            }
+    }//GEN-LAST:event_btnSPDActionPerformed
 
     /**
      * @param args the command line arguments
@@ -757,10 +799,10 @@ public class FrmDoiHang extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnDoi;
     private javax.swing.JButton btnHD;
+    private javax.swing.JButton btnSPD;
     private javax.swing.JButton btnThanhToan;
     private javax.swing.JButton btnTimHD;
     private javax.swing.JButton btnTimSP;
-    private javax.swing.JButton jButton39;
     private javax.swing.JLabel jLabel28;
     private javax.swing.JLabel jLabel29;
     private javax.swing.JLabel jLabel31;
@@ -785,7 +827,6 @@ public class FrmDoiHang extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane8;
     private javax.swing.JScrollPane jScrollPane9;
     private javax.swing.JTabbedPane jTabbedPane1;
-    private javax.swing.JTextField jTextField44;
     private javax.swing.JLabel lbMaHDCT;
     private javax.swing.JLabel lbMaKH;
     private javax.swing.JLabel lbMaNV;
@@ -800,6 +841,7 @@ public class FrmDoiHang extends javax.swing.JFrame {
     private javax.swing.JTextField txtMaHD;
     private javax.swing.JTextField txtMaHDNew;
     private javax.swing.JTextField txtMaSP;
+    private javax.swing.JTextField txtSPD;
     private javax.swing.JTextField txtTimMaHD;
     // End of variables declaration//GEN-END:variables
 }

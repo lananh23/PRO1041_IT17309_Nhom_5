@@ -691,9 +691,9 @@
                               <EmptySpace max="-2" attributes="0"/>
                               <Component id="jLabel79" min="-2" max="-2" attributes="0"/>
                               <EmptySpace min="-2" pref="36" max="-2" attributes="0"/>
-                              <Component id="jTextField44" min="-2" pref="122" max="-2" attributes="0"/>
+                              <Component id="txtSPD" min="-2" pref="122" max="-2" attributes="0"/>
                               <EmptySpace pref="35" max="32767" attributes="0"/>
-                              <Component id="jButton39" min="-2" max="-2" attributes="0"/>
+                              <Component id="btnSPD" min="-2" max="-2" attributes="0"/>
                               <EmptySpace min="-2" pref="58" max="-2" attributes="0"/>
                           </Group>
                           <Component id="jScrollPane18" alignment="0" pref="0" max="32767" attributes="0"/>
@@ -705,8 +705,8 @@
                               <EmptySpace max="-2" attributes="0"/>
                               <Group type="103" groupAlignment="3" attributes="0">
                                   <Component id="jLabel79" alignment="3" min="-2" max="-2" attributes="0"/>
-                                  <Component id="jTextField44" alignment="3" min="-2" max="-2" attributes="0"/>
-                                  <Component id="jButton39" alignment="3" min="-2" max="-2" attributes="0"/>
+                                  <Component id="txtSPD" alignment="3" min="-2" max="-2" attributes="0"/>
+                                  <Component id="btnSPD" alignment="3" min="-2" max="-2" attributes="0"/>
                               </Group>
                               <EmptySpace max="-2" attributes="0"/>
                               <Component id="jScrollPane18" pref="375" max="32767" attributes="0"/>
@@ -720,12 +720,15 @@
                         <Property name="text" type="java.lang.String" value="M&#xe3; SP"/>
                       </Properties>
                     </Component>
-                    <Component class="javax.swing.JTextField" name="jTextField44">
+                    <Component class="javax.swing.JTextField" name="txtSPD">
                     </Component>
-                    <Component class="javax.swing.JButton" name="jButton39">
+                    <Component class="javax.swing.JButton" name="btnSPD">
                       <Properties>
                         <Property name="text" type="java.lang.String" value="T&#xec;m ki&#x1ebf;m"/>
                       </Properties>
+                      <Events>
+                        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnSPDActionPerformed"/>
+                      </Events>
                     </Component>
                     <Container class="javax.swing.JScrollPane" name="jScrollPane18">
                       <AuxValues>

@@ -22,7 +22,9 @@ public interface DoiHangService {
     ArrayList<ManageHoaDonChiTiet> search(String maHD);
     ArrayList<QLSanPham> listSP();
     ArrayList<QLSanPham> searchSP(String maSP);
+    ArrayList<ManageHoaDonChiTiet> searchSP_2(String maSP);
     ArrayList<ManageHoaDon> searchKH(String maHD);
+    ArrayList<ManageHoaDon> listHDD(String maHD_2);
     ArrayList<ManageHoaDon> listHD();
     public Boolean them(HoaDonChiTiet hdct);
     public Boolean delete(String maSP);

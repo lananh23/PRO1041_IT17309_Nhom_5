@@ -40,6 +40,26 @@ public class DoiHangServiceIml implements DoiHangService {
     }
 
     @Override
+    public ArrayList<ManageHoaDon> listHDD(String maHD_2) {
+        ArrayList<ManageHoaDon> list = new ArrayList<>();
+        ArrayList<HoaDon> list_HDD = doiHangRepo.listHDD(maHD_2);
+        for(HoaDon hdd : list_HDD){
+            list.add(new ManageHoaDon(hdd.getMaHD(), hdd.getMaHD_2(), hdd.getMaKH(), hdd.getMaND()));
+        }
+        return list;
+    }
+    
+    @Override
+    public ArrayList<ManageHoaDonChiTiet> searchSP_2(String maSP) {
+        ArrayList<ManageHoaDonChiTiet> list = new ArrayList<>();
+        ArrayList<HoaDonChiTiet> list_SP = doiHangRepo.searchSP_2(maSP);
+        for (HoaDonChiTiet sp : list_SP) {
+            list.add(new ManageHoaDonChiTiet(sp.getMaSP(),sp.getSoLuong(), sp.getGiaBan(), sp.getThanhTien()));
+        }
+        return list;
+    }
+
+    @Override
     public ArrayList<ManageHoaDonChiTiet> search(String maHD) {
         ArrayList<ManageHoaDonChiTiet> list = new ArrayList<>();
         ArrayList<HoaDonChiTiet> list_HD = doiHangRepo.search(maHD);
